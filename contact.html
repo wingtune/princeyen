@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Contact Us - LeapNodes</title>
+    <meta name="description"
+        content="Get in touch with the LeapNodes team. We're here to help with your WhatsApp automation needs." />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19e65e",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#112116",
+                        "surface-dark": "#1a2c20",
+                        "surface-highlight": "#233b2b",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "1.5rem",
+                        "xl": "2rem",
+                        "2xl": "2.5rem",
+                        "3xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(26, 44, 32, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden selection:bg-primary selection:text-background-dark">
+    <div class="relative min-h-screen flex flex-col w-full mx-auto bg-background-dark">
+        <nav class="sticky top-0 z-50 w-full glass-panel border-b border-white/5">
+            <div class="max-w-7xl mx-auto px-5 lg:px-10 py-4 flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-primary">
+                        <path d="M2 14 Q 12 -1 22 8" stroke="currentColor" stroke-width="1.5" fill="none"
+                            class="opacity-60" />
+                        <circle cx="21" cy="7" r="1.5" fill="currentColor" />
+                        <path
+                            d="M4.5 19 A 3.5 3.5 0 0 1 5 12 Q 9 6 11 6 A 4 4 0 0 1 15 7 Q 16 11 18 13 A 3.5 3.5 0 0 1 19.5 19 A 3.5 3.5 0 0 1 16 16 Q 12 11 8 16 A 3.5 3.5 0 0 1 4.5 19 Z"
+                            fill="currentColor" />
+                    </svg>
+                    <span class="text-2xl font-bold tracking-tight text-white">LeapNodes</span>
+                </a>
+                <div class="hidden lg:flex items-center gap-8">
+                    <a class="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                        href="index.html">Home</a>
+                    <a class="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                        href="features.html">Features</a>
+                    <a class="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                        href="process.html">Process</a>
+                    <a class="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                        href="about.html">About Us</a>
+                    <a class="text-sm font-medium text-primary hover:text-white transition-colors"
+                        href="contact.html">Contact</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="contact.html"
+                        class="hidden lg:flex px-6 py-2.5 bg-primary hover:bg-green-400 text-background-dark text-sm font-bold rounded-full items-center gap-2 transition-all active:scale-[0.98]">
+                        Request a Custom Setup
+                    </a>
+                    <button id="mobile-menu-btn"
+                        class="lg:hidden flex items-center justify-center size-10 rounded-full bg-white/5 active:scale-95 transition-transform">
+                        <span class="material-symbols-outlined text-white">menu</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <main class="flex-1 flex flex-col">
+            <section class="px-5 lg:px-10 py-16 lg:py-24">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h1 class="text-4xl lg:text-5xl font-bold text-white mb-4">Get in Touch</h1>
+                        <p class="text-gray-400 text-lg max-w-2xl mx-auto">Have questions about LeapNodes? We'd love to
+                            hear from you. Send us a message and we'll respond as soon as possible.</p>
+                    </div>
+                    <div class="grid lg:grid-cols-2 gap-12 items-start">
+                        <!-- Contact Form -->
+                        <div class="glass-panel p-8 lg:p-12 rounded-3xl">
+                            <!-- Success Message (hidden by default) -->
+                            <div id="successMessage" class="hidden text-center py-12">
+                                <div
+                                    class="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-6">
+                                    <span class="material-symbols-outlined text-primary text-4xl">check_circle</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white mb-3">Thank You!</h3>
+                                <p class="text-gray-400">Your message has been sent successfully. We'll get back to you
+                                    soon.</p>
+                            </div>
+
+                            <!-- Contact Form -->
+                            <form id="contactForm" class="space-y-6">
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-300 mb-2"
+                                            for="firstName">First Name</label>
+                                        <input type="text" id="firstName" name="firstName" required
+                                            class="w-full px-4 py-3 bg-surface-dark border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors"
+                                            placeholder="John">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-300 mb-2" for="lastName">Last
+                                            Name</label>
+                                        <input type="text" id="lastName" name="lastName" required
+                                            class="w-full px-4 py-3 bg-surface-dark border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors"
+                                            placeholder="Doe">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2" for="email">Email
+                                        Address</label>
+                                    <input type="email" id="email" name="email" required
+                                        class="w-full px-4 py-3 bg-surface-dark border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors"
+                                        placeholder="john@example.com">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2" for="phone">Phone
+                                        Number</label>
+                                    <input type="tel" id="phone" name="phone"
+                                        class="w-full px-4 py-3 bg-surface-dark border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors"
+                                        placeholder="+1 234 567 8900">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2"
+                                        for="subject">Subject</label>
+                                    <select id="subject" name="subject" required
+                                        class="w-full px-4 py-3 bg-surface-dark border border-white/10 rounded-xl text-white focus:outline-none focus:border-primary transition-colors">
+                                        <option value="" class="bg-surface-dark">Select a topic...</option>
+                                        <option value="General Inquiry" class="bg-surface-dark">General Inquiry</option>
+                                        <option value="Sales" class="bg-surface-dark">Sales & Pricing</option>
+                                        <option value="Support" class="bg-surface-dark">Technical Support</option>
+                                        <option value="Partnership" class="bg-surface-dark">Partnership</option>
+                                        <option value="Demo Request" class="bg-surface-dark">Request a Demo</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2" for="systemNeeds">Tell
+                                        us
+                                        about your WhatsApp communication needs</label>
+                                    <select id="systemNeeds" name="systemNeeds" required
+                                        class="w-full px-4 py-3 bg-surface-dark border border-white/10 rounded-xl text-white focus:outline-none focus:border-primary transition-colors">
+                                        <option value="" class="bg-surface-dark">Select an option...</option>
+                                        <option value="Basic Automation" class="bg-surface-dark">Basic Automation & FAQs
+                                        </option>
+                                        <option value="Lead Qualification" class="bg-surface-dark">Lead Qualification &
+                                            Sales</option>
+                                        <option value="Customer Support" class="bg-surface-dark">Managed Support
+                                            Escalation
+                                        </option>
+                                        <option value="Enterprise System" class="bg-surface-dark">Full Enterprise System
+                                            Architecture</option>
+                                        <option value="Other" class="bg-surface-dark">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2"
+                                        for="message">Message</label>
+                                    <textarea id="message" name="message" rows="5" required
+                                        class="w-full px-4 py-3 bg-surface-dark border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors resize-none"
+                                        placeholder="Tell us more about your inquiry..."></textarea>
+                                </div>
+                                <button type="submit" id="submitBtn"
+                                    class="w-full h-14 px-8 bg-primary hover:bg-green-400 text-background-dark text-lg font-bold rounded-full flex items-center justify-center gap-2 transition-all active:scale-[0.98] shadow-[0_0_30px_rgba(25,230,94,0.4)]">
+                                    <span id="btnText">Send Message</span>
+                                    <span id="btnSpinner" class="hidden animate-spin">
+                                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                                stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor"
+                                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                    <span class="material-symbols-outlined" id="btnIcon">send</span>
+                                </button>
+                            </form>
+                        </div>
+                        <!-- Contact Info -->
+                        <div class="space-y-8">
+                            <div class="glass-panel p-8 rounded-3xl">
+                                <div class="flex items-start gap-4">
+                                    <div
+                                        class="size-14 rounded-2xl bg-primary/20 flex items-center justify-center text-primary flex-shrink-0">
+                                        <span class="material-symbols-outlined text-3xl">mail</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white mb-2">Email Us</h3>
+                                        <p class="text-gray-400 mb-2">For general inquiries and support</p>
+                                        <a href="mailto:hello@leapnodes.com"
+                                            class="text-primary hover:text-green-400 transition-colors font-medium">hello@leapnodes.com</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="glass-panel p-8 rounded-3xl">
+                                <div class="flex items-start gap-4">
+                                    <div
+                                        class="size-14 rounded-2xl bg-blue-500/20 flex items-center justify-center text-blue-400 flex-shrink-0">
+                                        <span class="material-symbols-outlined text-3xl">support_agent</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white mb-2">24/7 Support</h3>
+                                        <p class="text-gray-400 mb-2">Get help anytime with our dedicated support team
+                                        </p>
+                                        <a href="mailto:support@leapnodes.com"
+                                            class="text-blue-400 hover:text-blue-300 transition-colors font-medium">support@leapnodes.com</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="glass-panel p-8 rounded-3xl">
+                                <div class="flex items-start gap-4">
+                                    <div
+                                        class="size-14 rounded-2xl bg-purple-500/20 flex items-center justify-center text-purple-400 flex-shrink-0">
+                                        <span class="material-symbols-outlined text-3xl">location_on</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white mb-2">HQ</h3>
+                                        <p class="text-gray-400">Johannesburg, South Africa</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="glass-panel p-8 rounded-3xl">
+                                <div class="flex items-start gap-4">
+                                    <div
+                                        class="size-14 rounded-2xl bg-green-500/20 flex items-center justify-center text-green-400 flex-shrink-0">
+                                        <span class="material-symbols-outlined text-3xl">chat</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white mb-2">WhatsApp</h3>
+                                        <p class="text-gray-400 mb-2">Chat with us directly on WhatsApp</p>
+                                        <a href="https://wa.me/1234567890" target="_blank"
+                                            class="text-green-400 hover:text-green-300 transition-colors font-medium">+1
+                                            234 567 890</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="border-t border-white/5 bg-black/20 py-12 px-5 lg:px-10">
+            <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <a href="index.html" class="flex items-center gap-2 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="w-7 h-7 text-primary">
+                            <path d="M2 14 Q 12 -1 22 8" stroke="currentColor" stroke-width="1.5" fill="none"
+                                class="opacity-60" />
+                            <circle cx="21" cy="7" r="1.5" fill="currentColor" />
+                            <path
+                                d="M4.5 19 A 3.5 3.5 0 0 1 5 12 Q 9 6 11 6 A 4 4 0 0 1 15 7 Q 16 11 18 13 A 3.5 3.5 0 0 1 19.5 19 A 3.5 3.5 0 0 1 16 16 Q 12 11 8 16 A 3.5 3.5 0 0 1 4.5 19 Z"
+                                fill="currentColor" />
+                        </svg>
+                        <span class="text-xl font-bold tracking-tight text-white">LeapNodes</span>
+                    </a>
+                    <p class="text-gray-500 text-sm max-w-xs">WhatsApp Automation & AI Communication Systems for
+                        businesses
+                        of all sizes.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a class="hover:text-primary transition-colors" href="features.html">Features</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="process.html">Process</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a class="hover:text-primary transition-colors" href="about.html">About Us</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="contact.html">Contact</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="terms.html">Terms & Conditions</a>
+                        </li>
+                        <li><a class="hover:text-primary transition-colors" href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/5 text-center md:text-left text-xs text-gray-600">
+                © 2026 LeapNodes Inc. All rights reserved.
+            </div>
+        </footer>
+    </div>
+
+    <!-- Google Sheets Integration Script -->
+    <script>
+        // CONFIGURATION: Replace this URL with your Google Apps Script Web App URL
+        // To set up:
+        // 1. Create a Google Sheet with columns: Timestamp, FirstName, LastName, Email, Phone, Subject, Message
+        // 2. Go to Extensions > Apps Script
+        // 3. Paste the code from the setup instructions
+        // 4. Deploy as Web App and paste the URL below
+        const GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnSpinner = document.getElementById('btnSpinner');
+        const btnIcon = document.getElementById('btnIcon');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Show loading state
+            btnText.textContent = 'Sending...';
+            btnSpinner.classList.remove('hidden');
+            btnIcon.classList.add('hidden');
+            submitBtn.disabled = true;
+
+            // Collect form data
+            const formData = {
+                timestamp: new Date().toISOString(),
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value || 'Not provided',
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            try {
+                // Check if Google Sheets URL is configured
+                if (GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+                    // Demo mode - just show success
+                    console.log('Form data (demo mode):', formData);
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                } else {
+                    // Send to Google Sheets
+                    await fetch(GOOGLE_SHEETS_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                }
+
+                // Show success message
+                form.classList.add('hidden');
+                successMessage.classList.remove('hidden');
+
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('There was an error sending your message. Please try again or email us directly.');
+
+                // Reset button
+                btnText.textContent = 'Send Message';
+                btnSpinner.classList.add('hidden');
+                btnIcon.classList.remove('hidden');
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 z-[60] bg-background-dark/95 backdrop-blur-xl hidden lg:hidden flex flex-col items-center justify-center gap-8 transition-all duration-300 opacity-0 pointer-events-none">
+        <a class="text-2xl font-medium text-white hover:text-primary transition-colors" href="index.html">Home</a>
+        <a class="text-2xl font-medium text-white hover:text-primary transition-colors"
+            href="features.html">Features</a>
+        <a class="text-2xl font-medium text-white hover:text-primary transition-colors" href="process.html">Process</a>
+        <a class="text-2xl font-medium text-white hover:text-primary transition-colors" href="about.html">About Us</a>
+        <a class="text-2xl font-medium text-white hover:text-primary transition-colors" href="contact.html">Contact</a>
+
+        <button id="close-menu-btn"
+            class="absolute top-5 right-5 p-2 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+    </div>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuBtn && closeMenuBtn && mobileMenu) {
+            function toggleMenu() {
+                const isHidden = mobileMenu.classList.contains('hidden');
+                if (isHidden) {
+                    mobileMenu.classList.remove('hidden');
+                    // Small delay to allow display:flex to apply before opacity transition
+                    requestAnimationFrame(() => {
+                        mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                    });
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                    }, 300);
+                    document.body.style.overflow = '';
+                }
+            }
+
+            mobileMenuBtn.addEventListener('click', toggleMenu);
+            closeMenuBtn.addEventListener('click', toggleMenu);
+        }
+    </script>
+</body>
+
+</html>
