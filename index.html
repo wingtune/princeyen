@@ -1,1028 +1,715 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leapnodes | WhatsApp AI Automation for South African Businesses</title>
-    <meta name="description" content="Stop losing sales to slow WhatsApp replies. Leapnodes builds AI assistants that respond instantly, qualify leads, and book appointments 24/7.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Space Grotesk', 'sans-serif'],
-                    },
-                    colors: {
-                        'neon-green': '#00ff88',
-                        'neon-blue': '#00d4ff',
-                        'dark-bg': '#0a0a0a',
-                        'dark-card': '#111111',
-                        'dark-border': '#222222',
-                    },
-                    animation: {
-                        'gradient': 'gradient 8s linear infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        gradient: {
-                            '0%, 100%': { backgroundPosition: '0% 50%' },
-                            '50%': { backgroundPosition: '100% 50%' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        
-        html {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-        }
-        
-        body {
-            background: #0a0a0a;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            /* Fix subpixel rendering */
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-        
-        .gradient-border {
-            position: relative;
-            background: #111;
-            border-radius: 12px;
-            border: 1px solid #333;
-        }
-        
-        .glow {
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
-        }
-        
-        .text-glow {
-            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
-        }
-        
-        /* REMOVED: Noise texture causing pixelation */
-        /* .noise { ... } */
-        
-        .hero-gradient {
-            background: radial-gradient(ellipse at top, rgba(0, 255, 136, 0.15), transparent 50%),
-                        radial-gradient(ellipse at bottom right, rgba(0, 212, 255, 0.1), transparent 50%);
-        }
-        
-        .glass {
-            background: rgba(17, 17, 17, 0.95);
-            /* Fix backdrop-filter pixelation */
-            backdrop-filter: blur(12px) saturate(100%);
-            -webkit-backdrop-filter: blur(12px) saturate(100%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            /* Prevent subpixel issues */
-            transform: translateZ(0);
-        }
-        
-        .chat-bubble {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 16px;
-            padding: 12px 16px;
-            margin: 8px 0;
-            max-width: 80%;
-            animation: slideIn 0.3s ease-out;
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .typing-dot {
-            width: 6px;
-            height: 6px;
-            background: #00ff88;
-            border-radius: 50%;
-            display: inline-block;
-            animation: typing 1.4s infinite;
-            margin: 0 2px;
-        }
-        
-        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-        
-        @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-10px); }
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        .form-input {
-            width: 100%;
-            background: #0a0a0a;
-            border: 2px solid #333;
-            border-radius: 12px;
-            padding: 16px 20px;
-            color: #fff;
-            font-size: 16px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 10;
-            -webkit-appearance: none;
-            appearance: none;
-        }
-        
-        .form-input:hover {
-            border-color: #444;
-        }
-        
-        .form-input:focus {
-            border-color: #00ff88;
-            box-shadow: 0 0 0 4px rgba(0, 255, 136, 0.1);
-        }
-        
-        .form-input::placeholder {
-            color: #666;
-        }
-        
-        @media (max-width: 768px) {
-            .form-input {
-                font-size: 16px;
-                padding: 18px 20px;
-            }
-        }
-        
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #444; }
-        
-        a, button {
-            cursor: pointer;
-            touch-action: manipulation;
-        }
-        
-        /* Fix for blurry/pixelated images and elements */
-        img, svg {
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leapnodes | AI Revenue Engine for Shopify Stores</title>
+<meta name="description" content="Turn abandoned carts into sales, eliminate support tickets, and grow revenue 24/7. Leapnodes automates your Shopify store's entire customer journey.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0F172A;--navy2:#1E293B;
+  --indigo:#4F46E5;--indigo2:#6366F1;--indigo-pale:#EEF2FF;--indigo-mid:#C7D2FE;
+  --emerald:#059669;--amber:#D97706;--amber-pale:#FFFBEB;
+  --slate:#64748B;--slate2:#94A3B8;
+  --border:#E2E8F0;--border2:#CBD5E1;
+  --bg:#F8FAFC;--white:#FFFFFF;
+  --text:#0F172A;--text2:#475569;
+}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden;font-size:16px;line-height:1.6}
+h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:700;line-height:1.15}
+a{text-decoration:none;color:inherit}
+svg{display:block}
+button{cursor:pointer;font-family:'DM Sans',sans-serif}
+
+/* NAV */
+.nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:11px;font-family:'Fraunces',serif;font-weight:700;font-size:20px;color:var(--navy);letter-spacing:-.3px}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:14px;color:var(--slate);font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--navy)}
+.nav-cta{display:flex;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;transition:all .2s;white-space:nowrap;cursor:pointer}
+.btn-dark{background:var(--navy);color:#fff}.btn-dark:hover{background:var(--indigo);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--border2)}.btn-ghost:hover{border-color:var(--navy);background:var(--bg)}
+.btn-xl{padding:15px 30px;font-size:16px;border-radius:10px}
+.btn-indigo{background:var(--indigo);color:#fff}.btn-indigo:hover{background:#4338CA;transform:translateY(-1px)}
+
+/* HERO */
+.hero{padding:136px 24px 96px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--indigo-pale);color:var(--indigo);border:1px solid var(--indigo-mid);padding:6px 14px;border-radius:100px;font-size:13px;font-weight:600;margin-bottom:24px}
+.badge-dot{width:6px;height:6px;background:var(--indigo);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(40px,5vw,58px);color:var(--navy);margin-bottom:20px;letter-spacing:-.5px}
+.hero h1 em{font-style:italic;color:var(--indigo)}
+.hero-sub{font-size:18px;color:var(--text2);max-width:480px;line-height:1.7;margin-bottom:36px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.trust{display:flex;gap:20px;flex-wrap:wrap}
+.trust-i{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--slate);font-weight:500}
+
+/* HERO CARD */
+.hcard{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 4px 6px -1px rgba(0,0,0,.05),0 20px 40px -12px rgba(15,23,42,.1)}
+.hcard-top{background:var(--navy);padding:14px 20px;display:flex;align-items:center;gap:12px}
+.dots{display:flex;gap:6px}
+.d{width:10px;height:10px;border-radius:50%}
+.metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+.met{background:var(--bg);border-radius:10px;padding:12px}
+.met-l{font-size:11px;color:var(--slate);font-weight:500;margin-bottom:4px}
+.met-v{font-size:20px;font-weight:700;font-family:'Fraunces',serif}
+.met-c{font-size:11px;font-weight:600;color:var(--emerald)}
+.ev{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border-radius:8px;margin-bottom:8px;opacity:0;animation:su .4s ease-out forwards}
+@keyframes su{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.ev-ic{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ev-tit{font-size:13px;font-weight:600;color:var(--navy)}
+.ev-sub{font-size:11px;color:var(--slate)}
+.ev-val{font-size:12px;font-weight:700;color:var(--slate);flex-shrink:0}
+.fbadge{position:absolute;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:12px 16px;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.fbadge-v{font-size:22px;font-weight:700;font-family:'Fraunces',serif}
+.fbadge-l{font-size:11px;color:var(--slate);font-weight:500;margin-top:2px}
+
+/* MARQUEE */
+.marq-wrap{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:22px 0;overflow:hidden;position:relative}
+.marq-wrap::before,.marq-wrap::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none}
+.marq-wrap::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
+.marq-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
+.marq-track{display:flex;width:max-content;animation:marq 30s linear infinite}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marq-item{display:flex;align-items:center;gap:9px;padding:0 36px;border-right:1px solid var(--border);opacity:.6;transition:opacity .2s;flex-shrink:0}
+.marq-item:hover{opacity:1}
+.marq-item span{font-size:13px;font-weight:600;color:var(--slate2);white-space:nowrap}
+
+/* SECTIONS */
+.sec{padding:96px 24px;max-width:1200px;margin:0 auto}
+.sec-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px}
+.sec-label::before{content:'';width:16px;height:2px;background:currentColor;border-radius:2px;flex-shrink:0}
+.sec-title{font-size:clamp(30px,4vw,44px);color:var(--navy);margin-bottom:16px;letter-spacing:-.3px}
+.sec-sub{font-size:18px;color:var(--text2);max-width:600px;line-height:1.7}
+
+/* PAIN */
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.pcard{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:32px;position:relative;overflow:hidden;transition:all .25s}
+.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px 3px 0 0}
+.pcard.r::before{background:#EF4444}.pcard.a::before{background:#F59E0B}.pcard.b::before{background:#3B82F6}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 20px 40px -12px rgba(15,23,42,.12)}
+.pic{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.pic.r{background:#FEF2F2;color:#EF4444}.pic.a{background:var(--amber-pale);color:var(--amber)}.pic.b{background:#EFF6FF;color:#3B82F6}
+.pcard h3{font-size:19px;color:var(--navy);margin-bottom:10px}
+.pcard p{font-size:14px;color:var(--text2);line-height:1.7}
+.pstat{margin-top:20px;padding-top:20px;border-top:1px solid var(--border);font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px}
+.pstat.r{color:#DC2626}.pstat.a{color:var(--amber)}.pstat.b{color:#2563EB}
+
+/* HOW */
+.how{padding:96px 24px;background:var(--navy)}
+.how-in{max-width:1200px;margin:0 auto}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:56px}
+.scard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px;transition:all .25s}
+.scard:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
+.snum{font-family:'Fraunces',serif;font-size:52px;font-weight:700;color:rgba(255,255,255,.07);line-height:1;margin-bottom:10px}
+.sic{width:48px;height:48px;background:rgba(99,102,241,.3);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:#A5B4FC}
+.scard h3{font-size:19px;color:#fff;margin-bottom:10px}
+.scard p{font-size:14px;color:#94A3B8;line-height:1.7}
+.sfeat{display:flex;align-items:center;gap:8px;font-size:13px;color:#C7D2FE;margin-top:8px}
+
+/* CHANNELS */
+.ch-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:56px}
+.ch-list{display:flex;flex-direction:column;gap:14px}
+.ch-item{display:flex;gap:16px;padding:20px;background:var(--white);border:1px solid var(--border);border-radius:14px;cursor:pointer;transition:all .2s}
+.ch-item.active,.ch-item:hover{border-color:var(--indigo-mid);background:var(--indigo-pale)}
+.ch-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ch-item h4{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.ch-item p{font-size:13px;color:var(--text2);line-height:1.5}
+.ch-stat{font-size:12px;font-weight:700;color:var(--indigo);margin-top:6px}
+.ch-preview{background:var(--bg);border-radius:20px;padding:24px;border:1px solid var(--border);min-height:460px}
+.chat-ui{background:var(--white);border-radius:16px;border:1px solid var(--border);overflow:hidden}
+.chat-top{background:var(--navy);padding:14px 16px;display:flex;align-items:center;gap:12px}
+.chat-av{width:32px;height:32px;border-radius:50%;background:var(--indigo);display:flex;align-items:center;justify-content:center;color:white;font-size:13px;font-weight:700;flex-shrink:0}
+.chat-name{color:white;font-size:14px;font-weight:600}
+.chat-st{color:#86EFAC;font-size:11px;display:flex;align-items:center;gap:4px}
+.st-dot{width:6px;height:6px;background:#22C55E;border-radius:50%}
+.msgs{padding:16px;display:flex;flex-direction:column;gap:10px;max-height:320px;overflow-y:auto}
+.msg{max-width:78%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5}
+.msg-in{background:var(--bg);color:var(--text);border-radius:4px 12px 12px 12px;align-self:flex-start}
+.msg-out{background:var(--indigo);color:white;border-radius:12px 4px 12px 12px;align-self:flex-end}
+.msg-t{font-size:10px;opacity:.6;margin-top:4px}
+.tdot{width:6px;height:6px;background:var(--slate2);border-radius:50%;display:inline-block;animation:tb 1.4s infinite;margin:0 2px}
+.tdot:nth-child(2){animation-delay:.2s}.tdot:nth-child(3){animation-delay:.4s}
+@keyframes tb{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+
+/* TESTIMONIALS */
+.tc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.tc{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:32px;transition:all .25s}
+.tc:hover{transform:translateY(-3px);box-shadow:0 16px 32px -8px rgba(15,23,42,.08)}
+.tc-q{font-size:14px;color:var(--text2);line-height:1.8;margin:16px 0 24px;font-style:italic}
+.tc-av{width:40px;height:40px;border-radius:50%;background:var(--indigo-pale);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--indigo);flex-shrink:0}
+.tc-name{font-size:14px;font-weight:700;color:var(--navy)}
+.tc-role{font-size:12px;color:var(--slate)}
+.tc-res{margin-top:16px;padding-top:16px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.res-l{font-size:11px;color:var(--slate);font-weight:500}
+.res-v{font-size:13px;font-weight:800;color:var(--emerald)}
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--border);border-radius:16px;overflow:hidden;margin-top:56px;border:1px solid var(--border);gap:1px}
+.sc{background:var(--white);padding:32px;text-align:center}
+.sc-n{font-family:'Fraunces',serif;font-size:38px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.sc-l{font-size:13px;color:var(--text2);font-weight:500}
+
+/* FAQ */
+.faq-sec{padding:96px 24px;background:var(--bg)}
+.faq-in{max-width:760px;margin:0 auto}
+.faq-list{margin-top:48px;display:flex;flex-direction:column;gap:12px}
+.faq-item{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;cursor:pointer;font-size:15px;font-weight:600;color:var(--navy);transition:background .2s;gap:16px}
+.faq-q:hover{background:var(--bg)}
+.faq-q svg{flex-shrink:0;color:var(--slate);transition:transform .3s}
+.faq-item.open .faq-q svg{transform:rotate(180deg)}
+.faq-a{display:none;padding:0 24px 20px;font-size:14px;color:var(--text2);line-height:1.8}
+.faq-item.open .faq-a{display:block}
+
+/* CTA */
+.cta-sec{padding:96px 24px;background:var(--navy);position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;top:-50%;left:-20%;width:60%;height:200%;background:radial-gradient(ellipse,rgba(99,102,241,.2) 0%,transparent 70%)}
+.cta-sec::after{content:'';position:absolute;bottom:-50%;right:-10%;width:40%;height:150%;background:radial-gradient(ellipse,rgba(16,185,129,.1) 0%,transparent 70%)}
+.cta-in{max-width:800px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.cta-sec h2{font-size:clamp(34px,5vw,50px);color:white;margin-bottom:16px;letter-spacing:-.3px}
+.cta-sec p{font-size:18px;color:#94A3B8;margin-bottom:48px;line-height:1.7}
+.cta-form{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:40px;text-align:left}
+.fg{display:flex;flex-direction:column;gap:8px}
+.fg.full{grid-column:1/-1}
+.fl{font-size:13px;font-weight:600;color:#CBD5E1}
+.fi{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:13px 16px;color:white;font-size:15px;font-family:'DM Sans',sans-serif;outline:none;transition:all .2s;width:100%;-webkit-appearance:none}
+.fi::placeholder{color:#64748B}
+.fi:focus{border-color:rgba(99,102,241,.6);background:rgba(255,255,255,.1);box-shadow:0 0 0 3px rgba(99,102,241,.2)}
+.fsub{grid-column:1/-1;background:var(--indigo);color:white;padding:16px;border-radius:10px;font-size:16px;font-weight:700;border:none;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:8px}
+.fsub:hover{background:#4338CA;transform:translateY(-1px)}
+.cta-alt{margin-top:24px;text-align:center;font-size:14px;color:#64748B}
+.cta-alt a{color:#A5B4FC;font-weight:600}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+/* FOOTER */
+.foot{background:#080F1E;padding:64px 24px 32px;border-top:1px solid rgba(255,255,255,.08)}
+.foot-in{max-width:1200px;margin:0 auto}
+.foot-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px}
+.foot-brand p{font-size:14px;color:#64748B;line-height:1.7;margin-top:16px;max-width:280px}
+.foot-col h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#475569;margin-bottom:20px}
+.foot-col a{display:block;font-size:14px;color:#94A3B8;margin-bottom:12px;transition:color .2s}
+.foot-col a:hover{color:#E2E8F0}
+.foot-bot{border-top:1px solid rgba(255,255,255,.06);padding-top:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.foot-copy{font-size:13px;color:#475569}
+.mbadge{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:#475569;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:5px 12px;border-radius:100px}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding-top:96px}
+  .hero-visual{display:none}
+  .pain-grid,.steps,.tc-grid{grid-template-columns:1fr}
+  .ch-grid{grid-template-columns:1fr}
+  .ch-preview{display:none}
+  .stats-bar{grid-template-columns:1fr 1fr}
+  .foot-top{grid-template-columns:1fr 1fr}
+  .fgrid{grid-template-columns:1fr}
+  .nav-links,.nav-cta .btn-ghost{display:none}
+  .fbadge{display:none}
+}
+</style>
 </head>
-<body class="antialiased">
+<body>
 
-    <!-- REMOVED: Noise div causing pixelation -->
-    <!-- <div class="noise"></div> -->
+<!-- SVG SYMBOL LIBRARY -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+<defs>
+<symbol id="s-shopify" viewBox="0 0 256 292">
+<path d="M223.773 55.675c-.226-1.68-1.68-2.686-2.912-2.798-.337-.025-6.266-.449-6.266-.449s-4.137-4.025-4.586-4.474c-.449-.449-1.344-.337-1.68-.225l-2.574.786c-1.568-4.474-4.25-8.611-9.058-8.611-.113 0-.225 0-.337.013-.338-.449-.899-.899-1.57-1.235-6.941-3.251-14.332-.449-20.048 6.267-4.025 4.698-7.053 11.865-7.951 19.042l-13.097 4.025c0-.113-3.926-12.31-4.025-12.535-3.251-7.839-9.396-11.752-15.999-12.422-5.148-.562-10.17.787-14.308 3.363-5.26-1.905-10.856-.337-15.891 5.941-3.139 3.927-5.827 9.846-6.154 19.129l-9.059 2.8s-4.923-1.569-12.984-3.926C70.87 67.878 58.225 137.47 47.93 195.131l104.297 19.579 56.492-12.421c0 0-24.846-124.471-26.089-130.162.899-.337 1.905-.674 2.912-1.011 1.009-.337 4.025-.899 4.474-4.025.449-3.025-4.137-3.25-4.137-3.25l-11.302-1.905c0 0 6.603-37.85 6.941-39.981.337-2.011 2.91-2.123 3.812-.449.899 1.68 3.027 4.698 3.027 4.698l15.213 5.036c1.232.449 2.798.562 4.137.112.899-.337 7.614-3.139 8.624-3.588 2.123-.899 1.57-2.91.225-5.036zm-80.285-4.586c-.674 4.474-1.571 9.846-2.686 15.553l-17.108 5.26c2.349-15.214 7.839-24.397 14.443-26.971 1.457-.562 3.251-.674 5.036-.225-.449 2.012-.899 4.025-1.348 6.04l1.663.343zm-14.894-9.846c-1.011.449-1.905 1.123-2.8 1.797-3.475 2.91-6.154 7.951-7.951 14.667-.449 1.68-.899 3.475-1.235 5.372l-9.396 2.91c2.8-14.443 8.961-23.52 15.553-25.643 2.012-.562 3.926-.562 5.829.897zm-26.09 11.641c-1.011.449-2.012 1.011-2.91 1.68-4.025 3.25-7.052 9.17-8.624 16.786l-9.059 2.8c2.91-14.218 9.846-22.958 17.108-24.51 2.012-.449 3.814-.225 5.709.674l-2.224 2.57z" fill="#96BF48"/>
+<path d="M220.861 52.877c-.337-.025-6.266-.449-6.266-.449s-4.137-4.025-4.586-4.474c-.225-.225-.449-.337-.674-.337l-3.363 129.936L256 166.31l-30.001-110.9c-.449-1.232-1.793-2.196-3.138-2.533z" fill="#5E8E3E"/>
+<path d="M148.775 92.295l-7.839 23.295s-6.941-3.7-15.327-3.251c-12.197.674-12.31 8.4-12.197 10.407.562 8.961 24.172 10.97 25.52 32.337.899 16.786-8.961 28.313-23.294 29.2-17.108 1.123-26.64-8.961-26.64-8.961l3.363-15.664s9.284 6.941 16.449 6.491c4.923-.225 6.716-4.25 6.491-7.052-.674-11.302-19.916-10.632-21.147-30.325-.674-16.449 9.846-33.122 33.572-34.583 9.396-.449 14.05 1.906 14.05 1.906z" fill="#fff"/>
+</symbol>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass border-b border-dark-border/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <a href="#top" class="flex items-center gap-2 hover:opacity-80 transition">
-                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-neon-green to-neon-blue flex items-center justify-center">
-                        <i data-lucide="zap" class="w-5 h-5 text-black"></i>
-                    </div>
-                    <span class="font-display font-bold text-xl tracking-tight">Leapnodes</span>
-                </a>
-                
-                <div class="hidden md:flex items-center gap-8 text-sm text-gray-400">
-                    <a href="#problem" class="hover:text-white transition">The Problem</a>
-                    <a href="#solution" class="hover:text-white transition">Solution</a>
-                    <a href="#proof" class="hover:text-white transition">Results</a>
-                    <a href="#packages" class="hover:text-white transition">Packages</a>
-                </div>
+<symbol id="s-whatsapp" viewBox="0 0 24 24">
+<path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+</symbol>
 
-                <a href="#audit" class="hidden md:inline-flex items-center gap-2 bg-white text-black px-5 py-2 rounded-full font-semibold text-sm hover:bg-neon-green transition-all">
-                    Get Audit
-                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </a>
-            </div>
+<symbol id="s-instagram" viewBox="0 0 24 24">
+<defs><linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs>
+<path fill="url(#ig)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+</symbol>
+
+<symbol id="s-facebook" viewBox="0 0 24 24">
+<path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+</symbol>
+
+<symbol id="s-klaviyo" viewBox="0 0 32 32">
+<rect width="32" height="32" rx="5" fill="#1A1A1A"/>
+<path fill="white" d="M8 6h4v9l8-9h5L16 15l10 11h-5.5L12 16.5V26H8V6z"/>
+</symbol>
+
+<symbol id="s-gcal" viewBox="0 0 32 32">
+<rect width="32" height="32" rx="5" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+<rect x="4" y="4" width="24" height="24" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
+<rect x="4" y="4" width="24" height="8" rx="3" fill="#EA4335"/>
+<rect x="4" y="9" width="24" height="3" fill="#EA4335"/>
+<path fill="#1A73E8" d="M4 15h5v5H4z"/>
+<path fill="#34A853" d="M11 15h5v5h-5z"/>
+<path fill="#FBBC04" d="M18 15h5v5h-5z"/>
+<path fill="#4285F4" d="M4 22h5v5H4z"/>
+<path fill="#EA4335" d="M11 22h5v5h-5z"/>
+<rect x="23" y="4" width="1" height="4" rx=".5" fill="white"/>
+<rect x="8" y="4" width="1" height="4" rx=".5" fill="white"/>
+</symbol>
+
+<symbol id="s-hubspot" viewBox="0 0 32 32">
+<path fill="#FF7A59" d="M22 9.5V6.8A2.3 2.3 0 0023.3 4.7a2.3 2.3 0 10-4.6 0 2.3 2.3 0 001.3 2.1V9.5a6.5 6.5 0 00-3.1 1.4L9.3 5.4A2.5 2.5 0 009.4 5a2.6 2.6 0 10-2.6 2.6c.5 0 .9-.1 1.3-.3l7.5 5a6.5 6.5 0 000 3.5l-7.5 4.9a2.5 2.5 0 00-1.3-.3A2.6 2.6 0 004.2 23a2.6 2.6 0 002.6 2.6 2.6 2.6 0 002.6-2.6c0-.2 0-.4-.1-.6l7.4-4.8a6.5 6.5 0 004.3 1.6 6.5 6.5 0 000-13 6.5 6.5 0 00-1 .1zm-1 8.5a3.8 3.8 0 110-7.6 3.8 3.8 0 010 7.6z"/>
+</symbol>
+
+<symbol id="s-klaviyo2" viewBox="0 0 32 32">
+<rect width="32" height="32" rx="5" fill="#1A1A2E"/>
+<path fill="#FFD700" d="M10 8h3v5.5L18 8h3.5l-6 7 7 9H19l-5-7-1.5 1.7V24H10V8z"/>
+</symbol>
+
+<symbol id="s-tiktok" viewBox="0 0 24 24">
+<path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34l-.01-8.63a8.17 8.17 0 004.77 1.52V4.74a4.85 4.85 0 01-1-.05z"/>
+</symbol>
+</defs>
+</svg>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <a href="#" class="logo">
+      <!-- LOGO MARK: ascending nodes -->
+      <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+        <rect width="38" height="38" rx="10" fill="#0F172A"/>
+        <line x1="11" y1="27" x2="19" y2="18" stroke="#6366F1" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="19" y1="18" x2="27" y2="11" stroke="#6366F1" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="11" cy="27" r="3" fill="#6366F1" opacity=".7"/>
+        <circle cx="19" cy="18" r="3.5" fill="#818CF8"/>
+        <circle cx="27" cy="11" r="4.5" fill="white"/>
+      </svg>
+      Leapnodes
+    </a>
+    <div class="nav-links">
+      <a href="#pain">The Problem</a>
+      <a href="#how">How It Works</a>
+      <a href="#channels">Channels</a>
+      <a href="#proof">Results</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#proof" class="btn btn-ghost">See Results</a>
+      <a href="#contact" class="btn btn-dark">
+        Book Free Audit
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="padding-top:64px;background:var(--white)">
+<div class="hero">
+  <div>
+    <div class="badge"><span class="badge-dot"></span>Trusted by Shopify stores across the UK &amp; South Africa</div>
+    <h1>Your Shopify store runs.<br><em>Revenue doesn't have to sleep.</em></h1>
+    <p class="hero-sub">Leapnodes builds AI automation that recovers abandoned carts, handles every customer query, and upsells — across WhatsApp, Instagram, email and live chat — 24 hours a day.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-dark btn-xl">
+        Book Your Free Store Audit
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="#how" class="btn btn-ghost btn-xl">How It Works</a>
+    </div>
+    <div class="trust">
+      <div class="trust-i"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>48-hour setup</div>
+      <div class="trust-i"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Shopify native</div>
+      <div class="trust-i"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>No long contracts</div>
+      <div class="trust-i"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>UK &amp; SA support</div>
+    </div>
+  </div>
+
+  <!-- hero visual -->
+  <div class="hero-visual" style="position:relative">
+    <div class="fbadge" style="top:-20px;right:-20px;text-align:center;position:absolute">
+      <div class="fbadge-v" style="color:var(--emerald)">£3,840</div>
+      <div class="fbadge-l">Recovered this week</div>
+    </div>
+    <div class="hcard">
+      <div class="hcard-top">
+        <div class="dots"><div class="d" style="background:#EF4444"></div><div class="d" style="background:#F59E0B"></div><div class="d" style="background:#10B981"></div></div>
+        <span style="color:rgba(255,255,255,.5);font-size:12px;font-weight:500">Leapnodes Dashboard — Live</span>
+      </div>
+      <div style="padding:20px">
+        <div class="metrics">
+          <div class="met"><div class="met-l">Carts Recovered</div><div class="met-v" style="color:var(--emerald)" id="m1">0</div><div class="met-c">+18% this week</div></div>
+          <div class="met"><div class="met-l">Tickets Automated</div><div class="met-v" style="color:var(--indigo)" id="m2">0%</div><div class="met-c">84% deflection</div></div>
+          <div class="met"><div class="met-l">Upsells Today</div><div class="met-v" style="color:var(--navy)" id="m3">0</div><div class="met-c">+£640 revenue</div></div>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="top" class="relative min-h-screen flex items-center hero-gradient pt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="space-y-8">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-dark-card border border-dark-border text-sm">
-                        <span class="w-2 h-2 rounded-full bg-neon-green animate-pulse"></span>
-                        <span class="text-gray-300">Now serving 50+ SA businesses</span>
-                    </div>
-
-                    <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[0.9] tracking-tight">
-                        Stop Losing Sales to 
-                        <span class="gradient-text text-glow">Slow Replies</span>
-                    </h1>
-
-                    <p class="text-xl text-gray-400 max-w-lg leading-relaxed">
-                        40% of your WhatsApp leads die in the first 5 minutes. Leapnodes builds AI assistants that respond instantly, qualify leads, and book appointments—while you sleep.
-                    </p>
-
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#audit" class="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-neon-green to-neon-blue text-black font-bold py-4 px-8 rounded-full text-lg hover:shadow-[0_0_30px_rgba(0,255,136,0.4)] transition-all">
-                            Free WhatsApp Audit
-                            <i data-lucide="zap" class="w-5 h-5 group-hover:rotate-12 transition"></i>
-                        </a>
-                        <a href="#solution" class="inline-flex items-center justify-center gap-2 border border-dark-border hover:border-neon-green text-white py-4 px-8 rounded-full text-lg transition-all hover:bg-dark-card">
-                            <i data-lucide="play" class="w-5 h-5"></i>
-                            See How It Works
-                        </a>
-                    </div>
-
-                    <div class="flex items-center gap-6 text-sm text-gray-500 pt-4">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="check-circle" class="w-4 h-4 text-neon-green"></i>
-                            <span>24h Setup</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="check-circle" class="w-4 h-4 text-neon-green"></i>
-                            <span>SA-Based</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="check-circle" class="w-4 h-4 text-neon-green"></i>
-                            <span>Load Shedding Proof</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative">
-                    <div class="absolute -inset-4 bg-gradient-to-r from-neon-green/20 to-neon-blue/20 rounded-3xl blur-3xl opacity-30"></div>
-                    
-                    <div class="relative bg-dark-card rounded-2xl p-6 space-y-4 border border-dark-border">
-                        <div class="flex items-center justify-between border-b border-dark-border pb-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-600 flex items-center justify-center">
-                                    <i data-lucide="user" class="w-5 h-5 text-gray-300"></i>
-                                </div>
-                                <div>
-                                    <div class="font-semibold">Sarah's Salon</div>
-                                    <div class="text-xs text-neon-green flex items-center gap-1">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-neon-green animate-pulse"></span>
-                                        Leapnodes AI Online
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-xs text-gray-500">Now</div>
-                        </div>
-
-                        <div class="space-y-3 h-64 overflow-y-auto pr-2" id="chat-container">
-                            <div class="chat-bubble ml-auto bg-neon-green/10 border-neon-green/30 text-right">
-                                Hi, do you have availability for a haircut this Saturday?
-                                <div class="text-[10px] text-gray-500 mt-1">10:02 AM</div>
-                            </div>
-                            
-                            <div class="chat-bubble mr-auto">
-                                <div class="flex items-center gap-1 mb-1">
-                                    <span class="typing-dot"></span>
-                                    <span class="typing-dot"></span>
-                                    <span class="typing-dot"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="pt-4 border-t border-dark-border flex gap-2">
-                            <input type="text" placeholder="Type a message..." class="flex-1 bg-dark-bg border border-dark-border rounded-full px-4 py-2 text-sm" disabled>
-                            <button class="w-10 h-10 rounded-full bg-neon-green flex items-center justify-center text-black hover:scale-110 transition">
-                                <i data-lucide="send" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="absolute -bottom-6 -left-6 glass rounded-xl p-4 animate-[float_6s_ease-in-out_infinite]">
-                        <div class="text-xs text-gray-400 mb-1">Leads Captured Today</div>
-                        <div class="text-2xl font-bold text-neon-green" id="lead-counter">0</div>
-                    </div>
-
-                    <div class="absolute -top-6 -right-6 glass rounded-xl p-4 animate-[float_6s_ease-in-out_infinite_2s]">
-                        <div class="text-xs text-gray-400 mb-1">Response Time</div>
-                        <div class="text-2xl font-bold text-neon-blue">&lt; 3s</div>
-                    </div>
-                </div>
+        <!-- events: SVG icons, no emojis -->
+        <div id="evfeed">
+          <div class="ev" style="animation-delay:.15s">
+            <div class="ev-ic" style="background:#DCFCE7"><svg width="20" height="20" viewBox="0 0 24 24"><use href="#s-whatsapp"/></svg></div>
+            <div style="flex:1"><div class="ev-tit">Cart recovered — WhatsApp</div><div class="ev-sub">Emma T. · Nike Air Max 90 × 2</div></div>
+            <div class="ev-val">£149</div>
+          </div>
+          <div class="ev" style="animation-delay:.3s">
+            <div class="ev-ic" style="background:#FCE7F3"><svg width="20" height="20" viewBox="0 0 24 24"><use href="#s-instagram"/></svg></div>
+            <div style="flex:1"><div class="ev-tit">Instagram DM — Order query</div><div class="ev-sub">@sophiastyle_ · Resolved in 8s</div></div>
+            <div class="ev-val">Auto</div>
+          </div>
+          <div class="ev" style="animation-delay:.45s">
+            <div class="ev-ic" style="background:#EEF2FF">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--indigo)" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             </div>
+            <div style="flex:1"><div class="ev-tit">Post-purchase upsell sent</div><div class="ev-sub">James R. · Serum bundle offer</div></div>
+            <div class="ev-val">+£67</div>
+          </div>
+          <div class="ev" style="animation-delay:.6s">
+            <div class="ev-ic" style="background:#FEF9C3">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#CA8A04"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <div style="flex:1"><div class="ev-tit">Review requests sent</div><div class="ev-sub">5 customers · 3 already replied</div></div>
+            <div class="ev-val">5 ★</div>
+          </div>
         </div>
+      </div>
+    </div>
+    <div class="fbadge" style="bottom:-20px;left:-20px;position:absolute">
+      <div class="fbadge-v" style="color:var(--indigo)">98.7%</div>
+      <div class="fbadge-l">AI accuracy rate</div>
+    </div>
+  </div>
+</div>
+</section>
 
-        <a href="#problem" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer">
-            <i data-lucide="chevron-down" class="w-6 h-6 text-gray-600"></i>
-        </a>
-    </section>
+<!-- MARQUEE: real brand icons -->
+<div class="marq-wrap">
+  <div class="marq-track">
+    <!-- set 1 -->
+    <div class="marq-item"><svg width="24" height="24" viewBox="0 0 256 292"><use href="#s-shopify"/></svg><span>Shopify</span></div>
+    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#s-whatsapp"/></svg><span>WhatsApp</span></div>
+    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#s-instagram"/></svg><span>Instagram</span></div>
+    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#s-facebook"/></svg><span>Facebook</span></div>
+    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 32 32"><use href="#s-klaviyo"/></svg><span>Klaviyo</span></div>
+    <div class="marq-item"><svg width="24" height="24" viewBox="0 0 32 32"><use href="#s-gcal"/></svg><span>Google Calendar</span></div>
+    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 32 32"><use href="#s-hubspot"/></svg><span>HubSpot</span></div>
+    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#s-tiktok"/></svg><span>TikTok Shop</span></div>
+    <!-- set 2 (mirror) -->
+    <div class="marq-item"><svg width="24" height="24" viewBox="0 0 256 292"><use href="#s-shopify"/></svg><span>Shopify</span></div>
+    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#s-whatsapp"/></svg><span>WhatsApp</span></div>
+    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#s-instagram"/></svg><span>Instagram</span></div>
+    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#s-facebook"/></svg><span>Facebook</span></div>
+    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 32 32"><use href="#s-klaviyo"/></svg><span>Klaviyo</span></div>
+    <div class="marq-item"><svg width="24" height="24" viewBox="0 0 32 32"><use href="#s-gcal"/></svg><span>Google Calendar</span></div>
+    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 32 32"><use href="#s-hubspot"/></svg><span>HubSpot</span></div>
+    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#s-tiktok"/></svg><span>TikTok Shop</span></div>
+  </div>
+</div>
 
-    <!-- Problem Section -->
-    <section id="problem" class="py-24 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">The <span class="text-red-500">R3.2 Million</span> Problem</h2>
-                <p class="text-gray-400 text-lg">Average revenue lost by SA SMEs annually to slow WhatsApp responses</p>
-            </div>
+<!-- PAIN -->
+<section id="pain">
+<div class="sec">
+  <div class="sec-label" style="color:#EF4444">The Problem</div>
+  <h2 class="sec-title">Your Shopify store is leaking<br>revenue every single day</h2>
+  <p class="sec-sub">Most store owners don't realise how much slips through — not from bad products, but from slow or zero follow-up.</p>
+  <div class="pain-grid">
+    <div class="pcard r">
+      <div class="pic r"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></div>
+      <h3>Abandoned Carts Are Ignored</h3>
+      <p>70% of shoppers abandon their cart. Most stores send one generic email days later. By then, they've bought elsewhere. A WhatsApp message within 10 minutes recovers up to 20% of lost sales.</p>
+      <div class="pstat r"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Average store loses £4,200/month to abandoned carts</div>
+    </div>
+    <div class="pcard a">
+      <div class="pic a"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
+      <h3>Support Tickets Eat Your Day</h3>
+      <p>"Where's my order?" accounts for 43% of all ecommerce tickets. You're manually answering questions your AI could handle in 3 seconds — for every order, every day.</p>
+      <div class="pstat a"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>12+ hours per week lost to repetitive queries</div>
+    </div>
+    <div class="pcard b">
+      <div class="pic b"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+      <h3>You're Only Selling Once</h3>
+      <p>Getting a customer to buy again costs 5× less than finding a new one — but most stores have zero post-purchase automation. No upsells, no loyalty loops. Money left on the table daily.</p>
+      <div class="pstat b"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Repeat purchases can increase revenue by 30–40%</div>
+    </div>
+  </div>
+</div>
+</section>
 
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="gradient-border p-8 hover:scale-[1.02] transition-transform cursor-pointer" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                    <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center mb-4">
-                        <i data-lucide="clock" class="w-6 h-6 text-red-500"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">The 5-Minute Death</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        After 5 minutes, lead qualification drops 80%. Most businesses reply in 47 minutes. By then, your competitor already got the job.
-                    </p>
-                    <div class="mt-4 text-neon-green text-sm font-semibold flex items-center gap-1">
-                        Fix this <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </div>
-                </div>
+<!-- HOW -->
+<section id="how" class="how">
+<div class="how-in">
+  <div class="sec-label" style="color:#818CF8">How It Works</div>
+  <h2 class="sec-title" style="color:white">We build your entire<br>AI revenue system</h2>
+  <p class="sec-sub" style="color:#94A3B8">Not a tool you configure yourself. We design, build, and run the automation — you watch the results.</p>
+  <div class="steps">
+    <div class="scard">
+      <div class="snum">01</div>
+      <div class="sic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      <h3>We Audit Your Store</h3>
+      <p>We analyse your Shopify data, abandonment rates, and support volume to find exactly where revenue is leaking — and how much.</p>
+      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Shopify analytics review</div>
+      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Cart abandonment deep-dive</div>
+      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Channel &amp; competitor audit</div>
+    </div>
+    <div class="scard">
+      <div class="snum">02</div>
+      <div class="sic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="14" x2="22" y2="14"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="14" x2="4" y2="14"/></svg></div>
+      <h3>We Build Your AI System</h3>
+      <p>Our team builds your custom AI — trained on your products, tone, and policies. Integrated directly into Shopify and all your channels.</p>
+      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Custom AI trained on your brand</div>
+      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Multi-channel deployment</div>
+      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Live within 48 hours</div>
+    </div>
+    <div class="scard">
+      <div class="snum">03</div>
+      <div class="sic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+      <h3>Revenue Grows on Autopilot</h3>
+      <p>Your AI handles abandoned carts, queries, upsells, and review collection around the clock. Monthly report and optimisation from us.</p>
+      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>24/7 automated revenue recovery</div>
+      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Monthly performance reviews</div>
+      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Continuous AI improvement</div>
+    </div>
+  </div>
+</div>
+</section>
 
-                <div class="gradient-border p-8 hover:scale-[1.02] transition-transform cursor-pointer" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                    <div class="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center mb-4">
-                        <i data-lucide="moon" class="w-6 h-6 text-orange-500"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">The Night Shift Gap</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        35% of WhatsApp enquiries come after 6 PM. You're closed. They're messaging competitors who reply instantly.
-                    </p>
-                    <div class="mt-4 text-neon-green text-sm font-semibold flex items-center gap-1">
-                        Fix this <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </div>
-                </div>
-
-                <div class="gradient-border p-8 hover:scale-[1.02] transition-transform cursor-pointer" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                    <div class="w-12 h-12 rounded-xl bg-yellow-500/10 flex items-center justify-center mb-4">
-                        <i data-lucide="filter" class="w-6 h-6 text-yellow-500"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">The Tyre-Kicker Tax</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        You waste 12 hours weekly on unqualified leads. No budget, no timeline, just "checking prices." AI filters them out instantly.
-                    </p>
-                    <div class="mt-4 text-neon-green text-sm font-semibold flex items-center gap-1">
-                        Fix this <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </div>
-                </div>
-            </div>
+<!-- CHANNELS -->
+<section id="channels" style="padding:96px 24px">
+<div style="max-width:1200px;margin:0 auto">
+  <div class="sec-label" style="color:var(--emerald)">What We Automate</div>
+  <h2 class="sec-title">Everything your store needs.<br>All in one system.</h2>
+  <p class="sec-sub">Most chatbot tools only do one channel. Leapnodes builds a complete multi-channel engine — because your customers are everywhere.</p>
+  <div class="ch-grid">
+    <div class="ch-list">
+      <div class="ch-item active">
+        <div class="ch-ic" style="background:#DCFCE7"><svg width="26" height="26" viewBox="0 0 24 24"><use href="#s-whatsapp"/></svg></div>
+        <div><h4>WhatsApp Automation</h4><p>Abandoned cart recovery, order tracking, returns and product recommendations via WhatsApp Business API.</p><div class="ch-stat">Avg. 15–22% cart recovery rate</div></div>
+      </div>
+      <div class="ch-item">
+        <div class="ch-ic" style="background:#FCE7F3"><svg width="26" height="26" viewBox="0 0 24 24"><use href="#s-instagram"/></svg></div>
+        <div><h4>Instagram &amp; Facebook DMs</h4><p>Auto-respond to DMs, story replies, and comments. Qualify followers and drive them to your store.</p><div class="ch-stat">Turn followers into buyers automatically</div></div>
+      </div>
+      <div class="ch-item">
+        <div class="ch-ic" style="background:#DBEAFE">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </div>
-    </section>
-
-    <!-- Solution Section -->
-    <section id="solution" class="py-24 bg-dark-card/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-green/10 text-neon-green text-xs font-semibold mb-6">
-                        THE SOLUTION
-                    </div>
-                    <h2 class="font-display text-4xl sm:text-5xl font-bold mb-6 leading-tight">
-                        An AI Employee That Never Sleeps, Never Complains, and Never Misses a Lead
-                    </h2>
-                    <p class="text-gray-400 text-lg mb-8">
-                        Built specifically for South African businesses. Understands local context, handles load shedding, and speaks your customers' language.
-                    </p>
-
-                    <div class="space-y-6">
-                        <div class="flex gap-4 group cursor-pointer" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-neon-green/20 to-neon-blue/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition">
-                                <i data-lucide="zap" class="w-6 h-6 text-neon-green"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-1 group-hover:text-neon-green transition">Instant Response 24/7</h4>
-                                <p class="text-gray-400 text-sm">Replies in under 3 seconds, even at 2 AM. Every lead gets immediate attention.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex gap-4 group cursor-pointer" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-neon-green/20 to-neon-blue/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition">
-                                <i data-lucide="target" class="w-6 h-6 text-neon-blue"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-1 group-hover:text-neon-blue transition">Smart Qualification</h4>
-                                <p class="text-gray-400 text-sm">Asks budget, timeline, and requirements. Only hot leads reach you.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex gap-4 group cursor-pointer" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-neon-green/20 to-neon-blue/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition">
-                                <i data-lucide="calendar" class="w-6 h-6 text-neon-green"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-1 group-hover:text-neon-green transition">Auto-Booking</h4>
-                                <p class="text-gray-400 text-sm">Checks your calendar and books appointments directly. No back-and-forth.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex gap-4 group cursor-pointer" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-neon-green/20 to-neon-blue/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition">
-                                <i data-lucide="shield" class="w-6 h-6 text-neon-blue"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg mb-1 group-hover:text-neon-blue transition">Load Shedding Proof</h4>
-                                <p class="text-gray-400 text-sm">Edge deployment keeps working when the grid fails. Your customers never know.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="#audit" class="inline-flex items-center gap-2 mt-8 bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-neon-green transition-all">
-                        Start Free Audit
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </a>
-                </div>
-
-                <div class="relative">
-                    <div class="absolute inset-0 bg-gradient-to-r from-neon-green/10 to-neon-blue/10 rounded-3xl blur-3xl"></div>
-                    <div class="relative glass rounded-3xl p-8 space-y-6">
-                        <div class="flex items-center justify-between mb-6">
-                            <div class="flex items-center gap-2">
-                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            </div>
-                            <div class="text-xs text-gray-500">Leapnodes Dashboard</div>
-                        </div>
-
-                        <div class="space-y-4">
-                            <div class="flex justify-between items-center p-4 bg-dark-bg rounded-xl border border-dark-border hover:border-neon-green/50 transition cursor-pointer" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-neon-green/20 flex items-center justify-center">
-                                        <i data-lucide="message-square" class="w-5 h-5 text-neon-green"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold text-sm">Conversations Today</div>
-                                        <div class="text-xs text-gray-500">+23% vs yesterday</div>
-                                    </div>
-                                </div>
-                                <div class="text-2xl font-bold text-neon-green">47</div>
-                            </div>
-
-                            <div class="flex justify-between items-center p-4 bg-dark-bg rounded-xl border border-dark-border hover:border-neon-blue/50 transition cursor-pointer" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-neon-blue/20 flex items-center justify-center">
-                                        <i data-lucide="check-circle" class="w-5 h-5 text-neon-blue"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold text-sm">Appointments Booked</div>
-                                        <div class="text-xs text-gray-500">Auto-confirmed</div>
-                                    </div>
-                                </div>
-                                <div class="text-2xl font-bold text-neon-blue">12</div>
-                            </div>
-
-                            <div class="flex justify-between items-center p-4 bg-dark-bg rounded-xl border border-dark-border hover:border-purple-500/50 transition cursor-pointer" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                                        <i data-lucide="trending-up" class="w-5 h-5 text-purple-400"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-semibold text-sm">Revenue Saved</div>
-                                        <div class="text-xs text-gray-500">This month</div>
-                                    </div>
-                                </div>
-                                <div class="text-2xl font-bold text-white">R8,450</div>
-                            </div>
-                        </div>
-
-                        <div class="pt-4 border-t border-dark-border">
-                            <div class="flex items-center justify-between text-sm">
-                                <span class="text-gray-400">AI Confidence Score</span>
-                                <span class="text-neon-green font-semibold">98.4%</span>
-                            </div>
-                            <div class="mt-2 h-2 bg-dark-bg rounded-full overflow-hidden">
-                                <div class="h-full w-[98%] bg-gradient-to-r from-neon-green to-neon-blue rounded-full"></div>
-                            </div>
-                        </div>
-
-                        <a href="#audit" class="block w-full text-center border border-dark-border hover:border-neon-green text-gray-400 hover:text-white py-3 rounded-xl text-sm transition">
-                            View Full Analytics →
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div><h4>Email Sequences</h4><p>Post-purchase upsell flows, win-back campaigns, and review requests — triggered by Shopify order events.</p><div class="ch-stat">+30% average repeat purchase rate</div></div>
+      </div>
+      <div class="ch-item">
+        <div class="ch-ic" style="background:#F3E8FF">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#9333EA" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
         </div>
-    </section>
-
-    <!-- Social Proof -->
-    <section id="proof" class="py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">Businesses That Stopped Leaking Revenue</h2>
-                <p class="text-gray-400">Real results from real South African businesses using Leapnodes</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="gradient-border p-8 hover:scale-[1.02] transition cursor-pointer" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                    <div class="flex items-center gap-1 mb-4">
-                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
-                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
-                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
-                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
-                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
-                    </div>
-                    <p class="text-gray-300 mb-6 text-sm leading-relaxed">
-                        "We were losing 15-20 leads per week to slow replies. Leapnodes captures everything now. The AI even books appointments while I'm on site with clients."
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-600 flex items-center justify-center text-sm font-bold">JD</div>
-                        <div>
-                            <div class="font-semibold text-sm">John Dlamini</div>
-                            <div class="text-xs text-gray-500">JD Plumbing, Johannesburg</div>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-dark-border flex justify-between text-xs">
-                        <span class="text-gray-500">Response Time</span>
-                        <span class="text-neon-green font-semibold">2m → 3s</span>
-                    </div>
-                </div>
-
-                <div class="gradient-border p-8 hover:scale-[1.02] transition cursor-pointer" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                    <div class="flex items-center gap-1 mb-4">
-                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
-                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
-                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
-                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
-                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
-                    </div>
-                    <p class="text-gray-300 mb-6 text-sm leading-relaxed">
-                        "I used to wake up to 30 WhatsApps and spend 2 hours every morning just replying. Now I only talk to qualified leads. Game changer."
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-600 flex items-center justify-center text-sm font-bold">SN</div>
-                        <div>
-                            <div class="font-semibold text-sm">Sarah Nkosi</div>
-                            <div class="text-xs text-gray-500">Glow Salon, Cape Town</div>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-dark-border flex justify-between text-xs">
-                        <span class="text-gray-500">Time Saved</span>
-                        <span class="text-neon-green font-semibold">12h/week</span>
-                    </div>
-                </div>
-
-                <div class="gradient-border p-8 hover:scale-[1.02] transition cursor-pointer" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                    <div class="flex items-center gap-1 mb-4">
-                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
-                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
-                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
-                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
-                        <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i>
-                    </div>
-                    <p class="text-gray-300 mb-6 text-sm leading-relaxed">
-                        "During load shedding our old system died. Leapnodes keeps working on battery power. We've had zero downtime in 3 months."
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-700 to-gray-600 flex items-center justify-center text-sm font-bold">MP</div>
-                        <div>
-                            <div class="font-semibold text-sm">Mike Peters</div>
-                            <div class="text-xs text-gray-500">Peters Auto, Durban</div>
-                        </div>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-dark-border flex justify-between text-xs">
-                        <span class="text-gray-500">Uptime</span>
-                        <span class="text-neon-green font-semibold">99.9%</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-12 text-center">
-                <a href="#audit" class="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-neon-green transition-all">
-                    Join 50+ Businesses Using Leapnodes
-                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                </a>
-            </div>
+        <div><h4>On-Site AI Chat Widget</h4><p>A smart assistant on your store — answers product questions, recommends items, captures leads in real time.</p><div class="ch-stat">Reduces bounce rate by up to 18%</div></div>
+      </div>
+    </div>
+    <div class="ch-preview">
+      <div style="font-size:11px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:1px;margin-bottom:18px">Live preview</div>
+      <div class="chat-ui">
+        <div class="chat-top">
+          <svg width="30" height="30" viewBox="0 0 24 24" style="flex-shrink:0"><use href="#s-whatsapp"/></svg>
+          <div>
+            <div class="chat-name">Luxe Skin — WhatsApp AI</div>
+            <div class="chat-st"><span class="st-dot"></span>Automated · Always on</div>
+          </div>
         </div>
-    </section>
-
-    <!-- Packages Section -->
-    <section id="packages" class="py-24 bg-dark-card/30">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">Choose Your Growth Package</h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Solutions tailored to your business size and complexity. Every package includes setup, training, and ongoing support.</p>
-            </div>
-
-            <!-- Standard Packages -->
-            <div class="grid md:grid-cols-3 gap-8 mb-12">
-                <!-- Starter Package -->
-                <div class="gradient-border p-8 hover:scale-[1.02] transition-all duration-300 group cursor-pointer" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                    <div class="w-14 h-14 rounded-2xl bg-gray-800 flex items-center justify-center mb-6 group-hover:bg-neon-green/20 transition">
-                        <i data-lucide="message-circle" class="w-7 h-7 text-gray-400 group-hover:text-neon-green transition"></i>
-                    </div>
-                    
-                    <h3 class="font-display text-2xl font-bold mb-2">Starter</h3>
-                    <p class="text-gray-500 text-sm mb-6">For solo operators getting 5-15 WhatsApp leads per week</p>
-                    
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-neon-green mt-0.5 flex-shrink-0"></i>
-                            <span>Instant auto-replies to common questions</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-neon-green mt-0.5 flex-shrink-0"></i>
-                            <span>Basic lead capture (name, service needed)</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-neon-green mt-0.5 flex-shrink-0"></i>
-                            <span>WhatsApp notifications to your phone</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-neon-green mt-0.5 flex-shrink-0"></i>
-                            <span>Simple analytics dashboard</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-neon-green mt-0.5 flex-shrink-0"></i>
-                            <span>Email support</span>
-                        </li>
-                    </ul>
-
-                    <div class="pt-6 border-t border-dark-border">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-sm text-gray-500">Best for</span>
-                            <span class="text-xs bg-gray-800 px-2 py-1 rounded text-gray-300">Solo operators</span>
-                        </div>
-                        <button class="w-full border border-neon-green text-neon-green hover:bg-neon-green hover:text-black font-semibold py-3 rounded-xl transition-all">
-                            Get Custom Quote →
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Growth Package -->
-                <div class="relative gradient-border p-8 hover:scale-[1.02] transition-all duration-300 group cursor-pointer" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <span class="bg-gradient-to-r from-neon-green to-neon-blue text-black text-xs font-bold px-4 py-1 rounded-full">MOST POPULAR</span>
-                    </div>
-                    
-                    <div class="w-14 h-14 rounded-2xl bg-neon-green/20 flex items-center justify-center mb-6">
-                        <i data-lucide="zap" class="w-7 h-7 text-neon-green"></i>
-                    </div>
-                    
-                    <h3 class="font-display text-2xl font-bold mb-2">Growth</h3>
-                    <p class="text-gray-500 text-sm mb-6">For established businesses with 15-50 weekly enquiries and a small team</p>
-                    
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-neon-green mt-0.5 flex-shrink-0"></i>
-                            <span>Everything in Starter, plus:</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-neon-green mt-0.5 flex-shrink-0"></i>
-                            <span>Smart lead qualification (budget, timeline, urgency)</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-neon-green mt-0.5 flex-shrink-0"></i>
-                            <span>Direct calendar booking (Google/Outlook)</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-neon-green mt-0.5 flex-shrink-0"></i>
-                            <span>Team notifications & handoff to human staff</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-neon-green mt-0.5 flex-shrink-0"></i>
-                            <span>CRM integration (HubSpot, Pipedrive, Zoho)</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-neon-green mt-0.5 flex-shrink-0"></i>
-                            <span>Load shedding failover included</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-neon-green mt-0.5 flex-shrink-0"></i>
-                            <span>Priority WhatsApp support</span>
-                        </li>
-                    </ul>
-
-                    <div class="pt-6 border-t border-dark-border">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-sm text-gray-500">Best for</span>
-                            <span class="text-xs bg-neon-green/20 px-2 py-1 rounded text-neon-green">Growing teams</span>
-                        </div>
-                        <button class="w-full bg-gradient-to-r from-neon-green to-neon-blue text-black font-bold py-3 rounded-xl hover:shadow-[0_0_20px_rgba(0,255,136,0.4)] transition-all">
-                            Get Custom Quote →
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Enterprise Package -->
-                <div class="gradient-border p-8 hover:scale-[1.02] transition-all duration-300 group cursor-pointer" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                    <div class="w-14 h-14 rounded-2xl bg-purple-500/20 flex items-center justify-center mb-6 group-hover:bg-purple-500/30 transition">
-                        <i data-lucide="building-2" class="w-7 h-7 text-purple-400 group-hover:text-purple-300 transition"></i>
-                    </div>
-                    
-                    <h3 class="font-display text-2xl font-bold mb-2">Enterprise</h3>
-                    <p class="text-gray-500 text-sm mb-6">For multi-location businesses or high-volume operations with complex workflows</p>
-                    
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0"></i>
-                            <span>Everything in Growth, plus:</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0"></i>
-                            <span>Multi-location routing (different branches/teams)</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0"></i>
-                            <span>Custom AI training on your business data</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0"></i>
-                            <span>Advanced integrations (ERP, accounting software)</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0"></i>
-                            <span>Voice AI option (phone calls + WhatsApp)</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0"></i>
-                            <span>Dedicated account manager</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-sm text-gray-300">
-                            <i data-lucide="check" class="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0"></i>
-                            <span>SLA with guaranteed uptime</span>
-                        </li>
-                    </ul>
-
-                    <div class="pt-6 border-t border-dark-border">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-sm text-gray-500">Best for</span>
-                            <span class="text-xs bg-purple-500/20 px-2 py-1 rounded text-purple-300">Multi-location</span>
-                        </div>
-                        <button class="w-full border border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-black font-semibold py-3 rounded-xl transition-all">
-                            Get Custom Quote →
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Custom Solutions CTA -->
-            <div class="relative">
-                <div class="absolute -inset-1 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl blur opacity-20"></div>
-                <div class="relative gradient-border p-8 md:p-12 text-center cursor-pointer hover:border-orange-500/50 transition-all" onclick="document.getElementById('audit').scrollIntoView({behavior: 'smooth'})">
-                    <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-                        <div class="text-left">
-                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 text-xs font-semibold mb-4">
-                                <i data-lucide="settings" class="w-3 h-3"></i>
-                                CUSTOM SOLUTIONS
-                            </div>
-                            <h3 class="font-display text-2xl md:text-3xl font-bold mb-2">Need Something Different?</h3>
-                            <p class="text-gray-400 max-w-xl">Unique workflow? Custom integration? Specific compliance requirements? We build bespoke AI solutions for businesses that don't fit the standard mold.</p>
-                        </div>
-                        
-                        <div class="flex-shrink-0">
-                            <button class="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-black font-bold py-4 px-8 rounded-xl transition-all">
-                                Discuss Custom Build
-                                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="mt-8 pt-8 border-t border-dark-border grid md:grid-cols-4 gap-6 text-left">
-                        <div class="flex items-start gap-3">
-                            <i data-lucide="code" class="w-5 h-5 text-orange-400 mt-0.5 flex-shrink-0"></i>
-                            <div>
-                                <div class="font-semibold text-sm text-white">Custom Integrations</div>
-                                <div class="text-xs text-gray-500">ERP, legacy systems, proprietary software</div>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i data-lucide="shield-check" class="w-5 h-5 text-orange-400 mt-0.5 flex-shrink-0"></i>
-                            <div>
-                                <div class="font-semibold text-sm text-white">Compliance & Security</div>
-                                <div class="text-xs text-gray-500">POPIA, ISO 27001, on-premise deployment</div>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i data-lucide="workflow" class="w-5 h-5 text-orange-400 mt-0.5 flex-shrink-0"></i>
-                            <div>
-                                <div class="font-semibold text-sm text-white">Complex Workflows</div>
-                                <div class="text-xs text-gray-500">Multi-step approvals, conditional logic, routing</div>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i data-lucide="headphones" class="w-5 h-5 text-orange-400 mt-0.5 flex-shrink-0"></i>
-                            <div>
-                                <div class="font-semibold text-sm text-white">White-Label & Reseller</div>
-                                <div class="text-xs text-gray-500">Your branding, your clients, we build</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-16 text-center">
-                <div class="inline-flex items-center gap-8 glass rounded-2xl px-8 py-6">
-                    <div class="text-center">
-                        <div class="text-2xl font-bold text-white">50+</div>
-                        <div class="text-xs text-gray-500">Businesses served</div>
-                    </div>
-                    <div class="w-px h-10 bg-dark-border"></div>
-                    <div class="text-center">
-                        <div class="text-2xl font-bold text-neon-green">24h</div>
-                        <div class="text-xs text-gray-500">Average setup time</div>
-                    </div>
-                    <div class="w-px h-10 bg-dark-border"></div>
-                    <div class="text-center">
-                        <div class="text-2xl font-bold text-neon-blue">99.9%</div>
-                        <div class="text-xs text-gray-500">Uptime guarantee</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-12 text-center">
-                <p class="text-gray-400 mb-4">Not sure which package fits? Let's talk.</p>
-                <a href="#audit" class="inline-flex items-center gap-2 text-neon-green hover:text-white transition text-lg font-semibold">
-                    <i data-lucide="message-circle" class="w-5 h-5"></i>
-                    Get Free Consultation
-                </a>
-            </div>
+        <div class="msgs" id="chat-preview">
+          <div class="msg msg-in">Hi, I added items to my cart but didn't checkout — do you still have the serum bundle?<div class="msg-t">Just now</div></div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 
-    <!-- CTA Section -->
-    <section id="audit" class="py-24 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-dark-bg via-dark-card to-dark-bg"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-neon-green/10 via-transparent to-transparent"></div>
-        
-        <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-12">
-                <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4">Free WhatsApp Audit</h2>
-                <p class="text-gray-400 text-lg">I'll analyze your current setup and show you exactly how many leads you're losing—and how Leapnodes fixes it.</p>
-            </div>
+<!-- TESTIMONIALS -->
+<section id="proof" style="padding:96px 24px;background:var(--bg)">
+<div style="max-width:1200px;margin:0 auto">
+  <div style="text-align:center">
+    <div class="sec-label" style="color:var(--emerald);display:inline-flex;align-items:center;gap:8px">
+      <span style="width:16px;height:2px;background:var(--emerald);border-radius:2px;display:inline-block"></span>Results
+    </div>
+    <h2 class="sec-title">Shopify owners who stopped<br>leaving money on the table</h2>
+  </div>
+  <div class="tc-grid">
+    <div class="tc">
+      <div style="display:flex;gap:2px">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <p class="tc-q">"In the first month, Leapnodes recovered £6,800 in abandoned carts we would have completely lost. The WhatsApp follow-up converts at 22% — way better than our emails ever did."</p>
+      <div style="display:flex;align-items:center;gap:12px"><div class="tc-av">CW</div><div><div class="tc-name">Charlotte Webb</div><div class="tc-role">Founder, Luminary Skin — London, UK</div></div></div>
+      <div class="tc-res"><span class="res-l">Carts recovered / month</span><span class="res-v">£6,800+</span></div>
+    </div>
+    <div class="tc">
+      <div style="display:flex;gap:2px">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <p class="tc-q">"My support inbox used to have 200+ unanswered messages every Monday. Now it's under 20. The AI handles order tracking and returns instantly. I got my weekends back."</p>
+      <div style="display:flex;align-items:center;gap:12px"><div class="tc-av">TM</div><div><div class="tc-name">Thandeka Mokoena</div><div class="tc-role">Owner, Kasi Threads — Johannesburg, SA</div></div></div>
+      <div class="tc-res"><span class="res-l">Support tickets automated</span><span class="res-v">84% automated</span></div>
+    </div>
+    <div class="tc">
+      <div style="display:flex;gap:2px">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <p class="tc-q">"The Instagram DM automation alone paid for everything. When we run a drop, the AI engages every comment and DM instantly. Conversion on those DMs is around 31%."</p>
+      <div style="display:flex;align-items:center;gap:12px"><div class="tc-av">JA</div><div><div class="tc-name">Jake Ashworth</div><div class="tc-role">Co-Founder, Dusk Supply Co. — Manchester, UK</div></div></div>
+      <div class="tc-res"><span class="res-l">Instagram DM conversion</span><span class="res-v">31% rate</span></div>
+    </div>
+  </div>
+  <div class="stats-bar">
+    <div class="sc"><div class="sc-n">£2.4M</div><div class="sc-l">Revenue recovered for clients</div></div>
+    <div class="sc"><div class="sc-n">120+</div><div class="sc-l">Shopify stores automated</div></div>
+    <div class="sc"><div class="sc-n">3s</div><div class="sc-l">Average AI response time</div></div>
+    <div class="sc"><div class="sc-n">99.9%</div><div class="sc-l">Uptime — 24/7</div></div>
+  </div>
+</div>
+</section>
 
-            <form action="mailto:suppy@leapnodes.com" method="POST" enctype="text/plain" class="space-y-4">
-                
-                <div>
-                    <label class="block text-sm text-gray-400 mb-2 ml-1">Your Name</label>
-                    <input 
-                        type="text" 
-                        name="name" 
-                        placeholder="John Smith" 
-                        required 
-                        class="form-input"
-                        autocomplete="name"
-                    >
-                </div>
+<!-- FAQ -->
+<section class="faq-sec">
+<div class="faq-in">
+  <div style="text-align:center">
+    <div class="sec-label" style="color:var(--indigo);display:inline-flex;align-items:center;gap:8px"><span style="width:16px;height:2px;background:var(--indigo);border-radius:2px;display:inline-block"></span>FAQ</div>
+    <h2 class="sec-title">Common questions</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">How long does setup actually take?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">For most Shopify stores, we go live within 48 hours of your onboarding call. We handle the entire build — WhatsApp Business API approval, Shopify integration, AI training, and testing. No technical knowledge required.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">Do I need a WhatsApp Business API account?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">No — we set that up as part of onboarding. The official WhatsApp API is required for automation at scale, and we handle the full verification process including any existing account migration.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">Does this work for UK stores and SA stores the same way?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Yes — we serve both markets actively. UK clients billed in GBP, SA clients in ZAR. WhatsApp is the dominant channel in both countries and Instagram DM automation works identically. Support staff in both timezones.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">What if a customer asks something the AI can't handle?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">The AI escalates when outside its confidence threshold. It flags the conversation and notifies you immediately so a human can take over. You decide the escalation rules — we configure them during setup.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">Are there contracts or lock-ins?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Monthly rolling — cancel anytime. We're confident in results so we don't need to lock you in. Most clients stay because the ROI is clear from month one.</div></div>
+    <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">How is this different from Shopify Inbox or Gorgias?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Shopify Inbox is reactive. Gorgias organises tickets but doesn't proactively sell. Leapnodes is proactive — it sends cart recovery messages, runs upsell conversations, and drives outbound campaigns. We're a revenue engine, not a helpdesk.</div></div>
+  </div>
+</div>
+</section>
 
-                <div>
-                    <label class="block text-sm text-gray-400 mb-2 ml-1">Email Address</label>
-                    <input 
-                        type="email" 
-                        name="email" 
-                        placeholder="john@yourbusiness.co.za" 
-                        required 
-                        class="form-input"
-                        autocomplete="email"
-                    >
-                </div>
+<!-- CTA -->
+<section id="contact" class="cta-sec">
+<div class="cta-in">
+  <h2>Ready to stop losing revenue<br>to slow follow-up?</h2>
+  <p>Book a free 30-minute audit. We'll analyse your store, show you exactly where revenue is leaking, and give you a custom plan — no obligation.</p>
+  <div class="cta-form">
+    <div class="fgrid">
+      <div class="fg"><label class="fl">Your Name</label><input class="fi" type="text" placeholder="Charlotte Webb" autocomplete="name"></div>
+      <div class="fg"><label class="fl">Email Address</label><input class="fi" type="email" placeholder="charlotte@yourstore.com" autocomplete="email"></div>
+      <div class="fg"><label class="fl">Shopify Store URL</label><input class="fi" type="url" placeholder="yourstore.myshopify.com"></div>
+      <div class="fg"><label class="fl">WhatsApp / Phone</label><input class="fi" type="tel" placeholder="+44 7700 900 123" autocomplete="tel"></div>
+      <div class="fg full"><label class="fl">Monthly Revenue (approx.)</label>
+        <select class="fi" style="cursor:pointer">
+          <option value="" style="background:#1E293B">Select range...</option>
+          <option style="background:#1E293B">Under £5k / R100k</option>
+          <option style="background:#1E293B">£5k–£20k / R100k–R400k</option>
+          <option style="background:#1E293B">£20k–£50k / R400k–R1M</option>
+          <option style="background:#1E293B">£50k+ / R1M+</option>
+        </select>
+      </div>
+      <button class="fsub" onclick="doSubmit(event)">
+        Book My Free Audit
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="cta-alt">
+    Prefer to message first?
+    <a href="https://wa.me/27781234567">+27 78 123 4567</a> (SA) &nbsp;·&nbsp;
+    <a href="https://wa.me/447700900123">+44 7700 900 123</a> (UK)
+  </div>
+</div>
+</section>
 
-                <div>
-                    <label class="block text-sm text-gray-400 mb-2 ml-1">WhatsApp Number</label>
-                    <input 
-                        type="tel" 
-                        name="phone" 
-                        placeholder="078 123 4567" 
-                        required 
-                        class="form-input"
-                        autocomplete="tel"
-                        inputmode="tel"
-                    >
-                </div>
+<!-- FOOTER -->
+<footer class="foot">
+<div class="foot-in">
+  <div class="foot-top">
+    <div class="foot-brand">
+      <a href="#" style="display:flex;align-items:center;gap:11px;font-family:'Fraunces',serif;font-weight:700;font-size:20px;color:white;letter-spacing:-.3px">
+        <svg width="36" height="36" viewBox="0 0 38 38" fill="none"><rect width="38" height="38" rx="10" fill="#1E293B"/><line x1="11" y1="27" x2="19" y2="18" stroke="#4F46E5" stroke-width="1.8" stroke-linecap="round"/><line x1="19" y1="18" x2="27" y2="11" stroke="#4F46E5" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="27" r="3" fill="#6366F1" opacity=".7"/><circle cx="19" cy="18" r="3.5" fill="#818CF8"/><circle cx="27" cy="11" r="4.5" fill="white"/></svg>
+        Leapnodes
+      </a>
+      <p>AI revenue automation for Shopify stores. We build the system. You collect the revenue.</p>
+    </div>
+    <div class="foot-col"><h4>Product</h4><a href="#how">How It Works</a><a href="#channels">Channels</a><a href="#proof">Case Studies</a><a href="#contact">Free Audit</a></div>
+    <div class="foot-col"><h4>Services</h4><a href="#channels">WhatsApp Automation</a><a href="#channels">Instagram DM AI</a><a href="#channels">Cart Recovery</a><a href="#contact">White-Label</a></div>
+    <div class="foot-col"><h4>Contact</h4><a href="mailto:hello@leapnodes.com">hello@leapnodes.com</a><a href="https://wa.me/27781234567">WhatsApp SA</a><a href="https://wa.me/447700900123">WhatsApp UK</a><a href="#contact">Book Audit</a></div>
+  </div>
+  <div class="foot-bot">
+    <div class="foot-copy">© 2025 Leapnodes. All rights reserved.</div>
+    <div style="display:flex;gap:10px">
+      <div class="mbadge">
+        <svg width="16" height="11" viewBox="0 0 60 40"><rect width="60" height="40" rx="3" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="white" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#C8102E" stroke-width="5"/><path d="M30 0v40M0 20h60" stroke="white" stroke-width="13"/><path d="M30 0v40M0 20h60" stroke="#C8102E" stroke-width="8"/></svg>
+        United Kingdom
+      </div>
+      <div class="mbadge">
+        <svg width="16" height="11" viewBox="0 0 60 40"><rect width="60" height="40" fill="#007A4D"/><rect y="13" width="60" height="14" fill="#FFB612"/><rect width="20" height="40" fill="#000"/><polygon points="20,20 38,13 38,27" fill="#007A4D"/></svg>
+        South Africa
+      </div>
+    </div>
+    <div style="display:flex;gap:16px"><a href="#" style="font-size:13px;color:#475569">Privacy</a><a href="#" style="font-size:13px;color:#475569">Terms</a></div>
+  </div>
+</div>
+</footer>
 
-                <div>
-                    <label class="block text-sm text-gray-400 mb-2 ml-1">Business Name & Industry</label>
-                    <input 
-                        type="text" 
-                        name="business" 
-                        placeholder="ABC Plumbing - Home Services" 
-                        required 
-                        class="form-input"
-                        autocomplete="organization"
-                    >
-                </div>
+<script>
+// Counters
+function animCount(el,target,suffix){
+  let c=0;const inc=target/60;
+  const t=setInterval(()=>{c+=inc;if(c>=target){c=target;clearInterval(t);}
+  el.textContent=Math.floor(c)+(suffix||'');},20);
+}
+const ob=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
+  animCount(document.getElementById('m1'),23,'');
+  animCount(document.getElementById('m2'),84,'%');
+  animCount(document.getElementById('m3'),14,'');
+  ob.disconnect();}});});
+const m1=document.getElementById('m1');if(m1)ob.observe(m1);
 
-                <button 
-                    type="submit" 
-                    class="w-full bg-white text-black font-bold py-4 rounded-xl hover:bg-neon-green transition-all mt-6 text-lg"
-                >
-                    Book My Free Audit →
-                </button>
+// Chat
+const msgs=[
+  {r:'ai',t:"Yes! The Serum Bundle is still in stock — only 3 left. Want me to hold one and send a checkout link?"},
+  {r:'user',t:"Yes please! Can I still get the discount that was on the site?"},
+  {r:'ai',t:"Absolutely — your 15% returning customer discount is applied. Here's your secure link (expires in 30 mins): luxeskin.com/checkout/emma-r47x"},
+  {r:'user',t:"Amazing, thank you so much!"},
+  {r:'ai',t:"Order confirmed! You'll get a tracking number within 24h. Want a look at our new SPF drops while you wait?"}
+];
+let ci=0;const chatEl=document.getElementById('chat-preview');
+function addMsg(){
+  if(!chatEl||ci>=msgs.length)return;
+  const m=msgs[ci];
+  if(m.r==='ai'){
+    const tp=document.createElement('div');tp.className='msg msg-in';
+    tp.style.cssText='display:flex;align-items:center;gap:4px;padding:10px 14px';
+    tp.innerHTML='<span class="tdot"></span><span class="tdot"></span><span class="tdot"></span>';
+    chatEl.appendChild(tp);chatEl.scrollTop=9999;
+    setTimeout(()=>{
+      if(chatEl.contains(tp))chatEl.removeChild(tp);
+      const d=document.createElement('div');d.className='msg msg-in';
+      d.innerHTML=m.t+'<div class="msg-t">Just now</div>';
+      chatEl.appendChild(d);chatEl.scrollTop=9999;ci++;setTimeout(addMsg,2400);
+    },1100);
+  }else{
+    const d=document.createElement('div');d.className='msg msg-out';
+    d.innerHTML=m.t+'<div class="msg-t">Just now</div>';
+    chatEl.appendChild(d);chatEl.scrollTop=9999;ci++;setTimeout(addMsg,1600);
+  }
+}
+setTimeout(addMsg,2200);
 
-            </form>
+// FAQ
+function tFaq(btn){const it=btn.parentElement;const was=it.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!was)it.classList.add('open');}
 
-            <div class="mt-8 text-center">
-                <p class="text-sm text-gray-500 mb-2">Or WhatsApp me directly:</p>
-                <a href="https://wa.me/27781234567" class="inline-flex items-center gap-2 text-neon-green hover:text-white transition text-lg font-semibold">
-                    <i data-lucide="message-circle" class="w-5 h-5"></i>
-                    <span>+27 78 123 4567</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="border-t border-dark-border py-12 bg-dark-bg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <a href="#top" class="flex items-center gap-2 hover:opacity-80 transition">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-neon-green to-neon-blue flex items-center justify-center">
-                    <i data-lucide="zap" class="w-5 h-5 text-black"></i>
-                </div>
-                <span class="font-display font-bold text-lg">Leapnodes</span>
-            </a>
-            <div class="text-sm text-gray-500">
-                © 2024 Leapnodes. Built for South African businesses.
-            </div>
-            <div class="flex items-center gap-6 text-sm text-gray-500">
-                <a href="#problem" class="hover:text-white transition">Problem</a>
-                <a href="#solution" class="hover:text-white transition">Solution</a>
-                <a href="#packages" class="hover:text-white transition">Packages</a>
-                <a href="#audit" class="hover:text-white transition">Contact</a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        lucide.createIcons();
-
-        const counter = document.getElementById('lead-counter');
-        let count = 0;
-        const target = 47;
-        const increment = target / 50;
-        
-        const updateCounter = () => {
-            count += increment;
-            if (count < target) {
-                counter.textContent = Math.floor(count);
-                requestAnimationFrame(updateCounter);
-            } else {
-                counter.textContent = target;
-            }
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    updateCounter();
-                    observer.unobserve(entry.target);
-                }
-            });
-        });
-        
-        if (counter) observer.observe(counter);
-
-        const chatContainer = document.getElementById('chat-container');
-        if (chatContainer) {
-            const messages = [
-                { text: "Hi! I'm Sarah's Leapnodes AI assistant. I can help you book instantly or answer questions. What do you need?", delay: 1000, sender: 'ai' },
-                { text: "Haircut and color", delay: 2000, sender: 'user' },
-                { text: "Great! Are you looking for this week or next week?", delay: 1000, sender: 'ai' },
-                { text: "This Saturday if possible", delay: 1500, sender: 'user' },
-                { text: "I found a slot at 10:30 AM or 2:00 PM this Saturday. Which works better?", delay: 1000, sender: 'ai' }
-            ];
-
-            let msgIndex = 0;
-            
-            function addMessage(text, sender) {
-                const div = document.createElement('div');
-                div.className = `chat-bubble ${sender === 'user' ? 'ml-auto bg-neon-green/10 border-neon-green/30 text-right' : 'mr-auto'}`;
-                div.innerHTML = `
-                    ${text}
-                    <div class="text-[10px] text-gray-500 mt-1">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
-                `;
-                chatContainer.appendChild(div);
-                chatContainer.scrollTop = chatContainer.scrollHeight;
-            }
-
-            function simulateChat() {
-                if (msgIndex < messages.length) {
-                    const msg = messages[msgIndex];
-                    setTimeout(() => {
-                        addMessage(msg.text, msg.sender);
-                        msgIndex++;
-                        simulateChat();
-                    }, msg.delay);
-                }
-            }
-
-            setTimeout(simulateChat, 2000);
-        }
-    </script>
+// Form
+function doSubmit(e){e.preventDefault();const b=e.target;
+b.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Submitted — we\'ll be in touch within 2 hours!';
+b.style.background='var(--emerald)';b.disabled=true;}
+</script>
 </body>
 </html>
