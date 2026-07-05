@@ -1,715 +1,575 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leapnodes | AI Revenue Engine for Shopify Stores</title>
-<meta name="description" content="Turn abandoned carts into sales, eliminate support tickets, and grow revenue 24/7. Leapnodes automates your Shopify store's entire customer journey.">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LeapNodes — Turn one video into months of visibility</title>
+<meta name="description" content="LeapNodes is an AI-powered content distribution studio. We turn one long-form video into a professional short-form content engine that keeps your brand visible every day." />
+<script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          paper: "#FBFCFE", band: "#F4F7FC", ink: "#0B1220", slate: "#5B6472",
+          line: "#E4E9F2", signal: "#2E6BFF", signald: "#1D4ED8", lift: "#6FA0FF", heat: "#FF7A45",
+        },
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --navy:#0F172A;--navy2:#1E293B;
-  --indigo:#4F46E5;--indigo2:#6366F1;--indigo-pale:#EEF2FF;--indigo-mid:#C7D2FE;
-  --emerald:#059669;--amber:#D97706;--amber-pale:#FFFBEB;
-  --slate:#64748B;--slate2:#94A3B8;
-  --border:#E2E8F0;--border2:#CBD5E1;
-  --bg:#F8FAFC;--white:#FFFFFF;
-  --text:#0F172A;--text2:#475569;
-}
-html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden;font-size:16px;line-height:1.6}
-h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:700;line-height:1.15}
-a{text-decoration:none;color:inherit}
-svg{display:block}
-button{cursor:pointer;font-family:'DM Sans',sans-serif}
+  html, body { background: #FBFCFE; color: #0B1220; }
+  ::selection { background: rgba(46,107,255,.16); }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
 
-/* NAV */
-.nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
-.nav-in{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{display:flex;align-items:center;gap:11px;font-family:'Fraunces',serif;font-weight:700;font-size:20px;color:var(--navy);letter-spacing:-.3px}
-.nav-links{display:flex;align-items:center;gap:32px}
-.nav-links a{font-size:14px;color:var(--slate);font-weight:500;transition:color .2s}
-.nav-links a:hover{color:var(--navy)}
-.nav-cta{display:flex;gap:12px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;border:none;transition:all .2s;white-space:nowrap;cursor:pointer}
-.btn-dark{background:var(--navy);color:#fff}.btn-dark:hover{background:var(--indigo);transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--border2)}.btn-ghost:hover{border-color:var(--navy);background:var(--bg)}
-.btn-xl{padding:15px 30px;font-size:16px;border-radius:10px}
-.btn-indigo{background:var(--indigo);color:#fff}.btn-indigo:hover{background:#4338CA;transform:translateY(-1px)}
+  /* soft premium shadows */
+  .shadow-soft { box-shadow: 0 1px 2px rgba(11,18,32,.04), 0 12px 32px -12px rgba(11,18,32,.10); }
+  .shadow-lift { box-shadow: 0 2px 6px rgba(11,18,32,.05), 0 24px 60px -20px rgba(46,107,255,.28); }
+  .shadow-card { box-shadow: 0 1px 2px rgba(11,18,32,.04), 0 8px 24px -14px rgba(11,18,32,.14); }
 
-/* HERO */
-.hero{padding:136px 24px 96px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.badge{display:inline-flex;align-items:center;gap:8px;background:var(--indigo-pale);color:var(--indigo);border:1px solid var(--indigo-mid);padding:6px 14px;border-radius:100px;font-size:13px;font-weight:600;margin-bottom:24px}
-.badge-dot{width:6px;height:6px;background:var(--indigo);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero h1{font-size:clamp(40px,5vw,58px);color:var(--navy);margin-bottom:20px;letter-spacing:-.5px}
-.hero h1 em{font-style:italic;color:var(--indigo)}
-.hero-sub{font-size:18px;color:var(--text2);max-width:480px;line-height:1.7;margin-bottom:36px}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
-.trust{display:flex;gap:20px;flex-wrap:wrap}
-.trust-i{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--slate);font-weight:500}
+  /* scroll reveal */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
+  .reveal.in { opacity: 1; transform: none; }
 
-/* HERO CARD */
-.hcard{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 4px 6px -1px rgba(0,0,0,.05),0 20px 40px -12px rgba(15,23,42,.1)}
-.hcard-top{background:var(--navy);padding:14px 20px;display:flex;align-items:center;gap:12px}
-.dots{display:flex;gap:6px}
-.d{width:10px;height:10px;border-radius:50%}
-.metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
-.met{background:var(--bg);border-radius:10px;padding:12px}
-.met-l{font-size:11px;color:var(--slate);font-weight:500;margin-bottom:4px}
-.met-v{font-size:20px;font-weight:700;font-family:'Fraunces',serif}
-.met-c{font-size:11px;font-weight:600;color:var(--emerald)}
-.ev{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border-radius:8px;margin-bottom:8px;opacity:0;animation:su .4s ease-out forwards}
-@keyframes su{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.ev-ic{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.ev-tit{font-size:13px;font-weight:600;color:var(--navy)}
-.ev-sub{font-size:11px;color:var(--slate)}
-.ev-val{font-size:12px;font-weight:700;color:var(--slate);flex-shrink:0}
-.fbadge{position:absolute;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:12px 16px;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-.fbadge-v{font-size:22px;font-weight:700;font-family:'Fraunces',serif}
-.fbadge-l{font-size:11px;color:var(--slate);font-weight:500;margin-top:2px}
+  /* pulse dot */
+  @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(255,122,69,.5)} 70%{box-shadow:0 0 0 7px rgba(255,122,69,0)} 100%{box-shadow:0 0 0 0 rgba(255,122,69,0)} }
+  .pulse { animation: pulse 2.2s infinite; }
 
-/* MARQUEE */
-.marq-wrap{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:22px 0;overflow:hidden;position:relative}
-.marq-wrap::before,.marq-wrap::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none}
-.marq-wrap::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
-.marq-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
-.marq-track{display:flex;width:max-content;animation:marq 30s linear infinite}
-@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.marq-item{display:flex;align-items:center;gap:9px;padding:0 36px;border-right:1px solid var(--border);opacity:.6;transition:opacity .2s;flex-shrink:0}
-.marq-item:hover{opacity:1}
-.marq-item span{font-size:13px;font-weight:600;color:var(--slate2);white-space:nowrap}
+  /* marquee */
+  @keyframes marq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .marquee-row { animation: marq 34s linear infinite; }
+  .marquee-mask { -webkit-mask: linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent); mask: linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent); }
 
-/* SECTIONS */
-.sec{padding:96px 24px;max-width:1200px;margin:0 auto}
-.sec-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px}
-.sec-label::before{content:'';width:16px;height:2px;background:currentColor;border-radius:2px;flex-shrink:0}
-.sec-title{font-size:clamp(30px,4vw,44px);color:var(--navy);margin-bottom:16px;letter-spacing:-.3px}
-.sec-sub{font-size:18px;color:var(--text2);max-width:600px;line-height:1.7}
+  /* hero node dash flow */
+  @keyframes dash { to { stroke-dashoffset: -22; } }
+  .flow { stroke-dasharray: 3 8; animation: dash 1.1s linear infinite; }
+  @keyframes ringpulse { 0%{r:16;opacity:.5} 100%{r:24;opacity:0} }
+  .ringpulse { animation: ringpulse 2.4s ease-out infinite; }
+  @keyframes scrub { 0%,100%{transform:translateY(-42px)} 50%{transform:translateY(42px)} }
+  .scrub { animation: scrub 4.5s linear infinite; }
 
-/* PAIN */
-.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
-.pcard{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:32px;position:relative;overflow:hidden;transition:all .25s}
-.pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px 3px 0 0}
-.pcard.r::before{background:#EF4444}.pcard.a::before{background:#F59E0B}.pcard.b::before{background:#3B82F6}
-.pcard:hover{transform:translateY(-4px);box-shadow:0 20px 40px -12px rgba(15,23,42,.12)}
-.pic{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
-.pic.r{background:#FEF2F2;color:#EF4444}.pic.a{background:var(--amber-pale);color:var(--amber)}.pic.b{background:#EFF6FF;color:#3B82F6}
-.pcard h3{font-size:19px;color:var(--navy);margin-bottom:10px}
-.pcard p{font-size:14px;color:var(--text2);line-height:1.7}
-.pstat{margin-top:20px;padding-top:20px;border-top:1px solid var(--border);font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px}
-.pstat.r{color:#DC2626}.pstat.a{color:var(--amber)}.pstat.b{color:#2563EB}
-
-/* HOW */
-.how{padding:96px 24px;background:var(--navy)}
-.how-in{max-width:1200px;margin:0 auto}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:56px}
-.scard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px;transition:all .25s}
-.scard:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
-.snum{font-family:'Fraunces',serif;font-size:52px;font-weight:700;color:rgba(255,255,255,.07);line-height:1;margin-bottom:10px}
-.sic{width:48px;height:48px;background:rgba(99,102,241,.3);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:#A5B4FC}
-.scard h3{font-size:19px;color:#fff;margin-bottom:10px}
-.scard p{font-size:14px;color:#94A3B8;line-height:1.7}
-.sfeat{display:flex;align-items:center;gap:8px;font-size:13px;color:#C7D2FE;margin-top:8px}
-
-/* CHANNELS */
-.ch-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:56px}
-.ch-list{display:flex;flex-direction:column;gap:14px}
-.ch-item{display:flex;gap:16px;padding:20px;background:var(--white);border:1px solid var(--border);border-radius:14px;cursor:pointer;transition:all .2s}
-.ch-item.active,.ch-item:hover{border-color:var(--indigo-mid);background:var(--indigo-pale)}
-.ch-ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.ch-item h4{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:4px}
-.ch-item p{font-size:13px;color:var(--text2);line-height:1.5}
-.ch-stat{font-size:12px;font-weight:700;color:var(--indigo);margin-top:6px}
-.ch-preview{background:var(--bg);border-radius:20px;padding:24px;border:1px solid var(--border);min-height:460px}
-.chat-ui{background:var(--white);border-radius:16px;border:1px solid var(--border);overflow:hidden}
-.chat-top{background:var(--navy);padding:14px 16px;display:flex;align-items:center;gap:12px}
-.chat-av{width:32px;height:32px;border-radius:50%;background:var(--indigo);display:flex;align-items:center;justify-content:center;color:white;font-size:13px;font-weight:700;flex-shrink:0}
-.chat-name{color:white;font-size:14px;font-weight:600}
-.chat-st{color:#86EFAC;font-size:11px;display:flex;align-items:center;gap:4px}
-.st-dot{width:6px;height:6px;background:#22C55E;border-radius:50%}
-.msgs{padding:16px;display:flex;flex-direction:column;gap:10px;max-height:320px;overflow-y:auto}
-.msg{max-width:78%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5}
-.msg-in{background:var(--bg);color:var(--text);border-radius:4px 12px 12px 12px;align-self:flex-start}
-.msg-out{background:var(--indigo);color:white;border-radius:12px 4px 12px 12px;align-self:flex-end}
-.msg-t{font-size:10px;opacity:.6;margin-top:4px}
-.tdot{width:6px;height:6px;background:var(--slate2);border-radius:50%;display:inline-block;animation:tb 1.4s infinite;margin:0 2px}
-.tdot:nth-child(2){animation-delay:.2s}.tdot:nth-child(3){animation-delay:.4s}
-@keyframes tb{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
-
-/* TESTIMONIALS */
-.tc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
-.tc{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:32px;transition:all .25s}
-.tc:hover{transform:translateY(-3px);box-shadow:0 16px 32px -8px rgba(15,23,42,.08)}
-.tc-q{font-size:14px;color:var(--text2);line-height:1.8;margin:16px 0 24px;font-style:italic}
-.tc-av{width:40px;height:40px;border-radius:50%;background:var(--indigo-pale);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--indigo);flex-shrink:0}
-.tc-name{font-size:14px;font-weight:700;color:var(--navy)}
-.tc-role{font-size:12px;color:var(--slate)}
-.tc-res{margin-top:16px;padding-top:16px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.res-l{font-size:11px;color:var(--slate);font-weight:500}
-.res-v{font-size:13px;font-weight:800;color:var(--emerald)}
-.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--border);border-radius:16px;overflow:hidden;margin-top:56px;border:1px solid var(--border);gap:1px}
-.sc{background:var(--white);padding:32px;text-align:center}
-.sc-n{font-family:'Fraunces',serif;font-size:38px;font-weight:700;color:var(--navy);margin-bottom:6px}
-.sc-l{font-size:13px;color:var(--text2);font-weight:500}
-
-/* FAQ */
-.faq-sec{padding:96px 24px;background:var(--bg)}
-.faq-in{max-width:760px;margin:0 auto}
-.faq-list{margin-top:48px;display:flex;flex-direction:column;gap:12px}
-.faq-item{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden}
-.faq-q{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;cursor:pointer;font-size:15px;font-weight:600;color:var(--navy);transition:background .2s;gap:16px}
-.faq-q:hover{background:var(--bg)}
-.faq-q svg{flex-shrink:0;color:var(--slate);transition:transform .3s}
-.faq-item.open .faq-q svg{transform:rotate(180deg)}
-.faq-a{display:none;padding:0 24px 20px;font-size:14px;color:var(--text2);line-height:1.8}
-.faq-item.open .faq-a{display:block}
-
-/* CTA */
-.cta-sec{padding:96px 24px;background:var(--navy);position:relative;overflow:hidden}
-.cta-sec::before{content:'';position:absolute;top:-50%;left:-20%;width:60%;height:200%;background:radial-gradient(ellipse,rgba(99,102,241,.2) 0%,transparent 70%)}
-.cta-sec::after{content:'';position:absolute;bottom:-50%;right:-10%;width:40%;height:150%;background:radial-gradient(ellipse,rgba(16,185,129,.1) 0%,transparent 70%)}
-.cta-in{max-width:800px;margin:0 auto;text-align:center;position:relative;z-index:1}
-.cta-sec h2{font-size:clamp(34px,5vw,50px);color:white;margin-bottom:16px;letter-spacing:-.3px}
-.cta-sec p{font-size:18px;color:#94A3B8;margin-bottom:48px;line-height:1.7}
-.cta-form{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:40px;text-align:left}
-.fg{display:flex;flex-direction:column;gap:8px}
-.fg.full{grid-column:1/-1}
-.fl{font-size:13px;font-weight:600;color:#CBD5E1}
-.fi{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:13px 16px;color:white;font-size:15px;font-family:'DM Sans',sans-serif;outline:none;transition:all .2s;width:100%;-webkit-appearance:none}
-.fi::placeholder{color:#64748B}
-.fi:focus{border-color:rgba(99,102,241,.6);background:rgba(255,255,255,.1);box-shadow:0 0 0 3px rgba(99,102,241,.2)}
-.fsub{grid-column:1/-1;background:var(--indigo);color:white;padding:16px;border-radius:10px;font-size:16px;font-weight:700;border:none;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:8px}
-.fsub:hover{background:#4338CA;transform:translateY(-1px)}
-.cta-alt{margin-top:24px;text-align:center;font-size:14px;color:#64748B}
-.cta-alt a{color:#A5B4FC;font-weight:600}
-.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-
-/* FOOTER */
-.foot{background:#080F1E;padding:64px 24px 32px;border-top:1px solid rgba(255,255,255,.08)}
-.foot-in{max-width:1200px;margin:0 auto}
-.foot-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px}
-.foot-brand p{font-size:14px;color:#64748B;line-height:1.7;margin-top:16px;max-width:280px}
-.foot-col h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#475569;margin-bottom:20px}
-.foot-col a{display:block;font-size:14px;color:#94A3B8;margin-bottom:12px;transition:color .2s}
-.foot-col a:hover{color:#E2E8F0}
-.foot-bot{border-top:1px solid rgba(255,255,255,.06);padding-top:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.foot-copy{font-size:13px;color:#475569}
-.mbadge{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:#475569;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:5px 12px;border-radius:100px}
-
-@media(max-width:900px){
-  .hero{grid-template-columns:1fr;padding-top:96px}
-  .hero-visual{display:none}
-  .pain-grid,.steps,.tc-grid{grid-template-columns:1fr}
-  .ch-grid{grid-template-columns:1fr}
-  .ch-preview{display:none}
-  .stats-bar{grid-template-columns:1fr 1fr}
-  .foot-top{grid-template-columns:1fr 1fr}
-  .fgrid{grid-template-columns:1fr}
-  .nav-links,.nav-cta .btn-ghost{display:none}
-  .fbadge{display:none}
-}
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+  }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s cubic-bezier(.22,1,.36,1); }
+  a:focus-visible, button:focus-visible { outline: 2px solid #2E6BFF; outline-offset: 3px; border-radius: 8px; }
 </style>
 </head>
-<body>
+<body class="font-sans antialiased">
 
-<!-- SVG SYMBOL LIBRARY -->
-<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
-<defs>
-<symbol id="s-shopify" viewBox="0 0 256 292">
-<path d="M223.773 55.675c-.226-1.68-1.68-2.686-2.912-2.798-.337-.025-6.266-.449-6.266-.449s-4.137-4.025-4.586-4.474c-.449-.449-1.344-.337-1.68-.225l-2.574.786c-1.568-4.474-4.25-8.611-9.058-8.611-.113 0-.225 0-.337.013-.338-.449-.899-.899-1.57-1.235-6.941-3.251-14.332-.449-20.048 6.267-4.025 4.698-7.053 11.865-7.951 19.042l-13.097 4.025c0-.113-3.926-12.31-4.025-12.535-3.251-7.839-9.396-11.752-15.999-12.422-5.148-.562-10.17.787-14.308 3.363-5.26-1.905-10.856-.337-15.891 5.941-3.139 3.927-5.827 9.846-6.154 19.129l-9.059 2.8s-4.923-1.569-12.984-3.926C70.87 67.878 58.225 137.47 47.93 195.131l104.297 19.579 56.492-12.421c0 0-24.846-124.471-26.089-130.162.899-.337 1.905-.674 2.912-1.011 1.009-.337 4.025-.899 4.474-4.025.449-3.025-4.137-3.25-4.137-3.25l-11.302-1.905c0 0 6.603-37.85 6.941-39.981.337-2.011 2.91-2.123 3.812-.449.899 1.68 3.027 4.698 3.027 4.698l15.213 5.036c1.232.449 2.798.562 4.137.112.899-.337 7.614-3.139 8.624-3.588 2.123-.899 1.57-2.91.225-5.036zm-80.285-4.586c-.674 4.474-1.571 9.846-2.686 15.553l-17.108 5.26c2.349-15.214 7.839-24.397 14.443-26.971 1.457-.562 3.251-.674 5.036-.225-.449 2.012-.899 4.025-1.348 6.04l1.663.343zm-14.894-9.846c-1.011.449-1.905 1.123-2.8 1.797-3.475 2.91-6.154 7.951-7.951 14.667-.449 1.68-.899 3.475-1.235 5.372l-9.396 2.91c2.8-14.443 8.961-23.52 15.553-25.643 2.012-.562 3.926-.562 5.829.897zm-26.09 11.641c-1.011.449-2.012 1.011-2.91 1.68-4.025 3.25-7.052 9.17-8.624 16.786l-9.059 2.8c2.91-14.218 9.846-22.958 17.108-24.51 2.012-.449 3.814-.225 5.709.674l-2.224 2.57z" fill="#96BF48"/>
-<path d="M220.861 52.877c-.337-.025-6.266-.449-6.266-.449s-4.137-4.025-4.586-4.474c-.225-.225-.449-.337-.674-.337l-3.363 129.936L256 166.31l-30.001-110.9c-.449-1.232-1.793-2.196-3.138-2.533z" fill="#5E8E3E"/>
-<path d="M148.775 92.295l-7.839 23.295s-6.941-3.7-15.327-3.251c-12.197.674-12.31 8.4-12.197 10.407.562 8.961 24.172 10.97 25.52 32.337.899 16.786-8.961 28.313-23.294 29.2-17.108 1.123-26.64-8.961-26.64-8.961l3.363-15.664s9.284 6.941 16.449 6.491c4.923-.225 6.716-4.25 6.491-7.052-.674-11.302-19.916-10.632-21.147-30.325-.674-16.449 9.846-33.122 33.572-34.583 9.396-.449 14.05 1.906 14.05 1.906z" fill="#fff"/>
-</symbol>
-
-<symbol id="s-whatsapp" viewBox="0 0 24 24">
-<path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-</symbol>
-
-<symbol id="s-instagram" viewBox="0 0 24 24">
-<defs><linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs>
-<path fill="url(#ig)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-</symbol>
-
-<symbol id="s-facebook" viewBox="0 0 24 24">
-<path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-</symbol>
-
-<symbol id="s-klaviyo" viewBox="0 0 32 32">
-<rect width="32" height="32" rx="5" fill="#1A1A1A"/>
-<path fill="white" d="M8 6h4v9l8-9h5L16 15l10 11h-5.5L12 16.5V26H8V6z"/>
-</symbol>
-
-<symbol id="s-gcal" viewBox="0 0 32 32">
-<rect width="32" height="32" rx="5" fill="white" stroke="#E2E8F0" stroke-width="1"/>
-<rect x="4" y="4" width="24" height="24" rx="3" fill="white" stroke="#E2E8F0" stroke-width="1"/>
-<rect x="4" y="4" width="24" height="8" rx="3" fill="#EA4335"/>
-<rect x="4" y="9" width="24" height="3" fill="#EA4335"/>
-<path fill="#1A73E8" d="M4 15h5v5H4z"/>
-<path fill="#34A853" d="M11 15h5v5h-5z"/>
-<path fill="#FBBC04" d="M18 15h5v5h-5z"/>
-<path fill="#4285F4" d="M4 22h5v5H4z"/>
-<path fill="#EA4335" d="M11 22h5v5h-5z"/>
-<rect x="23" y="4" width="1" height="4" rx=".5" fill="white"/>
-<rect x="8" y="4" width="1" height="4" rx=".5" fill="white"/>
-</symbol>
-
-<symbol id="s-hubspot" viewBox="0 0 32 32">
-<path fill="#FF7A59" d="M22 9.5V6.8A2.3 2.3 0 0023.3 4.7a2.3 2.3 0 10-4.6 0 2.3 2.3 0 001.3 2.1V9.5a6.5 6.5 0 00-3.1 1.4L9.3 5.4A2.5 2.5 0 009.4 5a2.6 2.6 0 10-2.6 2.6c.5 0 .9-.1 1.3-.3l7.5 5a6.5 6.5 0 000 3.5l-7.5 4.9a2.5 2.5 0 00-1.3-.3A2.6 2.6 0 004.2 23a2.6 2.6 0 002.6 2.6 2.6 2.6 0 002.6-2.6c0-.2 0-.4-.1-.6l7.4-4.8a6.5 6.5 0 004.3 1.6 6.5 6.5 0 000-13 6.5 6.5 0 00-1 .1zm-1 8.5a3.8 3.8 0 110-7.6 3.8 3.8 0 010 7.6z"/>
-</symbol>
-
-<symbol id="s-klaviyo2" viewBox="0 0 32 32">
-<rect width="32" height="32" rx="5" fill="#1A1A2E"/>
-<path fill="#FFD700" d="M10 8h3v5.5L18 8h3.5l-6 7 7 9H19l-5-7-1.5 1.7V24H10V8z"/>
-</symbol>
-
-<symbol id="s-tiktok" viewBox="0 0 24 24">
-<path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34l-.01-8.63a8.17 8.17 0 004.77 1.52V4.74a4.85 4.85 0 01-1-.05z"/>
-</symbol>
-</defs>
-</svg>
-
-<!-- NAV -->
-<nav class="nav">
-  <div class="nav-in">
-    <a href="#" class="logo">
-      <!-- LOGO MARK: ascending nodes -->
-      <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
-        <rect width="38" height="38" rx="10" fill="#0F172A"/>
-        <line x1="11" y1="27" x2="19" y2="18" stroke="#6366F1" stroke-width="1.8" stroke-linecap="round"/>
-        <line x1="19" y1="18" x2="27" y2="11" stroke="#6366F1" stroke-width="1.8" stroke-linecap="round"/>
-        <circle cx="11" cy="27" r="3" fill="#6366F1" opacity=".7"/>
-        <circle cx="19" cy="18" r="3.5" fill="#818CF8"/>
-        <circle cx="27" cy="11" r="4.5" fill="white"/>
-      </svg>
-      Leapnodes
+<!-- ══════════ NAV ══════════ -->
+<header id="nav" class="fixed top-0 inset-x-0 z-40 transition-colors duration-300 border-b border-transparent">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center gap-6">
+    <a href="#top" class="flex items-center gap-2.5 font-bold tracking-tight text-[16px]">
+      <span id="brand-mark" class="inline-flex"></span>
+      Leap<span class="text-slate font-semibold">Nodes</span>
     </a>
-    <div class="nav-links">
-      <a href="#pain">The Problem</a>
-      <a href="#how">How It Works</a>
-      <a href="#channels">Channels</a>
-      <a href="#proof">Results</a>
+    <nav class="ml-auto hidden md:flex items-center gap-7 text-[14px] text-slate font-medium">
+      <a href="#process" class="hover:text-ink transition">Process</a>
+      <a href="#services" class="hover:text-ink transition">Services</a>
+      <a href="#results" class="hover:text-ink transition">Signals</a>
+      <a href="#pricing" class="hover:text-ink transition">Plans</a>
+      <a href="#faq" class="hover:text-ink transition">FAQ</a>
+    </nav>
+    <a href="#contact" class="hidden md:inline-flex items-center gap-1.5 bg-ink text-white px-4 py-2 rounded-lg text-[14px] font-semibold hover:bg-signal transition-colors">
+      Book a call
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <button id="burger" class="md:hidden ml-auto flex flex-col gap-1.5" aria-label="Menu">
+      <span class="w-6 h-0.5 bg-ink rounded"></span><span class="w-6 h-0.5 bg-ink rounded"></span>
+    </button>
+  </div>
+  <div id="mobile" class="md:hidden hidden bg-paper/95 backdrop-blur border-b border-line px-6 pb-4 flex-col">
+    <a href="#process" class="py-3 border-b border-line text-slate">Process</a>
+    <a href="#services" class="py-3 border-b border-line text-slate">Services</a>
+    <a href="#results" class="py-3 border-b border-line text-slate">Signals</a>
+    <a href="#pricing" class="py-3 border-b border-line text-slate">Plans</a>
+    <a href="#faq" class="py-3 border-b border-line text-slate">FAQ</a>
+    <a href="#contact" class="py-3 font-semibold text-signal">Book a call</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ══════════ HERO ══════════ -->
+<section class="max-w-6xl mx-auto px-6 pt-32 pb-20 md:pt-40">
+  <div class="grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <div class="mono text-[11.5px] tracking-[.14em] text-slate flex items-center gap-2.5 mb-7">
+        <span class="w-1.5 h-1.5 rounded-full bg-heat pulse"></span> AI-POWERED CONTENT DISTRIBUTION
+      </div>
+      <h1 id="h1" class="text-[clamp(40px,6vw,76px)] leading-[.98] tracking-[-.035em] font-extrabold mb-7"></h1>
+      <p class="text-[clamp(16px,1.5vw,18.5px)] leading-relaxed text-slate max-w-[52ch] mb-8">
+        One interview. One keynote. One podcast. We turn it into months of visibility —
+        professionally cut, captioned, scheduled, and measured across every platform your audience lives on.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="#contact" class="inline-flex items-center gap-2 bg-signal text-white px-6 py-3.5 rounded-xl font-semibold text-[15px] shadow-lift hover:bg-signald transition-colors">
+          Book a discovery call
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#process" class="inline-flex items-center gap-2 bg-white text-ink border border-line px-6 py-3.5 rounded-xl font-semibold text-[15px] shadow-soft hover:border-signal/40 transition">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> See the process
+        </a>
+      </div>
+      <div class="flex items-center gap-5 mt-11 flex-wrap">
+        <div class="flex flex-col"><b class="text-[26px] font-extrabold tracking-tight">1</b><span class="mono text-[11px] text-slate mt-0.5">source video</span></div>
+        <span class="text-signal text-lg">→</span>
+        <div class="flex flex-col"><b class="text-[26px] font-extrabold tracking-tight">100+</b><span class="mono text-[11px] text-slate mt-0.5">distributed clips</span></div>
+        <span class="text-signal text-lg">→</span>
+        <div class="flex flex-col"><b class="text-[26px] font-extrabold tracking-tight">5</b><span class="mono text-[11px] text-slate mt-0.5">platforms, daily</span></div>
+      </div>
     </div>
-    <div class="nav-cta">
-      <a href="#proof" class="btn btn-ghost">See Results</a>
-      <a href="#contact" class="btn btn-dark">
-        Book Free Audit
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    <!-- hero node splitter -->
+    <div class="flex justify-center">
+      <div class="w-full max-w-[540px] rounded-3xl bg-white border border-line shadow-soft p-4">
+        <svg viewBox="0 0 620 460" class="w-full h-auto" aria-hidden="true">
+          <defs>
+            <linearGradient id="src" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FA0FF"/><stop offset="1" stop-color="#2E6BFF"/></linearGradient>
+          </defs>
+          <!-- source -->
+          <rect x="70" y="140" width="70" height="180" rx="12" fill="url(#src)"/>
+          <rect x="70" y="140" width="70" height="180" rx="12" fill="none" stroke="#0B1220" stroke-opacity=".08"/>
+          <line class="scrub" x1="80" x2="130" y1="230" y2="230" stroke="#fff" stroke-width="2.5" stroke-opacity=".9"/>
+          <text x="105" y="345" text-anchor="middle" class="mono" font-size="11" fill="#5B6472">SOURCE · 01:04:22</text>
+          <!-- fan lines + clip nodes -->
+          <g stroke="#2E6BFF" stroke-opacity=".5" fill="none">
+            <path class="flow" d="M140 230 C 250 230, 300 70, 430 70"/>
+            <path class="flow" style="animation-delay:.2s" d="M140 230 C 250 230, 300 120, 430 120"/>
+            <path class="flow" style="animation-delay:.4s" d="M140 230 C 250 230, 300 175, 430 175"/>
+            <path class="flow" style="animation-delay:.6s" d="M140 230 C 250 230, 300 230, 430 230"/>
+            <path class="flow" style="animation-delay:.8s" d="M140 230 C 250 230, 300 285, 430 285"/>
+            <path class="flow" style="animation-delay:1s" d="M140 230 C 250 230, 300 340, 430 340"/>
+            <path class="flow" style="animation-delay:1.2s" d="M140 230 C 250 230, 300 390, 430 390"/>
+          </g>
+          <g>
+            <!-- clip cards -->
+            <g>
+              <rect x="430" y="59" width="52" height="24" rx="6" fill="#EAF0FF" stroke="#2E6BFF" stroke-opacity=".35"/>
+              <rect x="430" y="109" width="52" height="24" rx="6" fill="#EAF0FF" stroke="#2E6BFF" stroke-opacity=".35"/>
+              <rect x="430" y="164" width="52" height="24" rx="6" fill="#EAF0FF" stroke="#2E6BFF" stroke-opacity=".35"/>
+              <rect x="430" y="219" width="52" height="24" rx="6" fill="#EAF0FF" stroke="#2E6BFF" stroke-opacity=".35"/>
+              <rect x="430" y="274" width="52" height="24" rx="6" fill="#EAF0FF" stroke="#2E6BFF" stroke-opacity=".35"/>
+              <rect x="430" y="329" width="52" height="24" rx="6" fill="#EAF0FF" stroke="#2E6BFF" stroke-opacity=".35"/>
+              <rect x="430" y="379" width="52" height="24" rx="6" fill="#EAF0FF" stroke="#2E6BFF" stroke-opacity=".35"/>
+            </g>
+          </g>
+          <!-- platform nodes -->
+          <g>
+            <g><circle cx="560" cy="90" r="16" fill="#fff" stroke="#2E6BFF" stroke-opacity=".4"/><circle class="ringpulse" cx="560" cy="90" fill="none" stroke="#6FA0FF"/><text x="560" y="93" text-anchor="middle" class="mono" font-size="8" fill="#2E6BFF" font-weight="600">REELS</text></g>
+            <g><circle cx="560" cy="160" r="16" fill="#fff" stroke="#2E6BFF" stroke-opacity=".4"/><circle class="ringpulse" style="animation-delay:.5s" cx="560" cy="160" fill="none" stroke="#6FA0FF"/><text x="560" y="163" text-anchor="middle" class="mono" font-size="7.5" fill="#2E6BFF" font-weight="600">SHORTS</text></g>
+            <g><circle cx="560" cy="230" r="16" fill="#fff" stroke="#2E6BFF" stroke-opacity=".4"/><circle class="ringpulse" style="animation-delay:1s" cx="560" cy="230" fill="none" stroke="#6FA0FF"/><text x="560" y="233" text-anchor="middle" class="mono" font-size="7.5" fill="#2E6BFF" font-weight="600">TIKTOK</text></g>
+            <g><circle cx="560" cy="300" r="16" fill="#fff" stroke="#2E6BFF" stroke-opacity=".4"/><circle class="ringpulse" style="animation-delay:1.5s" cx="560" cy="300" fill="none" stroke="#6FA0FF"/><text x="560" y="303" text-anchor="middle" class="mono" font-size="9" fill="#2E6BFF" font-weight="600">X</text></g>
+            <g><circle cx="560" cy="370" r="16" fill="#fff" stroke="#2E6BFF" stroke-opacity=".4"/><circle class="ringpulse" style="animation-delay:2s" cx="560" cy="370" fill="none" stroke="#6FA0FF"/><text x="560" y="373" text-anchor="middle" class="mono" font-size="9" fill="#2E6BFF" font-weight="600">IN</text></g>
+          </g>
+          <g stroke="#6FA0FF" stroke-opacity=".3" fill="none">
+            <path d="M482 71 L544 90"/><path d="M482 121 L544 160"/><path d="M482 176 L544 230"/><path d="M482 286 L544 300"/><path d="M482 391 L544 370"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TRUST / MARQUEE (S01) ══════════ -->
+<section class="bg-band border-y border-line py-11 my-10">
+  <div class="max-w-6xl mx-auto px-6 mb-6 flex items-baseline gap-4">
+    <span class="mono text-[11px] text-signal tracking-[.1em]">S01</span>
+    <p class="text-[clamp(18px,2.4vw,26px)] font-bold tracking-[-.02em]">Built for people with something important to say.</p>
+  </div>
+  <div class="overflow-hidden marquee-mask">
+    <div class="marquee-row flex gap-3.5 w-max pl-3.5">
+      <!-- filled by JS (doubled) -->
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROCESS (S02) ══════════ -->
+<section id="process" class="max-w-6xl mx-auto px-6 py-24">
+  <div class="reveal mb-14">
+    <div class="flex items-center gap-3.5 mb-5">
+      <span class="mono text-[12px] text-signal tracking-[.12em]">S02</span>
+      <span class="w-11 h-px bg-gradient-to-r from-signal to-transparent"></span>
+      <span class="mono text-[11.5px] text-slate tracking-[.16em]">THE PIPELINE</span>
+    </div>
+    <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold max-w-[19ch]">One upload becomes an always-on system.</h2>
+  </div>
+  <div id="timeline" class="flex flex-col"></div>
+</section>
+
+<!-- ══════════ SERVICES (S03) ══════════ -->
+<section id="services" class="bg-band border-y border-line">
+  <div class="max-w-6xl mx-auto px-6 py-24">
+    <div class="reveal mb-14">
+      <div class="flex items-center gap-3.5 mb-5">
+        <span class="mono text-[12px] text-signal tracking-[.12em]">S03</span>
+        <span class="w-11 h-px bg-gradient-to-r from-signal to-transparent"></span>
+        <span class="mono text-[11.5px] text-slate tracking-[.16em]">THE SYSTEM</span>
+      </div>
+      <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold max-w-[19ch]">A full attention system, not a stack of files.</h2>
+    </div>
+    <div id="bento" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[minmax(180px,auto)]"></div>
+  </div>
+</section>
+
+<!-- ══════════ RESULTS (S04) ══════════ -->
+<section id="results" class="max-w-6xl mx-auto px-6 py-24">
+  <div class="reveal mb-14">
+    <div class="flex items-center gap-3.5 mb-5">
+      <span class="mono text-[12px] text-signal tracking-[.12em]">S04</span>
+      <span class="w-11 h-px bg-gradient-to-r from-signal to-transparent"></span>
+      <span class="mono text-[11.5px] text-slate tracking-[.16em]">SIGNALS</span>
+    </div>
+    <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold">Attention compounds.</h2>
+  </div>
+  <div id="metrics" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line border border-line rounded-2xl overflow-hidden shadow-card"></div>
+  <p class="reveal text-[12.5px] text-slate/80 mt-6 max-w-[72ch] leading-relaxed">
+    Figures are illustrative of aggregate program activity. Results vary by client, content quality, audience, and platform algorithms.
+  </p>
+</section>
+
+<!-- ══════════ DASHBOARD (S05) ══════════ -->
+<section id="dashboard" class="bg-band border-y border-line">
+  <div class="max-w-6xl mx-auto px-6 py-24">
+    <div class="reveal mb-14">
+      <div class="flex items-center gap-3.5 mb-5">
+        <span class="mono text-[12px] text-signal tracking-[.12em]">S05</span>
+        <span class="w-11 h-px bg-gradient-to-r from-signal to-transparent"></span>
+        <span class="mono text-[11.5px] text-slate tracking-[.16em]">THE CONSOLE</span>
+      </div>
+      <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold">Your whole program, one view.</h2>
+    </div>
+    <div class="reveal rounded-2xl bg-white border border-line shadow-soft overflow-hidden">
+      <div class="flex items-center gap-3 px-5 py-3.5 border-b border-line bg-band/60">
+        <span class="flex gap-1.5"><i class="w-2.5 h-2.5 rounded-full bg-line"></i><i class="w-2.5 h-2.5 rounded-full bg-line"></i><i class="w-2.5 h-2.5 rounded-full bg-line"></i></span>
+        <span class="mono text-[12px] text-slate">leapnodes.studio / console</span>
+        <span class="ml-auto mono text-[11px] text-heat tracking-[.1em] flex items-center gap-1.5"><i class="w-1.5 h-1.5 rounded-full bg-heat pulse"></i> LIVE</span>
+      </div>
+      <div class="p-4 grid md:grid-cols-2 gap-3.5">
+        <div class="md:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="p-4 rounded-xl bg-band border border-line"><span class="mono text-[10.5px] text-slate">Views this month</span><b class="block text-[23px] font-extrabold tracking-tight mt-1">3.2M</b><em class="not-italic mono text-[11px] text-signal">+18%</em></div>
+          <div class="p-4 rounded-xl bg-band border border-line"><span class="mono text-[10.5px] text-slate">Clips live</span><b class="block text-[23px] font-extrabold tracking-tight mt-1">184</b><em class="not-italic mono text-[11px] text-signal">+22</em></div>
+          <div class="p-4 rounded-xl bg-band border border-line"><span class="mono text-[10.5px] text-slate">Avg. watch</span><b class="block text-[23px] font-extrabold tracking-tight mt-1">41%</b><em class="not-italic mono text-[11px] text-signal">+6%</em></div>
+          <div class="p-4 rounded-xl bg-band border border-line"><span class="mono text-[10.5px] text-slate">Scheduled</span><b class="block text-[23px] font-extrabold tracking-tight mt-1">37</b><em class="not-italic mono text-[11px] text-signal">30d</em></div>
+        </div>
+        <div class="md:col-span-2 p-4 rounded-xl bg-band border border-line">
+          <h4 class="mono text-[11px] text-slate uppercase tracking-[.08em] mb-3">Monthly engagement</h4>
+          <svg viewBox="0 0 680 150" preserveAspectRatio="none" class="w-full h-[130px]">
+            <defs><linearGradient id="fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E6BFF" stop-opacity=".18"/><stop offset="1" stop-color="#2E6BFF" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0 111 L61.8 91.9 L123.6 103.8 L185.4 82.1 L247.3 74.7 L309.1 81.4 L370.9 60.4 L432.7 48.9 L494.5 61.9 L556.4 39.1 L618.2 49.9 L680 30 L680 150 L0 150 Z" fill="url(#fill)"/>
+            <path d="M0 111 L61.8 91.9 L123.6 103.8 L185.4 82.1 L247.3 74.7 L309.1 81.4 L370.9 60.4 L432.7 48.9 L494.5 61.9 L556.4 39.1 L618.2 49.9 L680 30" fill="none" stroke="#2E6BFF" stroke-width="2.4"/>
+            <circle cx="680" cy="30" r="4.5" fill="#FF7A45"/>
+          </svg>
+        </div>
+        <div class="p-4 rounded-xl bg-band border border-line">
+          <h4 class="mono text-[11px] text-slate uppercase tracking-[.08em] mb-3">Recent uploads</h4>
+          <div class="flex items-center justify-between py-2.5 border-b border-line text-[13.5px]"><span class="font-semibold flex flex-col">Q3 all-hands keynote<em class="not-italic mono text-[11px] text-slate mt-0.5">1:04:22</em></span><span class="mono text-[10px] font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 uppercase">processed</span></div>
+          <div class="flex items-center justify-between py-2.5 border-b border-line text-[13.5px]"><span class="font-semibold flex flex-col">Founder interview<em class="not-italic mono text-[11px] text-slate mt-0.5">48:10</em></span><span class="mono text-[10px] font-semibold px-2.5 py-1 rounded-full bg-orange-50 text-heat uppercase">editing</span></div>
+          <div class="flex items-center justify-between py-2.5 text-[13.5px]"><span class="font-semibold flex flex-col">Policy roundtable<em class="not-italic mono text-[11px] text-slate mt-0.5">2:11:03</em></span><span class="mono text-[10px] font-semibold px-2.5 py-1 rounded-full bg-blue-50 text-signal uppercase">scheduled</span></div>
+        </div>
+        <div class="p-4 rounded-xl bg-band border border-line">
+          <h4 class="mono text-[11px] text-slate uppercase tracking-[.08em] mb-3">Top-performing clips</h4>
+          <div class="flex items-center justify-between py-2.5 border-b border-line text-[13.5px]"><span class="font-semibold flex flex-col">The 3-second trust rule<em class="not-italic mono text-[11px] text-slate mt-0.5">Reels</em></span><span class="mono font-bold text-signal">412K</span></div>
+          <div class="flex items-center justify-between py-2.5 border-b border-line text-[13.5px]"><span class="font-semibold flex flex-col">Distribution beats volume<em class="not-italic mono text-[11px] text-slate mt-0.5">Shorts</em></span><span class="mono font-bold text-signal">298K</span></div>
+          <div class="flex items-center justify-between py-2.5 text-[13.5px]"><span class="font-semibold flex flex-col">One decision that changed us<em class="not-italic mono text-[11px] text-slate mt-0.5">TikTok</em></span><span class="mono font-bold text-signal">176K</span></div>
+        </div>
+        <div class="md:col-span-2 p-4 rounded-xl bg-band border border-line">
+          <h4 class="mono text-[11px] text-slate uppercase tracking-[.08em] mb-3">Content library · download center</h4>
+          <div class="grid grid-cols-5 md:grid-cols-10 gap-2 mb-3.5" id="lib"></div>
+          <div class="mono text-[11.5px] text-slate pt-3 border-t border-line">Client note — approved Q3 slate. Publish 3× weekly.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ COMPARE (S06) ══════════ -->
+<section id="why" class="max-w-6xl mx-auto px-6 py-24">
+  <div class="reveal mb-14">
+    <div class="flex items-center gap-3.5 mb-5">
+      <span class="mono text-[12px] text-signal tracking-[.12em]">S06</span>
+      <span class="w-11 h-px bg-gradient-to-r from-signal to-transparent"></span>
+      <span class="mono text-[11.5px] text-slate tracking-[.16em]">THE DIFFERENCE</span>
+    </div>
+    <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold">A system outlasts a project.</h2>
+  </div>
+  <div class="grid md:grid-cols-[1fr_1.2fr] gap-5 items-start">
+    <div class="reveal p-8 rounded-2xl bg-white border border-line shadow-soft">
+      <span class="mono text-[11px] tracking-[.1em] uppercase text-slate block mb-5">Traditional editor</span>
+      <ul class="flex flex-col gap-3.5 text-[15.5px] text-slate" id="old-list"></ul>
+    </div>
+    <div class="reveal p-8 rounded-2xl bg-gradient-to-b from-blue-50/70 to-white border border-signal/25 shadow-lift">
+      <span class="mono text-[11px] tracking-[.1em] uppercase text-signal block mb-5">LeapNodes</span>
+      <ul class="flex flex-col gap-3.5 text-[15.5px]" id="new-list"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PRICING (S07) ══════════ -->
+<section id="pricing" class="bg-band border-y border-line">
+  <div class="max-w-6xl mx-auto px-6 py-24">
+    <div class="reveal mb-14">
+      <div class="flex items-center gap-3.5 mb-5">
+        <span class="mono text-[12px] text-signal tracking-[.12em]">S07</span>
+        <span class="w-11 h-px bg-gradient-to-r from-signal to-transparent"></span>
+        <span class="mono text-[11.5px] text-slate tracking-[.16em]">ENGAGEMENTS</span>
+      </div>
+      <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold">Scoped to your reach, not a rate card.</h2>
+    </div>
+    <div id="plans" class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-stretch"></div>
+  </div>
+</section>
+
+<!-- ══════════ FAQ (S08) ══════════ -->
+<section id="faq" class="max-w-6xl mx-auto px-6 py-24">
+  <div class="reveal mb-14">
+    <div class="flex items-center gap-3.5 mb-5">
+      <span class="mono text-[12px] text-signal tracking-[.12em]">S08</span>
+      <span class="w-11 h-px bg-gradient-to-r from-signal to-transparent"></span>
+      <span class="mono text-[11.5px] text-slate tracking-[.16em]">QUESTIONS</span>
+    </div>
+    <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold">Everything, before you ask.</h2>
+  </div>
+  <div id="faq-list" class="max-w-[840px]"></div>
+</section>
+
+<!-- ══════════ FINAL CTA (S09) ══════════ -->
+<section id="contact" class="relative overflow-hidden border-t border-line">
+  <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[760px] h-[420px] max-w-[92vw] rounded-full" style="background:radial-gradient(ellipse,rgba(46,107,255,.14),transparent 65%)"></div>
+  <div class="relative max-w-6xl mx-auto px-6 py-32">
+    <span class="mono text-[11.5px] text-signal tracking-[.16em] block mb-5">S09 · THE ASK</span>
+    <h2 class="text-[clamp(30px,5vw,58px)] leading-[1.04] tracking-[-.03em] font-extrabold max-w-[17ch] mb-5">The world can't hear your message if it never sees it.</h2>
+    <p class="text-slate text-[clamp(16px,1.7vw,20px)] mb-9">Let's build an attention system around your content.</p>
+    <div class="flex flex-wrap gap-3">
+      <a href="#contact" class="inline-flex items-center gap-2 bg-signal text-white px-6 py-3.5 rounded-xl font-semibold text-[15px] shadow-lift hover:bg-signald transition-colors">
+        Book your strategy call
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
+      <a href="#process" class="inline-flex items-center gap-2 bg-white text-ink border border-line px-6 py-3.5 rounded-xl font-semibold text-[15px] shadow-soft hover:border-signal/40 transition">View the process</a>
     </div>
   </div>
-</nav>
-
-<!-- HERO -->
-<section style="padding-top:64px;background:var(--white)">
-<div class="hero">
-  <div>
-    <div class="badge"><span class="badge-dot"></span>Trusted by Shopify stores across the UK &amp; South Africa</div>
-    <h1>Your Shopify store runs.<br><em>Revenue doesn't have to sleep.</em></h1>
-    <p class="hero-sub">Leapnodes builds AI automation that recovers abandoned carts, handles every customer query, and upsells — across WhatsApp, Instagram, email and live chat — 24 hours a day.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn btn-dark btn-xl">
-        Book Your Free Store Audit
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <a href="#how" class="btn btn-ghost btn-xl">How It Works</a>
-    </div>
-    <div class="trust">
-      <div class="trust-i"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>48-hour setup</div>
-      <div class="trust-i"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Shopify native</div>
-      <div class="trust-i"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>No long contracts</div>
-      <div class="trust-i"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>UK &amp; SA support</div>
-    </div>
-  </div>
-
-  <!-- hero visual -->
-  <div class="hero-visual" style="position:relative">
-    <div class="fbadge" style="top:-20px;right:-20px;text-align:center;position:absolute">
-      <div class="fbadge-v" style="color:var(--emerald)">£3,840</div>
-      <div class="fbadge-l">Recovered this week</div>
-    </div>
-    <div class="hcard">
-      <div class="hcard-top">
-        <div class="dots"><div class="d" style="background:#EF4444"></div><div class="d" style="background:#F59E0B"></div><div class="d" style="background:#10B981"></div></div>
-        <span style="color:rgba(255,255,255,.5);font-size:12px;font-weight:500">Leapnodes Dashboard — Live</span>
-      </div>
-      <div style="padding:20px">
-        <div class="metrics">
-          <div class="met"><div class="met-l">Carts Recovered</div><div class="met-v" style="color:var(--emerald)" id="m1">0</div><div class="met-c">+18% this week</div></div>
-          <div class="met"><div class="met-l">Tickets Automated</div><div class="met-v" style="color:var(--indigo)" id="m2">0%</div><div class="met-c">84% deflection</div></div>
-          <div class="met"><div class="met-l">Upsells Today</div><div class="met-v" style="color:var(--navy)" id="m3">0</div><div class="met-c">+£640 revenue</div></div>
-        </div>
-        <!-- events: SVG icons, no emojis -->
-        <div id="evfeed">
-          <div class="ev" style="animation-delay:.15s">
-            <div class="ev-ic" style="background:#DCFCE7"><svg width="20" height="20" viewBox="0 0 24 24"><use href="#s-whatsapp"/></svg></div>
-            <div style="flex:1"><div class="ev-tit">Cart recovered — WhatsApp</div><div class="ev-sub">Emma T. · Nike Air Max 90 × 2</div></div>
-            <div class="ev-val">£149</div>
-          </div>
-          <div class="ev" style="animation-delay:.3s">
-            <div class="ev-ic" style="background:#FCE7F3"><svg width="20" height="20" viewBox="0 0 24 24"><use href="#s-instagram"/></svg></div>
-            <div style="flex:1"><div class="ev-tit">Instagram DM — Order query</div><div class="ev-sub">@sophiastyle_ · Resolved in 8s</div></div>
-            <div class="ev-val">Auto</div>
-          </div>
-          <div class="ev" style="animation-delay:.45s">
-            <div class="ev-ic" style="background:#EEF2FF">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--indigo)" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </div>
-            <div style="flex:1"><div class="ev-tit">Post-purchase upsell sent</div><div class="ev-sub">James R. · Serum bundle offer</div></div>
-            <div class="ev-val">+£67</div>
-          </div>
-          <div class="ev" style="animation-delay:.6s">
-            <div class="ev-ic" style="background:#FEF9C3">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="#CA8A04"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            </div>
-            <div style="flex:1"><div class="ev-tit">Review requests sent</div><div class="ev-sub">5 customers · 3 already replied</div></div>
-            <div class="ev-val">5 ★</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="fbadge" style="bottom:-20px;left:-20px;position:absolute">
-      <div class="fbadge-v" style="color:var(--indigo)">98.7%</div>
-      <div class="fbadge-l">AI accuracy rate</div>
-    </div>
-  </div>
-</div>
 </section>
+</main>
 
-<!-- MARQUEE: real brand icons -->
-<div class="marq-wrap">
-  <div class="marq-track">
-    <!-- set 1 -->
-    <div class="marq-item"><svg width="24" height="24" viewBox="0 0 256 292"><use href="#s-shopify"/></svg><span>Shopify</span></div>
-    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#s-whatsapp"/></svg><span>WhatsApp</span></div>
-    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#s-instagram"/></svg><span>Instagram</span></div>
-    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#s-facebook"/></svg><span>Facebook</span></div>
-    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 32 32"><use href="#s-klaviyo"/></svg><span>Klaviyo</span></div>
-    <div class="marq-item"><svg width="24" height="24" viewBox="0 0 32 32"><use href="#s-gcal"/></svg><span>Google Calendar</span></div>
-    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 32 32"><use href="#s-hubspot"/></svg><span>HubSpot</span></div>
-    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#s-tiktok"/></svg><span>TikTok Shop</span></div>
-    <!-- set 2 (mirror) -->
-    <div class="marq-item"><svg width="24" height="24" viewBox="0 0 256 292"><use href="#s-shopify"/></svg><span>Shopify</span></div>
-    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#s-whatsapp"/></svg><span>WhatsApp</span></div>
-    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#s-instagram"/></svg><span>Instagram</span></div>
-    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#s-facebook"/></svg><span>Facebook</span></div>
-    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 32 32"><use href="#s-klaviyo"/></svg><span>Klaviyo</span></div>
-    <div class="marq-item"><svg width="24" height="24" viewBox="0 0 32 32"><use href="#s-gcal"/></svg><span>Google Calendar</span></div>
-    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 32 32"><use href="#s-hubspot"/></svg><span>HubSpot</span></div>
-    <div class="marq-item"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#s-tiktok"/></svg><span>TikTok Shop</span></div>
-  </div>
-</div>
-
-<!-- PAIN -->
-<section id="pain">
-<div class="sec">
-  <div class="sec-label" style="color:#EF4444">The Problem</div>
-  <h2 class="sec-title">Your Shopify store is leaking<br>revenue every single day</h2>
-  <p class="sec-sub">Most store owners don't realise how much slips through — not from bad products, but from slow or zero follow-up.</p>
-  <div class="pain-grid">
-    <div class="pcard r">
-      <div class="pic r"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></div>
-      <h3>Abandoned Carts Are Ignored</h3>
-      <p>70% of shoppers abandon their cart. Most stores send one generic email days later. By then, they've bought elsewhere. A WhatsApp message within 10 minutes recovers up to 20% of lost sales.</p>
-      <div class="pstat r"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Average store loses £4,200/month to abandoned carts</div>
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="bg-band border-t border-line">
+  <div class="max-w-6xl mx-auto px-6 py-16 flex flex-wrap justify-between gap-12">
+    <div class="max-w-[280px]">
+      <a href="#top" class="flex items-center gap-2.5 font-bold tracking-tight text-[16px]"><span id="brand-mark-2" class="inline-flex"></span>Leap<span class="text-slate font-semibold">Nodes</span></a>
+      <p class="text-slate text-[14px] leading-relaxed mt-4">We don't edit videos. We engineer attention.</p>
     </div>
-    <div class="pcard a">
-      <div class="pic a"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
-      <h3>Support Tickets Eat Your Day</h3>
-      <p>"Where's my order?" accounts for 43% of all ecommerce tickets. You're manually answering questions your AI could handle in 3 seconds — for every order, every day.</p>
-      <div class="pstat a"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>12+ hours per week lost to repetitive queries</div>
-    </div>
-    <div class="pcard b">
-      <div class="pic b"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-      <h3>You're Only Selling Once</h3>
-      <p>Getting a customer to buy again costs 5× less than finding a new one — but most stores have zero post-purchase automation. No upsells, no loyalty loops. Money left on the table daily.</p>
-      <div class="pstat b"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Repeat purchases can increase revenue by 30–40%</div>
+    <div class="flex gap-14 flex-wrap">
+      <div><h4 class="mono text-[11px] uppercase tracking-[.08em] text-slate mb-4">Explore</h4>
+        <a href="#services" class="block text-slate text-[14px] mb-2.5 hover:text-ink transition">Services</a>
+        <a href="#" class="block text-slate text-[14px] mb-2.5 hover:text-ink transition">About</a>
+        <a href="#" class="block text-slate text-[14px] mb-2.5 hover:text-ink transition">Case studies</a>
+        <a href="#contact" class="block text-slate text-[14px] mb-2.5 hover:text-ink transition">Contact</a></div>
+      <div><h4 class="mono text-[11px] uppercase tracking-[.08em] text-slate mb-4">Legal</h4>
+        <a href="#" class="block text-slate text-[14px] mb-2.5 hover:text-ink transition">Privacy policy</a>
+        <a href="#" class="block text-slate text-[14px] mb-2.5 hover:text-ink transition">Terms</a></div>
+      <div><h4 class="mono text-[11px] uppercase tracking-[.08em] text-slate mb-4">Social</h4>
+        <a href="#" class="block text-slate text-[14px] mb-2.5 hover:text-ink transition">LinkedIn</a>
+        <a href="#" class="block text-slate text-[14px] mb-2.5 hover:text-ink transition">X</a></div>
     </div>
   </div>
-</div>
-</section>
-
-<!-- HOW -->
-<section id="how" class="how">
-<div class="how-in">
-  <div class="sec-label" style="color:#818CF8">How It Works</div>
-  <h2 class="sec-title" style="color:white">We build your entire<br>AI revenue system</h2>
-  <p class="sec-sub" style="color:#94A3B8">Not a tool you configure yourself. We design, build, and run the automation — you watch the results.</p>
-  <div class="steps">
-    <div class="scard">
-      <div class="snum">01</div>
-      <div class="sic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-      <h3>We Audit Your Store</h3>
-      <p>We analyse your Shopify data, abandonment rates, and support volume to find exactly where revenue is leaking — and how much.</p>
-      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Shopify analytics review</div>
-      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Cart abandonment deep-dive</div>
-      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Channel &amp; competitor audit</div>
-    </div>
-    <div class="scard">
-      <div class="snum">02</div>
-      <div class="sic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="14" x2="22" y2="14"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="14" x2="4" y2="14"/></svg></div>
-      <h3>We Build Your AI System</h3>
-      <p>Our team builds your custom AI — trained on your products, tone, and policies. Integrated directly into Shopify and all your channels.</p>
-      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Custom AI trained on your brand</div>
-      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Multi-channel deployment</div>
-      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Live within 48 hours</div>
-    </div>
-    <div class="scard">
-      <div class="snum">03</div>
-      <div class="sic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-      <h3>Revenue Grows on Autopilot</h3>
-      <p>Your AI handles abandoned carts, queries, upsells, and review collection around the clock. Monthly report and optimisation from us.</p>
-      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>24/7 automated revenue recovery</div>
-      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Monthly performance reviews</div>
-      <div class="sfeat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Continuous AI improvement</div>
-    </div>
+  <div class="max-w-6xl mx-auto px-6 pt-6 pb-10 mt-2 border-t border-line flex flex-wrap justify-between gap-4 mono text-[11.5px] text-slate/80">
+    <span>© <span id="year"></span> LeapNodes</span>
+    <span>Turn one piece of content into months of visibility.</span>
   </div>
-</div>
-</section>
-
-<!-- CHANNELS -->
-<section id="channels" style="padding:96px 24px">
-<div style="max-width:1200px;margin:0 auto">
-  <div class="sec-label" style="color:var(--emerald)">What We Automate</div>
-  <h2 class="sec-title">Everything your store needs.<br>All in one system.</h2>
-  <p class="sec-sub">Most chatbot tools only do one channel. Leapnodes builds a complete multi-channel engine — because your customers are everywhere.</p>
-  <div class="ch-grid">
-    <div class="ch-list">
-      <div class="ch-item active">
-        <div class="ch-ic" style="background:#DCFCE7"><svg width="26" height="26" viewBox="0 0 24 24"><use href="#s-whatsapp"/></svg></div>
-        <div><h4>WhatsApp Automation</h4><p>Abandoned cart recovery, order tracking, returns and product recommendations via WhatsApp Business API.</p><div class="ch-stat">Avg. 15–22% cart recovery rate</div></div>
-      </div>
-      <div class="ch-item">
-        <div class="ch-ic" style="background:#FCE7F3"><svg width="26" height="26" viewBox="0 0 24 24"><use href="#s-instagram"/></svg></div>
-        <div><h4>Instagram &amp; Facebook DMs</h4><p>Auto-respond to DMs, story replies, and comments. Qualify followers and drive them to your store.</p><div class="ch-stat">Turn followers into buyers automatically</div></div>
-      </div>
-      <div class="ch-item">
-        <div class="ch-ic" style="background:#DBEAFE">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <div><h4>Email Sequences</h4><p>Post-purchase upsell flows, win-back campaigns, and review requests — triggered by Shopify order events.</p><div class="ch-stat">+30% average repeat purchase rate</div></div>
-      </div>
-      <div class="ch-item">
-        <div class="ch-ic" style="background:#F3E8FF">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#9333EA" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-        </div>
-        <div><h4>On-Site AI Chat Widget</h4><p>A smart assistant on your store — answers product questions, recommends items, captures leads in real time.</p><div class="ch-stat">Reduces bounce rate by up to 18%</div></div>
-      </div>
-    </div>
-    <div class="ch-preview">
-      <div style="font-size:11px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:1px;margin-bottom:18px">Live preview</div>
-      <div class="chat-ui">
-        <div class="chat-top">
-          <svg width="30" height="30" viewBox="0 0 24 24" style="flex-shrink:0"><use href="#s-whatsapp"/></svg>
-          <div>
-            <div class="chat-name">Luxe Skin — WhatsApp AI</div>
-            <div class="chat-st"><span class="st-dot"></span>Automated · Always on</div>
-          </div>
-        </div>
-        <div class="msgs" id="chat-preview">
-          <div class="msg msg-in">Hi, I added items to my cart but didn't checkout — do you still have the serum bundle?<div class="msg-t">Just now</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section id="proof" style="padding:96px 24px;background:var(--bg)">
-<div style="max-width:1200px;margin:0 auto">
-  <div style="text-align:center">
-    <div class="sec-label" style="color:var(--emerald);display:inline-flex;align-items:center;gap:8px">
-      <span style="width:16px;height:2px;background:var(--emerald);border-radius:2px;display:inline-block"></span>Results
-    </div>
-    <h2 class="sec-title">Shopify owners who stopped<br>leaving money on the table</h2>
-  </div>
-  <div class="tc-grid">
-    <div class="tc">
-      <div style="display:flex;gap:2px">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      </div>
-      <p class="tc-q">"In the first month, Leapnodes recovered £6,800 in abandoned carts we would have completely lost. The WhatsApp follow-up converts at 22% — way better than our emails ever did."</p>
-      <div style="display:flex;align-items:center;gap:12px"><div class="tc-av">CW</div><div><div class="tc-name">Charlotte Webb</div><div class="tc-role">Founder, Luminary Skin — London, UK</div></div></div>
-      <div class="tc-res"><span class="res-l">Carts recovered / month</span><span class="res-v">£6,800+</span></div>
-    </div>
-    <div class="tc">
-      <div style="display:flex;gap:2px">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      </div>
-      <p class="tc-q">"My support inbox used to have 200+ unanswered messages every Monday. Now it's under 20. The AI handles order tracking and returns instantly. I got my weekends back."</p>
-      <div style="display:flex;align-items:center;gap:12px"><div class="tc-av">TM</div><div><div class="tc-name">Thandeka Mokoena</div><div class="tc-role">Owner, Kasi Threads — Johannesburg, SA</div></div></div>
-      <div class="tc-res"><span class="res-l">Support tickets automated</span><span class="res-v">84% automated</span></div>
-    </div>
-    <div class="tc">
-      <div style="display:flex;gap:2px">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      </div>
-      <p class="tc-q">"The Instagram DM automation alone paid for everything. When we run a drop, the AI engages every comment and DM instantly. Conversion on those DMs is around 31%."</p>
-      <div style="display:flex;align-items:center;gap:12px"><div class="tc-av">JA</div><div><div class="tc-name">Jake Ashworth</div><div class="tc-role">Co-Founder, Dusk Supply Co. — Manchester, UK</div></div></div>
-      <div class="tc-res"><span class="res-l">Instagram DM conversion</span><span class="res-v">31% rate</span></div>
-    </div>
-  </div>
-  <div class="stats-bar">
-    <div class="sc"><div class="sc-n">£2.4M</div><div class="sc-l">Revenue recovered for clients</div></div>
-    <div class="sc"><div class="sc-n">120+</div><div class="sc-l">Shopify stores automated</div></div>
-    <div class="sc"><div class="sc-n">3s</div><div class="sc-l">Average AI response time</div></div>
-    <div class="sc"><div class="sc-n">99.9%</div><div class="sc-l">Uptime — 24/7</div></div>
-  </div>
-</div>
-</section>
-
-<!-- FAQ -->
-<section class="faq-sec">
-<div class="faq-in">
-  <div style="text-align:center">
-    <div class="sec-label" style="color:var(--indigo);display:inline-flex;align-items:center;gap:8px"><span style="width:16px;height:2px;background:var(--indigo);border-radius:2px;display:inline-block"></span>FAQ</div>
-    <h2 class="sec-title">Common questions</h2>
-  </div>
-  <div class="faq-list">
-    <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">How long does setup actually take?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">For most Shopify stores, we go live within 48 hours of your onboarding call. We handle the entire build — WhatsApp Business API approval, Shopify integration, AI training, and testing. No technical knowledge required.</div></div>
-    <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">Do I need a WhatsApp Business API account?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">No — we set that up as part of onboarding. The official WhatsApp API is required for automation at scale, and we handle the full verification process including any existing account migration.</div></div>
-    <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">Does this work for UK stores and SA stores the same way?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Yes — we serve both markets actively. UK clients billed in GBP, SA clients in ZAR. WhatsApp is the dominant channel in both countries and Instagram DM automation works identically. Support staff in both timezones.</div></div>
-    <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">What if a customer asks something the AI can't handle?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">The AI escalates when outside its confidence threshold. It flags the conversation and notifies you immediately so a human can take over. You decide the escalation rules — we configure them during setup.</div></div>
-    <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">Are there contracts or lock-ins?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Monthly rolling — cancel anytime. We're confident in results so we don't need to lock you in. Most clients stay because the ROI is clear from month one.</div></div>
-    <div class="faq-item"><div class="faq-q" onclick="tFaq(this)">How is this different from Shopify Inbox or Gorgias?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Shopify Inbox is reactive. Gorgias organises tickets but doesn't proactively sell. Leapnodes is proactive — it sends cart recovery messages, runs upsell conversations, and drives outbound campaigns. We're a revenue engine, not a helpdesk.</div></div>
-  </div>
-</div>
-</section>
-
-<!-- CTA -->
-<section id="contact" class="cta-sec">
-<div class="cta-in">
-  <h2>Ready to stop losing revenue<br>to slow follow-up?</h2>
-  <p>Book a free 30-minute audit. We'll analyse your store, show you exactly where revenue is leaking, and give you a custom plan — no obligation.</p>
-  <div class="cta-form">
-    <div class="fgrid">
-      <div class="fg"><label class="fl">Your Name</label><input class="fi" type="text" placeholder="Charlotte Webb" autocomplete="name"></div>
-      <div class="fg"><label class="fl">Email Address</label><input class="fi" type="email" placeholder="charlotte@yourstore.com" autocomplete="email"></div>
-      <div class="fg"><label class="fl">Shopify Store URL</label><input class="fi" type="url" placeholder="yourstore.myshopify.com"></div>
-      <div class="fg"><label class="fl">WhatsApp / Phone</label><input class="fi" type="tel" placeholder="+44 7700 900 123" autocomplete="tel"></div>
-      <div class="fg full"><label class="fl">Monthly Revenue (approx.)</label>
-        <select class="fi" style="cursor:pointer">
-          <option value="" style="background:#1E293B">Select range...</option>
-          <option style="background:#1E293B">Under £5k / R100k</option>
-          <option style="background:#1E293B">£5k–£20k / R100k–R400k</option>
-          <option style="background:#1E293B">£20k–£50k / R400k–R1M</option>
-          <option style="background:#1E293B">£50k+ / R1M+</option>
-        </select>
-      </div>
-      <button class="fsub" onclick="doSubmit(event)">
-        Book My Free Audit
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </button>
-    </div>
-  </div>
-  <div class="cta-alt">
-    Prefer to message first?
-    <a href="https://wa.me/27781234567">+27 78 123 4567</a> (SA) &nbsp;·&nbsp;
-    <a href="https://wa.me/447700900123">+44 7700 900 123</a> (UK)
-  </div>
-</div>
-</section>
-
-<!-- FOOTER -->
-<footer class="foot">
-<div class="foot-in">
-  <div class="foot-top">
-    <div class="foot-brand">
-      <a href="#" style="display:flex;align-items:center;gap:11px;font-family:'Fraunces',serif;font-weight:700;font-size:20px;color:white;letter-spacing:-.3px">
-        <svg width="36" height="36" viewBox="0 0 38 38" fill="none"><rect width="38" height="38" rx="10" fill="#1E293B"/><line x1="11" y1="27" x2="19" y2="18" stroke="#4F46E5" stroke-width="1.8" stroke-linecap="round"/><line x1="19" y1="18" x2="27" y2="11" stroke="#4F46E5" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="27" r="3" fill="#6366F1" opacity=".7"/><circle cx="19" cy="18" r="3.5" fill="#818CF8"/><circle cx="27" cy="11" r="4.5" fill="white"/></svg>
-        Leapnodes
-      </a>
-      <p>AI revenue automation for Shopify stores. We build the system. You collect the revenue.</p>
-    </div>
-    <div class="foot-col"><h4>Product</h4><a href="#how">How It Works</a><a href="#channels">Channels</a><a href="#proof">Case Studies</a><a href="#contact">Free Audit</a></div>
-    <div class="foot-col"><h4>Services</h4><a href="#channels">WhatsApp Automation</a><a href="#channels">Instagram DM AI</a><a href="#channels">Cart Recovery</a><a href="#contact">White-Label</a></div>
-    <div class="foot-col"><h4>Contact</h4><a href="mailto:hello@leapnodes.com">hello@leapnodes.com</a><a href="https://wa.me/27781234567">WhatsApp SA</a><a href="https://wa.me/447700900123">WhatsApp UK</a><a href="#contact">Book Audit</a></div>
-  </div>
-  <div class="foot-bot">
-    <div class="foot-copy">© 2025 Leapnodes. All rights reserved.</div>
-    <div style="display:flex;gap:10px">
-      <div class="mbadge">
-        <svg width="16" height="11" viewBox="0 0 60 40"><rect width="60" height="40" rx="3" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="white" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#C8102E" stroke-width="5"/><path d="M30 0v40M0 20h60" stroke="white" stroke-width="13"/><path d="M30 0v40M0 20h60" stroke="#C8102E" stroke-width="8"/></svg>
-        United Kingdom
-      </div>
-      <div class="mbadge">
-        <svg width="16" height="11" viewBox="0 0 60 40"><rect width="60" height="40" fill="#007A4D"/><rect y="13" width="60" height="14" fill="#FFB612"/><rect width="20" height="40" fill="#000"/><polygon points="20,20 38,13 38,27" fill="#007A4D"/></svg>
-        South Africa
-      </div>
-    </div>
-    <div style="display:flex;gap:16px"><a href="#" style="font-size:13px;color:#475569">Privacy</a><a href="#" style="font-size:13px;color:#475569">Terms</a></div>
-  </div>
-</div>
 </footer>
 
 <script>
-// Counters
-function animCount(el,target,suffix){
-  let c=0;const inc=target/60;
-  const t=setInterval(()=>{c+=inc;if(c>=target){c=target;clearInterval(t);}
-  el.textContent=Math.floor(c)+(suffix||'');},20);
-}
-const ob=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
-  animCount(document.getElementById('m1'),23,'');
-  animCount(document.getElementById('m2'),84,'%');
-  animCount(document.getElementById('m3'),14,'');
-  ob.disconnect();}});});
-const m1=document.getElementById('m1');if(m1)ob.observe(m1);
+/* ---------- data ---------- */
+const C = { signal:"#2E6BFF", lift:"#6FA0FF" };
 
-// Chat
-const msgs=[
-  {r:'ai',t:"Yes! The Serum Bundle is still in stock — only 3 left. Want me to hold one and send a checkout link?"},
-  {r:'user',t:"Yes please! Can I still get the discount that was on the site?"},
-  {r:'ai',t:"Absolutely — your 15% returning customer discount is applied. Here's your secure link (expires in 30 mins): luxeskin.com/checkout/emma-r47x"},
-  {r:'user',t:"Amazing, thank you so much!"},
-  {r:'ai',t:"Order confirmed! You'll get a tracking number within 24h. Want a look at our new SPF drops while you wait?"}
+const AUD = ["Politicians","Public figures","CEOs","Founders","Documentary creators","Authors","Business leaders","Speakers","Coaches","Organizations"];
+
+const STEPS = [
+  ["Share the source","Upload a file or paste a public YouTube link. That's the entire lift on your end."],
+  ["We read the room","Your full session is processed end to end — speech, pacing, and structure."],
+  ["The moments surface","The engine ranks your strongest, most quotable segments first."],
+  ["Cut & optimize","Professional editing and framing, shaped per platform, not copy-pasted."],
+  ["Dressed to publish","Titles, descriptions, and captions written and formatted for each clip."],
+  ["Scheduled with intent","A publishing calendar across your approved channels — held consistently."],
+  ["Measured after launch","Every clip is tracked once it's live, not forgotten on delivery."],
+  ["Reported & refined","Monthly reporting and ongoing optimization. The strategy compounds."],
 ];
-let ci=0;const chatEl=document.getElementById('chat-preview');
-function addMsg(){
-  if(!chatEl||ci>=msgs.length)return;
-  const m=msgs[ci];
-  if(m.r==='ai'){
-    const tp=document.createElement('div');tp.className='msg msg-in';
-    tp.style.cssText='display:flex;align-items:center;gap:4px;padding:10px 14px';
-    tp.innerHTML='<span class="tdot"></span><span class="tdot"></span><span class="tdot"></span>';
-    chatEl.appendChild(tp);chatEl.scrollTop=9999;
-    setTimeout(()=>{
-      if(chatEl.contains(tp))chatEl.removeChild(tp);
-      const d=document.createElement('div');d.className='msg msg-in';
-      d.innerHTML=m.t+'<div class="msg-t">Just now</div>';
-      chatEl.appendChild(d);chatEl.scrollTop=9999;ci++;setTimeout(addMsg,2400);
-    },1100);
-  }else{
-    const d=document.createElement('div');d.className='msg msg-out';
-    d.innerHTML=m.t+'<div class="msg-t">Just now</div>';
-    chatEl.appendChild(d);chatEl.scrollTop=9999;ci++;setTimeout(addMsg,1600);
-  }
+
+const SVC = [
+  ["Content repurposing","Every long-form video becomes dozens of platform-ready clips — the core of the engine.","lg:col-span-2"],
+  ["Content strategy","A consistent publishing cadence, tailored to your goals and volume.",""],
+  ["Publishing support","Prepared and scheduled across your approved social channels.",""],
+  ["Performance analytics","Views, engagement, watch time, and audience growth — in one client dashboard.","lg:row-span-2"],
+  ["Brand positioning","Every clip reinforces one consistent public image and message.",""],
+  ["Content library","A searchable archive of everything you've produced, ready to reuse.",""],
+];
+
+const MET = [["Hours of content processed",4200,"","+"],["Clips produced",38000,"","+"],["Views generated",92,"M","+"],["Videos published",21500,"","+"],["Publishing consistency",98,"%",""],["Monthly reporting delivered",100,"%",""]];
+
+const OLD = ["Edits videos","Waits for instructions","Delivers files","Project ends"];
+const NEW = ["Builds content systems","Optimizes distribution","Creates reusable libraries","Tracks performance","Continuously improves strategy","Focuses on long-term visibility"];
+
+const PLANS = [
+  ["Starter","For founders and professionals building a presence.",["1 long-form source / month","Up to 20 short-form clips","Captions & metadata","Publishing calendar","Monthly report"],false],
+  ["Growth","For organizations publishing on a regular cadence.",["4 sources / month","Up to 100 clips","Multi-platform scheduling","Client dashboard","Strategy sessions","Priority turnaround"],true],
+  ["Executive","White-glove service for public figures & leadership teams.",["Unlimited sources","Dedicated strategist","Full library management","Custom reporting","Brand & message governance"],false],
+];
+
+const FAQS = [
+  ["Can we use existing YouTube videos?","Yes — a public YouTube link is all we need to start. No new recording required."],
+  ["Do I need to record new content?","No. We work entirely from the long-form content you already have."],
+  ["Who owns the finished content?","You do. Every clip, caption, and file is yours to keep and reuse."],
+  ["How quickly do you deliver?","It depends on plan and volume, but most first slates ship within the first weeks of onboarding."],
+  ["Can you work with speeches, interviews, and documentaries?","Those long-form formats are exactly what the engine is built to distribute."],
+  ["Do you provide analytics?","Yes — every clip is tracked in your dashboard, with monthly reporting and optimization."],
+  ["How often should I publish?","We set a cadence around your goals and volume, then hold it consistently."],
+];
+
+/* ---------- logo: circle of connected nodes ---------- */
+function logoSVG(size){
+  const cx=22,cy=22,r=15,n=6,pts=[];
+  for(let i=0;i<n;i++){const a=(i/n)*2*Math.PI-Math.PI/2;pts.push([cx+r*Math.cos(a),cy+r*Math.sin(a)]);}
+  const poly=pts.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" ");
+  let dots="";
+  pts.forEach((p,i)=>{dots+=`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3" fill="${i===0?C.lift:C.signal}" stroke="${i===0?'#fff':'none'}" stroke-width="1"/>`;});
+  return `<svg width="${size}" height="${size}" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs><linearGradient id="lg${size}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${C.signal}"/><stop offset="1" stop-color="${C.lift}"/></linearGradient></defs>
+    <polygon points="${poly}" stroke="url(#lg${size})" stroke-width="1.6" stroke-linejoin="round" fill="none"/>${dots}</svg>`;
 }
-setTimeout(addMsg,2200);
+document.getElementById("brand-mark").innerHTML = logoSVG(22);
+document.getElementById("brand-mark-2").innerHTML = logoSVG(22);
 
-// FAQ
-function tFaq(btn){const it=btn.parentElement;const was=it.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!was)it.classList.add('open');}
+/* ---------- headline (word reveal) ---------- */
+const H1 = "Your content deserves more attention.";
+document.getElementById("h1").innerHTML = H1.split(" ").map((w,i)=>
+  `<span style="display:inline-block;overflow:hidden;vertical-align:bottom"><span style="display:inline-block;transform:translateY(110%);transition:transform .9s cubic-bezier(.22,1,.36,1);transition-delay:${.15+i*.06}s">${w}&nbsp;</span></span>`
+).join("");
+requestAnimationFrame(()=>document.querySelectorAll("#h1 span span").forEach(s=>s.style.transform="none"));
 
-// Form
-function doSubmit(e){e.preventDefault();const b=e.target;
-b.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Submitted — we\'ll be in touch within 2 hours!';
-b.style.background='var(--emerald)';b.disabled=true;}
+/* ---------- marquee ---------- */
+const chip = a => `<span class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-line bg-white shadow-soft text-[15px] font-semibold whitespace-nowrap"><i class="w-1.5 h-1.5 rounded-full bg-signal"></i>${a}</span>`;
+document.querySelector(".marquee-row").innerHTML = [...AUD,...AUD].map(chip).join("");
+
+/* ---------- timeline ---------- */
+document.getElementById("timeline").innerHTML = STEPS.map(([t,b],i)=>`
+  <div class="reveal flex" style="transition-delay:${i*40}ms">
+    <div class="relative w-10 flex-shrink-0 flex justify-center">
+      <span class="absolute top-0 bottom-0 w-px bg-line ${i===0?'top-[26px]':''} ${i===STEPS.length-1?'h-[26px]':''}"></span>
+      <span class="relative z-10 w-3 h-3 rounded-full mt-[22px] bg-white border-2 border-signal" style="box-shadow:0 0 0 4px rgba(46,107,255,.10)"></span>
+    </div>
+    <div class="flex gap-5 pt-4 pb-8 pl-6 flex-1">
+      <span class="mono text-[13px] text-slate pt-0.5 flex-shrink-0">${String(i+1).padStart(2,"0")}</span>
+      <div><h3 class="text-[19px] font-bold tracking-[-.01em] mb-1.5">${t}</h3><p class="text-[15px] leading-relaxed text-slate max-w-[60ch]">${b}</p></div>
+    </div>
+  </div>`).join("");
+
+/* ---------- bento ---------- */
+document.getElementById("bento").innerHTML = SVC.map(([t,b,cls],i)=>`
+  <div class="reveal ${cls}" style="transition-delay:${i*50}ms">
+    <div class="group relative h-full min-h-[180px] p-6 rounded-2xl bg-white border border-line shadow-card hover:shadow-lift hover:border-signal/30 transition-all duration-300 flex flex-col overflow-hidden">
+      <span class="mono text-[12px] text-signal tracking-[.1em] mb-auto">${String(i+1).padStart(2,"0")}</span>
+      <h3 class="text-[${i===0?'24':'20'}px] font-bold mt-8 mb-2 tracking-[-.01em]">${t}</h3>
+      <p class="text-[14.5px] leading-relaxed text-slate">${b}</p>
+      <svg class="absolute top-6 right-6 opacity-0 -translate-x-1 translate-y-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all text-signal" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+    </div>
+  </div>`).join("");
+
+/* ---------- metrics ---------- */
+document.getElementById("metrics").innerHTML = MET.map(([label,val,unit,suf])=>`
+  <div class="reveal bg-paper hover:bg-band transition-colors p-9">
+    <div class="text-[clamp(34px,4.6vw,54px)] font-extrabold tracking-[-.03em] leading-none flex items-baseline">
+      <span class="counter" data-to="${val}">0</span>${unit}<span class="text-signal">${suf}</span>
+    </div>
+    <div class="mono text-[12px] text-slate tracking-[.04em] mt-3.5 uppercase">${label}</div>
+  </div>`).join("");
+
+/* ---------- compare ---------- */
+document.getElementById("old-list").innerHTML = OLD.map(o=>`<li class="flex items-center gap-3"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9aa3b2" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg>${o}</li>`).join("");
+document.getElementById("new-list").innerHTML = NEW.map(n=>`<li class="flex items-center gap-3"><span class="inline-flex items-center justify-center w-5 h-5 rounded-md bg-blue-100 text-signal flex-shrink-0"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>${n}</li>`).join("");
+
+/* ---------- plans ---------- */
+document.getElementById("plans").innerHTML = PLANS.map(([name,desc,feats,hot],i)=>`
+  <div class="reveal relative p-8 rounded-2xl bg-white border ${hot?'border-signal/40 shadow-lift':'border-line shadow-card'} flex flex-col hover:-translate-y-1 transition-transform duration-300" style="transition-delay:${i*80}ms">
+    ${hot?'<span class="absolute -top-3 left-7 bg-signal text-white mono text-[10px] font-semibold px-3 py-1.5 rounded-full uppercase tracking-[.06em]">Most chosen</span>':''}
+    <h3 class="text-[22px] font-extrabold mb-1.5">${name}</h3>
+    <p class="text-slate text-[14px] leading-snug mb-5 min-h-[42px]">${desc}</p>
+    <div class="text-[28px] font-extrabold tracking-tight mb-6">Custom<span class="mono text-[13px] font-normal text-slate"> / engagement</span></div>
+    <ul class="flex flex-col gap-3 mb-7 flex-1">${feats.map(f=>`<li class="flex items-center gap-2.5 text-[14px] text-ink/80"><span class="inline-flex items-center justify-center w-5 h-5 rounded-md bg-blue-100 text-signal flex-shrink-0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>${f}</li>`).join("")}</ul>
+    <a href="#contact" class="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl font-semibold text-[15px] ${hot?'bg-signal text-white shadow-lift hover:bg-signald':'bg-white text-ink border border-line shadow-soft hover:border-signal/40'} transition">Book a consultation <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>`).join("");
+
+/* ---------- FAQ ---------- */
+document.getElementById("faq-list").innerHTML = FAQS.map(([q,a],i)=>`
+  <div class="reveal border-b border-line" style="transition-delay:${i*30}ms">
+    <button class="faq-btn w-full flex items-center justify-between gap-4 py-6 text-left text-[17px] font-semibold" data-i="${i}">
+      <span>${q}</span>
+      <svg class="faq-icon text-slate flex-shrink-0 transition-transform duration-300" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+    <div class="faq-a"><p class="pb-6 text-slate text-[15px] leading-relaxed max-w-[66ch]">${a}</p></div>
+  </div>`).join("");
+
+document.querySelectorAll(".faq-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const a=btn.nextElementSibling, icon=btn.querySelector(".faq-icon");
+    const open = a.style.maxHeight && a.style.maxHeight!=="0px";
+    document.querySelectorAll(".faq-a").forEach(x=>x.style.maxHeight="0px");
+    document.querySelectorAll(".faq-icon").forEach(x=>x.style.transform="rotate(0deg)");
+    if(!open){ a.style.maxHeight=a.scrollHeight+"px"; icon.style.transform="rotate(45deg)"; }
+  });
+});
+// open first
+window.addEventListener("load",()=>{const f=document.querySelector(".faq-a");if(f){f.style.maxHeight=f.scrollHeight+"px";document.querySelector(".faq-icon").style.transform="rotate(45deg)";}});
+
+/* ---------- library cells ---------- */
+document.getElementById("lib").innerHTML = Array.from({length:10}).map(()=>`<span class="rounded-md bg-blue-50 border border-blue-100" style="aspect-ratio:9/16"></span>`).join("");
+
+/* ---------- year ---------- */
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* ---------- nav solidify ---------- */
+const nav=document.getElementById("nav");
+addEventListener("scroll",()=>{
+  if(scrollY>40){ nav.classList.add("bg-paper/80","backdrop-blur-xl","border-line","shadow-soft"); }
+  else { nav.classList.remove("bg-paper/80","backdrop-blur-xl","border-line","shadow-soft"); }
+});
+
+/* ---------- mobile menu ---------- */
+const mob=document.getElementById("mobile");
+document.getElementById("burger").addEventListener("click",()=>{ mob.classList.toggle("hidden"); mob.classList.toggle("flex"); });
+mob.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{mob.classList.add("hidden");mob.classList.remove("flex");}));
+
+/* ---------- reveal + counters via IntersectionObserver ---------- */
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("in");
+      e.target.querySelectorAll?.(".counter").forEach(runCounter);
+      if(e.target.classList.contains("counter")) runCounter(e.target);
+      io.unobserve(e.target);
+    }
+  });
+},{rootMargin:"-60px"});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+
+function runCounter(el){
+  if(el.dataset.done) return; el.dataset.done="1";
+  const to=+el.dataset.to; const start=performance.now(); const dur=1700;
+  function tick(t){
+    const p=Math.min((t-start)/dur,1); const v=to*(1-Math.pow(1-p,3));
+    el.textContent = Math.round(v).toLocaleString();
+    if(p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
 </script>
 </body>
 </html>
