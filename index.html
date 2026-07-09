@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>LeapNodes — Turn one video into months of visibility</title>
-<meta name="description" content="LeapNodes is an AI-powered content distribution studio. We turn one long-form video into a professional short-form content engine that keeps your brand visible every day." />
+<title>LeapNodes — The creator agency behind your growth</title>
+<meta name="description" content="LeapNodes is a full-service creator agency: training, brand deals, livestream production, payments and contracts, community, and content distribution — everything a creator needs to grow and get paid." />
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,6 +61,8 @@
     .reveal { opacity: 1 !important; transform: none !important; }
   }
   .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s cubic-bezier(.22,1,.36,1); }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary { list-style: none; }
   a:focus-visible, button:focus-visible { outline: 2px solid #2E6BFF; outline-offset: 3px; border-radius: 8px; }
 </style>
 </head>
@@ -74,9 +76,9 @@
       Leap<span class="text-slate font-semibold">Nodes</span>
     </a>
     <nav class="ml-auto hidden md:flex items-center gap-7 text-[14px] text-slate font-medium">
-      <a href="#process" class="hover:text-ink transition">Process</a>
-      <a href="#services" class="hover:text-ink transition">Services</a>
-      <a href="#results" class="hover:text-ink transition">Signals</a>
+      <a href="#services" class="hover:text-ink transition">What we do</a>
+      <a href="#network" class="hover:text-ink transition">Network</a>
+      <a href="#brands" class="hover:text-ink transition">Brands</a>
       <a href="#pricing" class="hover:text-ink transition">Plans</a>
       <a href="#faq" class="hover:text-ink transition">FAQ</a>
     </nav>
@@ -89,9 +91,9 @@
     </button>
   </div>
   <div id="mobile" class="md:hidden hidden bg-paper/95 backdrop-blur border-b border-line px-6 pb-4 flex-col">
-    <a href="#process" class="py-3 border-b border-line text-slate">Process</a>
-    <a href="#services" class="py-3 border-b border-line text-slate">Services</a>
-    <a href="#results" class="py-3 border-b border-line text-slate">Signals</a>
+    <a href="#services" class="py-3 border-b border-line text-slate">What we do</a>
+    <a href="#network" class="py-3 border-b border-line text-slate">Network</a>
+    <a href="#brands" class="py-3 border-b border-line text-slate">Brands</a>
     <a href="#pricing" class="py-3 border-b border-line text-slate">Plans</a>
     <a href="#faq" class="py-3 border-b border-line text-slate">FAQ</a>
     <a href="#contact" class="py-3 font-semibold text-signal">Book a call</a>
@@ -105,33 +107,37 @@
   <div class="grid md:grid-cols-2 gap-12 items-center">
     <div>
       <div class="mono text-[11.5px] tracking-[.14em] text-slate flex items-center gap-2.5 mb-7">
-        <span class="w-1.5 h-1.5 rounded-full bg-heat pulse"></span> AI-POWERED CONTENT DISTRIBUTION
+        <span class="w-1.5 h-1.5 rounded-full bg-heat pulse"></span> A FULL-SERVICE CREATOR AGENCY
       </div>
-      <h1 id="h1" class="text-[clamp(40px,6vw,76px)] leading-[.98] tracking-[-.035em] font-extrabold mb-7"></h1>
+      <h1 id="h1" class="text-[clamp(40px,6vw,76px)] leading-[1.08] tracking-[-.035em] font-extrabold mb-8"></h1>
       <p class="text-[clamp(16px,1.5vw,18.5px)] leading-relaxed text-slate max-w-[52ch] mb-8">
-        One interview. One keynote. One podcast. We turn it into months of visibility —
-        professionally cut, captioned, scheduled, and measured across every platform your audience lives on.
+        Training, brand deals, livestream production, payments and contracts, a creator community,
+        and content distribution — one agency behind you, turning your audience into a business.
       </p>
       <div class="flex flex-wrap gap-3">
         <a href="#contact" class="inline-flex items-center gap-2 bg-signal text-white px-6 py-3.5 rounded-xl font-semibold text-[15px] shadow-lift hover:bg-signald transition-colors">
           Book a discovery call
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a href="#process" class="inline-flex items-center gap-2 bg-white text-ink border border-line px-6 py-3.5 rounded-xl font-semibold text-[15px] shadow-soft hover:border-signal/40 transition">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> See the process
+        <a href="#services" class="inline-flex items-center gap-2 bg-white text-ink border border-line px-6 py-3.5 rounded-xl font-semibold text-[15px] shadow-soft hover:border-signal/40 transition">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> What we do
         </a>
       </div>
-      <div class="flex items-center gap-5 mt-11 flex-wrap">
-        <div class="flex flex-col"><b class="text-[26px] font-extrabold tracking-tight">1</b><span class="mono text-[11px] text-slate mt-0.5">source video</span></div>
-        <span class="text-signal text-lg">→</span>
-        <div class="flex flex-col"><b class="text-[26px] font-extrabold tracking-tight">100+</b><span class="mono text-[11px] text-slate mt-0.5">distributed clips</span></div>
-        <span class="text-signal text-lg">→</span>
-        <div class="flex flex-col"><b class="text-[26px] font-extrabold tracking-tight">5</b><span class="mono text-[11px] text-slate mt-0.5">platforms, daily</span></div>
+      <div class="flex items-center gap-6 mt-11 flex-wrap">
+        <div class="flex flex-col"><b class="text-[26px] font-extrabold tracking-tight">1,200+</b><span class="mono text-[11px] text-slate mt-0.5">creators in the network</span></div>
+        <span class="w-px h-8 bg-line"></span>
+        <div class="flex flex-col"><b class="text-[26px] font-extrabold tracking-tight">$4.6M</b><span class="mono text-[11px] text-slate mt-0.5">paid to creators</span></div>
+        <span class="w-px h-8 bg-line"></span>
+        <div class="flex flex-col"><b class="text-[26px] font-extrabold tracking-tight">340+</b><span class="mono text-[11px] text-slate mt-0.5">brand campaigns run</span></div>
       </div>
     </div>
     <!-- hero node splitter -->
     <div class="flex justify-center">
       <div class="w-full max-w-[540px] rounded-3xl bg-white border border-line shadow-soft p-4">
+        <div class="flex items-center justify-between px-2 pt-1 pb-3">
+          <span class="mono text-[10.5px] tracking-[.12em] text-slate uppercase">Inside the agency · distribution engine</span>
+          <span class="mono text-[10px] text-signal">1 of 6 services</span>
+        </div>
         <svg viewBox="0 0 620 460" class="w-full h-auto" aria-hidden="true">
           <defs>
             <linearGradient id="src" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FA0FF"/><stop offset="1" stop-color="#2E6BFF"/></linearGradient>
@@ -193,56 +199,104 @@
   </div>
 </section>
 
-<!-- ══════════ PROCESS (S02) ══════════ -->
-<section id="process" class="max-w-6xl mx-auto px-6 py-24">
+<!-- ══════════ NETWORK (S02) ══════════ -->
+<section id="network" class="max-w-6xl mx-auto px-6 py-24">
   <div class="reveal mb-14">
     <div class="flex items-center gap-3.5 mb-5">
       <span class="mono text-[12px] text-signal tracking-[.12em]">S02</span>
       <span class="w-11 h-px bg-gradient-to-r from-signal to-transparent"></span>
-      <span class="mono text-[11.5px] text-slate tracking-[.16em]">THE PIPELINE</span>
+      <span class="mono text-[11.5px] text-slate tracking-[.16em]">THE NETWORK</span>
     </div>
-    <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold max-w-[19ch]">One upload becomes an always-on system.</h2>
+    <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold max-w-[20ch]">A network of creators who actually earn.</h2>
+    <p class="reveal text-[clamp(16px,1.5vw,18px)] leading-relaxed text-slate max-w-[62ch] mt-6">
+      LeapNodes brings streamers, sellers, entertainers, and gamers into one network —
+      with the training, tools, brand relationships, and community behind them. We've built a
+      reputation on one thing: helping creators turn an audience into income.
+    </p>
   </div>
-  <div id="timeline" class="flex flex-col"></div>
+  <div id="netmetrics" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-line border border-line rounded-2xl overflow-hidden shadow-card"></div>
+
+  <!-- community row -->
+  <div class="reveal mt-6 rounded-2xl bg-white border border-line shadow-soft p-6 sm:p-8 flex flex-col md:flex-row md:items-center gap-6">
+    <div class="flex-1">
+      <span class="mono text-[11px] text-signal tracking-[.12em] uppercase">The community</span>
+      <h3 class="text-[20px] font-bold tracking-[-.01em] mt-2 mb-1.5">A room you're never creating in alone.</h3>
+      <p class="text-[14.5px] leading-relaxed text-slate max-w-[52ch]">Live support, feedback, and collaboration across Discord, WhatsApp, and Telegram — active every day.</p>
+    </div>
+    <div id="community" class="flex flex-wrap gap-2.5"></div>
+  </div>
 </section>
 
-<!-- ══════════ SERVICES (S03) ══════════ -->
+<!-- ══════════ WHAT WE DO — THE SPINE (S03) ══════════ -->
 <section id="services" class="bg-band border-y border-line">
   <div class="max-w-6xl mx-auto px-6 py-24">
     <div class="reveal mb-14">
       <div class="flex items-center gap-3.5 mb-5">
         <span class="mono text-[12px] text-signal tracking-[.12em]">S03</span>
         <span class="w-11 h-px bg-gradient-to-r from-signal to-transparent"></span>
-        <span class="mono text-[11.5px] text-slate tracking-[.16em]">THE SYSTEM</span>
+        <span class="mono text-[11.5px] text-slate tracking-[.16em]">WHAT WE DO</span>
       </div>
-      <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold max-w-[19ch]">A full attention system, not a stack of files.</h2>
+      <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold max-w-[19ch]">A full agency, working across your whole career.</h2>
+      <p class="reveal text-[clamp(16px,1.5vw,18px)] leading-relaxed text-slate max-w-[62ch] mt-6">
+        Six services, one team. Grow your audience, land brand deals, run professional livestreams,
+        get paid cleanly, and distribute your content everywhere — without stitching together six vendors.
+      </p>
     </div>
-    <div id="bento" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[minmax(180px,auto)]"></div>
+    <div id="creatorbento" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[minmax(180px,auto)]"></div>
   </div>
 </section>
 
-<!-- ══════════ RESULTS (S04) ══════════ -->
-<section id="results" class="max-w-6xl mx-auto px-6 py-24">
+<!-- ══════════ FOR BRANDS (S04) ══════════ -->
+<section id="brands" class="max-w-6xl mx-auto px-6 py-24">
   <div class="reveal mb-14">
     <div class="flex items-center gap-3.5 mb-5">
       <span class="mono text-[12px] text-signal tracking-[.12em]">S04</span>
       <span class="w-11 h-px bg-gradient-to-r from-signal to-transparent"></span>
+      <span class="mono text-[11.5px] text-slate tracking-[.16em]">FOR BRANDS</span>
+    </div>
+    <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold max-w-[20ch]">Put your product in front of creators who sell.</h2>
+  </div>
+  <div class="grid md:grid-cols-[1.2fr_1fr] gap-5 items-start">
+    <div class="reveal p-8 rounded-2xl bg-gradient-to-b from-blue-50/70 to-white border border-signal/25 shadow-lift">
+      <span class="mono text-[11px] tracking-[.1em] uppercase text-signal block mb-5">What brands get</span>
+      <ul class="flex flex-col gap-3.5 text-[15.5px]" id="brand-list"></ul>
+    </div>
+    <div class="reveal p-8 rounded-2xl bg-white border border-line shadow-soft flex flex-col justify-center">
+      <span class="mono text-[11px] tracking-[.1em] uppercase text-slate block mb-3">The model</span>
+      <p class="text-[15.5px] leading-relaxed text-slate">
+        We match businesses with creators built to move product, then run the whole relationship —
+        campaigns, contracts, and payments — through one managed pipeline. You brief once; the network delivers.
+      </p>
+      <a href="#contact" class="inline-flex items-center gap-2 mt-6 self-start bg-ink text-white px-5 py-3 rounded-xl font-semibold text-[14px] hover:bg-signal transition-colors">
+        Partner with LeapNodes
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ RESULTS (S05) ══════════ -->
+<section id="results" class="max-w-6xl mx-auto px-6 py-24">
+  <div class="reveal mb-14">
+    <div class="flex items-center gap-3.5 mb-5">
+      <span class="mono text-[12px] text-signal tracking-[.12em]">S05</span>
+      <span class="w-11 h-px bg-gradient-to-r from-signal to-transparent"></span>
       <span class="mono text-[11.5px] text-slate tracking-[.16em]">SIGNALS</span>
     </div>
-    <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold">Attention compounds.</h2>
+    <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold">The work behind the network.</h2>
   </div>
   <div id="metrics" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line border border-line rounded-2xl overflow-hidden shadow-card"></div>
   <p class="reveal text-[12.5px] text-slate/80 mt-6 max-w-[72ch] leading-relaxed">
-    Figures are illustrative of aggregate program activity. Results vary by client, content quality, audience, and platform algorithms.
+    Figures are illustrative of aggregate program activity across the network. Results vary by creator, content quality, audience, and platform algorithms.
   </p>
 </section>
 
-<!-- ══════════ DASHBOARD (S05) ══════════ -->
+<!-- ══════════ DASHBOARD (S06) ══════════ -->
 <section id="dashboard" class="bg-band border-y border-line">
   <div class="max-w-6xl mx-auto px-6 py-24">
     <div class="reveal mb-14">
       <div class="flex items-center gap-3.5 mb-5">
-        <span class="mono text-[12px] text-signal tracking-[.12em]">S05</span>
+        <span class="mono text-[12px] text-signal tracking-[.12em]">S06</span>
         <span class="w-11 h-px bg-gradient-to-r from-signal to-transparent"></span>
         <span class="mono text-[11.5px] text-slate tracking-[.16em]">THE CONSOLE</span>
       </div>
@@ -292,48 +346,48 @@
   </div>
 </section>
 
-<!-- ══════════ COMPARE (S06) ══════════ -->
+<!-- ══════════ GOING IT ALONE vs AGENCY (S07) ══════════ -->
 <section id="why" class="max-w-6xl mx-auto px-6 py-24">
   <div class="reveal mb-14">
     <div class="flex items-center gap-3.5 mb-5">
-      <span class="mono text-[12px] text-signal tracking-[.12em]">S06</span>
+      <span class="mono text-[12px] text-signal tracking-[.12em]">S07</span>
       <span class="w-11 h-px bg-gradient-to-r from-signal to-transparent"></span>
-      <span class="mono text-[11.5px] text-slate tracking-[.16em]">THE DIFFERENCE</span>
+      <span class="mono text-[11.5px] text-slate tracking-[.16em]">GOING IT ALONE</span>
     </div>
-    <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold">A system outlasts a project.</h2>
+    <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold max-w-[22ch]">Going it alone vs. having an agency behind you.</h2>
   </div>
   <div class="grid md:grid-cols-[1fr_1.2fr] gap-5 items-start">
     <div class="reveal p-8 rounded-2xl bg-white border border-line shadow-soft">
-      <span class="mono text-[11px] tracking-[.1em] uppercase text-slate block mb-5">Traditional editor</span>
+      <span class="mono text-[11px] tracking-[.1em] uppercase text-slate block mb-5">Going it alone</span>
       <ul class="flex flex-col gap-3.5 text-[15.5px] text-slate" id="old-list"></ul>
     </div>
     <div class="reveal p-8 rounded-2xl bg-gradient-to-b from-blue-50/70 to-white border border-signal/25 shadow-lift">
-      <span class="mono text-[11px] tracking-[.1em] uppercase text-signal block mb-5">LeapNodes</span>
+      <span class="mono text-[11px] tracking-[.1em] uppercase text-signal block mb-5">With LeapNodes</span>
       <ul class="flex flex-col gap-3.5 text-[15.5px]" id="new-list"></ul>
     </div>
   </div>
 </section>
 
-<!-- ══════════ PRICING (S07) ══════════ -->
+<!-- ══════════ PRICING (S08) ══════════ -->
 <section id="pricing" class="bg-band border-y border-line">
   <div class="max-w-6xl mx-auto px-6 py-24">
     <div class="reveal mb-14">
       <div class="flex items-center gap-3.5 mb-5">
-        <span class="mono text-[12px] text-signal tracking-[.12em]">S07</span>
+        <span class="mono text-[12px] text-signal tracking-[.12em]">S08</span>
         <span class="w-11 h-px bg-gradient-to-r from-signal to-transparent"></span>
         <span class="mono text-[11.5px] text-slate tracking-[.16em]">ENGAGEMENTS</span>
       </div>
-      <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold">Scoped to your reach, not a rate card.</h2>
+      <h2 class="text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-[-.03em] font-extrabold">Scoped to your career, not a rate card.</h2>
     </div>
     <div id="plans" class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-stretch"></div>
   </div>
 </section>
 
-<!-- ══════════ FAQ (S08) ══════════ -->
+<!-- ══════════ FAQ (S09) ══════════ -->
 <section id="faq" class="max-w-6xl mx-auto px-6 py-24">
   <div class="reveal mb-14">
     <div class="flex items-center gap-3.5 mb-5">
-      <span class="mono text-[12px] text-signal tracking-[.12em]">S08</span>
+      <span class="mono text-[12px] text-signal tracking-[.12em]">S09</span>
       <span class="w-11 h-px bg-gradient-to-r from-signal to-transparent"></span>
       <span class="mono text-[11.5px] text-slate tracking-[.16em]">QUESTIONS</span>
     </div>
@@ -342,19 +396,47 @@
   <div id="faq-list" class="max-w-[840px]"></div>
 </section>
 
-<!-- ══════════ FINAL CTA (S09) ══════════ -->
+<!-- ══════════ DISTRIBUTION DEEP-DIVE (linked from the service card) ══════════ -->
+<section id="distribution" class="bg-band border-y border-line">
+  <div class="max-w-6xl mx-auto px-6 py-24">
+    <div class="reveal mb-10">
+      <div class="flex items-center gap-3.5 mb-5">
+        <span class="mono text-[12px] text-signal tracking-[.12em]">↳ SERVICE DEEP-DIVE</span>
+        <span class="w-11 h-px bg-gradient-to-r from-signal to-transparent"></span>
+        <span class="mono text-[11.5px] text-slate tracking-[.16em]">CONTENT DISTRIBUTION</span>
+      </div>
+      <h2 class="text-[clamp(26px,3.4vw,40px)] leading-[1.06] tracking-[-.03em] font-extrabold max-w-[24ch]">How one long-form video becomes an always-on clip engine.</h2>
+      <p class="reveal text-[15.5px] leading-relaxed text-slate max-w-[62ch] mt-5">
+        Content distribution is one of our six services. If you want the detail on how the clipping
+        pipeline works, it's all here — expand it below.
+      </p>
+    </div>
+    <details class="reveal group rounded-2xl bg-white border border-line shadow-soft overflow-hidden">
+      <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none select-none">
+        <span class="font-semibold text-[16px]">The 8-step distribution pipeline</span>
+        <svg class="text-slate transition-transform duration-300 group-open:rotate-45" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+      </summary>
+      <div class="px-6 pb-8 pt-2 border-t border-line">
+        <div id="timeline" class="flex flex-col mt-6"></div>
+        <div class="mono text-[12px] text-slate mt-4">Aggregate to date: 4,200+ hours processed · 38,000+ clips produced · 92M+ views generated.</div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ══════════ FINAL CTA (S10) ══════════ -->
 <section id="contact" class="relative overflow-hidden border-t border-line">
   <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[760px] h-[420px] max-w-[92vw] rounded-full" style="background:radial-gradient(ellipse,rgba(46,107,255,.14),transparent 65%)"></div>
   <div class="relative max-w-6xl mx-auto px-6 py-32">
-    <span class="mono text-[11.5px] text-signal tracking-[.16em] block mb-5">S09 · THE ASK</span>
-    <h2 class="text-[clamp(30px,5vw,58px)] leading-[1.04] tracking-[-.03em] font-extrabold max-w-[17ch] mb-5">The world can't hear your message if it never sees it.</h2>
-    <p class="text-slate text-[clamp(16px,1.7vw,20px)] mb-9">Let's build an attention system around your content.</p>
+    <span class="mono text-[11.5px] text-signal tracking-[.16em] block mb-5">S10 · THE ASK</span>
+    <h2 class="text-[clamp(30px,5vw,58px)] leading-[1.04] tracking-[-.03em] font-extrabold max-w-[18ch] mb-5">Your career deserves a team behind it.</h2>
+    <p class="text-slate text-[clamp(16px,1.7vw,20px)] mb-9">Let's build the agency around you — growth, deals, production, and distribution.</p>
     <div class="flex flex-wrap gap-3">
       <a href="#contact" class="inline-flex items-center gap-2 bg-signal text-white px-6 py-3.5 rounded-xl font-semibold text-[15px] shadow-lift hover:bg-signald transition-colors">
         Book your strategy call
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a href="#process" class="inline-flex items-center gap-2 bg-white text-ink border border-line px-6 py-3.5 rounded-xl font-semibold text-[15px] shadow-soft hover:border-signal/40 transition">View the process</a>
+      <a href="#services" class="inline-flex items-center gap-2 bg-white text-ink border border-line px-6 py-3.5 rounded-xl font-semibold text-[15px] shadow-soft hover:border-signal/40 transition">See what we do</a>
     </div>
   </div>
 </section>
@@ -365,7 +447,7 @@
   <div class="max-w-6xl mx-auto px-6 py-16 flex flex-wrap justify-between gap-12">
     <div class="max-w-[280px]">
       <a href="#top" class="flex items-center gap-2.5 font-bold tracking-tight text-[16px]"><span id="brand-mark-2" class="inline-flex"></span>Leap<span class="text-slate font-semibold">Nodes</span></a>
-      <p class="text-slate text-[14px] leading-relaxed mt-4">We don't edit videos. We engineer attention.</p>
+      <p class="text-slate text-[14px] leading-relaxed mt-4">The creator agency behind your growth, your deals, and your income.</p>
     </div>
     <div class="flex gap-14 flex-wrap">
       <div><h4 class="mono text-[11px] uppercase tracking-[.08em] text-slate mb-4">Explore</h4>
@@ -383,7 +465,7 @@
   </div>
   <div class="max-w-6xl mx-auto px-6 pt-6 pb-10 mt-2 border-t border-line flex flex-wrap justify-between gap-4 mono text-[11.5px] text-slate/80">
     <span>© <span id="year"></span> LeapNodes</span>
-    <span>Turn one piece of content into months of visibility.</span>
+    <span>Everything a creator needs to grow and get paid.</span>
   </div>
 </footer>
 
@@ -404,35 +486,44 @@ const STEPS = [
   ["Reported & refined","Monthly reporting and ongoing optimization. The strategy compounds."],
 ];
 
-const SVC = [
-  ["Content repurposing","Every long-form video becomes dozens of platform-ready clips — the core of the engine.","lg:col-span-2"],
-  ["Content strategy","A consistent publishing cadence, tailored to your goals and volume.",""],
-  ["Publishing support","Prepared and scheduled across your approved social channels.",""],
-  ["Performance analytics","Views, engagement, watch time, and audience growth — in one client dashboard.","lg:row-span-2"],
-  ["Brand positioning","Every clip reinforces one consistent public image and message.",""],
-  ["Content library","A searchable archive of everything you've produced, ready to reuse.",""],
-];
+const SVC = [];
 
 const MET = [["Hours of content processed",4200,"","+"],["Clips produced",38000,"","+"],["Views generated",92,"M","+"],["Videos published",21500,"","+"],["Publishing consistency",98,"%",""],["Monthly reporting delivered",100,"%",""]];
 
-const OLD = ["Edits videos","Waits for instructions","Delivers files","Project ends"];
-const NEW = ["Builds content systems","Optimizes distribution","Creates reusable libraries","Tracks performance","Continuously improves strategy","Focuses on long-term visibility"];
+const OLD = ["No brand-deal access","Chasing invoices yourself","Learning growth by trial and error","Running livestreams solo","Every tool bought separately","One person, wearing every hat"];
+const NEW = ["Brand deals sourced and negotiated for you","Payments and contracts handled","Training and coaching from day one","Live production team on your streams","Analytics and tools included","A whole agency behind your name"];
 
 const PLANS = [
-  ["Starter","For founders and professionals building a presence.",["1 long-form source / month","Up to 20 short-form clips","Captions & metadata","Publishing calendar","Monthly report"],false],
-  ["Growth","For organizations publishing on a regular cadence.",["4 sources / month","Up to 100 clips","Multi-platform scheduling","Client dashboard","Strategy sessions","Priority turnaround"],true],
-  ["Executive","White-glove service for public figures & leadership teams.",["Unlimited sources","Dedicated strategist","Full library management","Custom reporting","Brand & message governance"],false],
+  ["Starter","For emerging creators getting serious about their career.",["Training library & group coaching","Community access (Discord, WhatsApp, Telegram)","Brand-deal eligibility","Analytics dashboard","Content distribution — up to 20 clips / mo"],false],
+  ["Growth","For established creators earning and ready to scale.",["Everything in Starter","Active brand-deal matching","Livestream production support","Payments & contracts managed","Content distribution — up to 100 clips / mo","Priority turnaround"],true],
+  ["Executive","White-glove management for top creators and public figures.",["Everything in Growth","Dedicated strategist & manager","Hands-on brand negotiation","Full livestream production team","Custom reporting & governance","Unlimited content distribution"],false],
 ];
 
 const FAQS = [
-  ["Can we use existing YouTube videos?","Yes — a public YouTube link is all we need to start. No new recording required."],
-  ["Do I need to record new content?","No. We work entirely from the long-form content you already have."],
-  ["Who owns the finished content?","You do. Every clip, caption, and file is yours to keep and reuse."],
-  ["How quickly do you deliver?","It depends on plan and volume, but most first slates ship within the first weeks of onboarding."],
-  ["Can you work with speeches, interviews, and documentaries?","Those long-form formats are exactly what the engine is built to distribute."],
-  ["Do you provide analytics?","Yes — every clip is tracked in your dashboard, with monthly reporting and optimization."],
-  ["How often should I publish?","We set a cadence around your goals and volume, then hold it consistently."],
+  ["What does LeapNodes actually do?","We're a full-service creator agency. We handle training and growth, brand deals, livestream production, payments and contracts, analytics and tools, and content distribution — the whole business side of being a creator, under one roof."],
+  ["Who is LeapNodes for?","Streamers, sellers, entertainers, gamers, and public figures who are ready to treat their audience like a business and want a team behind them instead of doing everything alone."],
+  ["How do creators make money with LeapNodes?","Through brand deals we source and negotiate, monetized content and livestreams, and the reach our distribution builds — with payments and contracts managed for you so you actually get paid."],
+  ["Do I have to use every service?","No. The six services work together, but we scope an engagement around where you are — you can lean on brand deals and livestreams, distribution, or the full stack."],
+  ["How do brand deals work?","We match you with businesses looking for creators to sell their products, handle the negotiation and contract, and manage the campaign and payout end to end."],
+  ["Can you use my existing videos for content distribution?","Yes — a public YouTube link is all we need. One long-form video becomes 100+ captioned, scheduled, measured clips. No new recording required."],
+  ["Who owns the content you produce?","You do. Every clip, caption, and file we create is yours to keep and reuse."],
 ];
+
+/* network ledger */
+const NETMET = [["Creators in the network",1200,"","+"],["Paid to creators",4.6,"M","$",1],["Brand campaigns run",340,"","+"],["Live every week",7,"","days/"]];
+/* community platforms */
+const COMMUNITY = ["Discord","WhatsApp","Telegram"];
+/* what we do — the six services (content distribution is one of them) */
+const CREATOR = [
+  ["Training & growth","Structured playbooks and coaching on how to grow an audience and turn it into income.","lg:col-span-2",""],
+  ["Brand deals","Direct access to businesses looking for creators to sell their products — matched, negotiated, and managed.","lg:row-span-2",""],
+  ["Livestream production","Moderators, on-stream graphics, and live coaching so every broadcast looks professional.","",""],
+  ["Payments & contracts","Campaign management, contracts, and payouts handled for you — clean and on time.","",""],
+  ["Analytics & tools","Dashboards and management tools that track your audience, revenue, and content in one place.","",""],
+  ["Content distribution","One long-form video becomes 100+ captioned, scheduled, measured clips across every platform.","","#distribution"],
+];
+/* what brands get */
+const BRANDS = ["Vetted creators matched to your product","Managed campaigns end to end","Contracts & payments handled for you","Real sell-through, not just impressions","One brief, distributed across the network","Performance reporting on every campaign"];
 
 /* ---------- logo: circle of connected nodes ---------- */
 function logoSVG(size){
@@ -449,9 +540,9 @@ document.getElementById("brand-mark").innerHTML = logoSVG(22);
 document.getElementById("brand-mark-2").innerHTML = logoSVG(22);
 
 /* ---------- headline (word reveal) ---------- */
-const H1 = "Your content deserves more attention.";
+const H1 = "Everything a creator needs to grow and get paid.";
 document.getElementById("h1").innerHTML = H1.split(" ").map((w,i)=>
-  `<span style="display:inline-block;overflow:hidden;vertical-align:bottom"><span style="display:inline-block;transform:translateY(110%);transition:transform .9s cubic-bezier(.22,1,.36,1);transition-delay:${.15+i*.06}s">${w}&nbsp;</span></span>`
+  `<span style="display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:0.16em;margin-bottom:-0.16em"><span style="display:inline-block;transform:translateY(110%);transition:transform .9s cubic-bezier(.22,1,.36,1);transition-delay:${.15+i*.06}s">${w}&nbsp;</span></span>`
 ).join("");
 requestAnimationFrame(()=>document.querySelectorAll("#h1 span span").forEach(s=>s.style.transform="none"));
 
@@ -459,8 +550,9 @@ requestAnimationFrame(()=>document.querySelectorAll("#h1 span span").forEach(s=>
 const chip = a => `<span class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-line bg-white shadow-soft text-[15px] font-semibold whitespace-nowrap"><i class="w-1.5 h-1.5 rounded-full bg-signal"></i>${a}</span>`;
 document.querySelector(".marquee-row").innerHTML = [...AUD,...AUD].map(chip).join("");
 
-/* ---------- timeline ---------- */
-document.getElementById("timeline").innerHTML = STEPS.map(([t,b],i)=>`
+/* ---------- distribution deep-dive timeline (rendered into #distribution) ---------- */
+const tl = document.getElementById("timeline");
+if (tl) tl.innerHTML = STEPS.map(([t,b],i)=>`
   <div class="reveal flex" style="transition-delay:${i*40}ms">
     <div class="relative w-10 flex-shrink-0 flex justify-center">
       <span class="absolute top-0 bottom-0 w-px bg-line ${i===0?'top-[26px]':''} ${i===STEPS.length-1?'h-[26px]':''}"></span>
@@ -472,17 +564,6 @@ document.getElementById("timeline").innerHTML = STEPS.map(([t,b],i)=>`
     </div>
   </div>`).join("");
 
-/* ---------- bento ---------- */
-document.getElementById("bento").innerHTML = SVC.map(([t,b,cls],i)=>`
-  <div class="reveal ${cls}" style="transition-delay:${i*50}ms">
-    <div class="group relative h-full min-h-[180px] p-6 rounded-2xl bg-white border border-line shadow-card hover:shadow-lift hover:border-signal/30 transition-all duration-300 flex flex-col overflow-hidden">
-      <span class="mono text-[12px] text-signal tracking-[.1em] mb-auto">${String(i+1).padStart(2,"0")}</span>
-      <h3 class="text-[${i===0?'24':'20'}px] font-bold mt-8 mb-2 tracking-[-.01em]">${t}</h3>
-      <p class="text-[14.5px] leading-relaxed text-slate">${b}</p>
-      <svg class="absolute top-6 right-6 opacity-0 -translate-x-1 translate-y-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all text-signal" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
-    </div>
-  </div>`).join("");
-
 /* ---------- metrics ---------- */
 document.getElementById("metrics").innerHTML = MET.map(([label,val,unit,suf])=>`
   <div class="reveal bg-paper hover:bg-band transition-colors p-9">
@@ -491,6 +572,35 @@ document.getElementById("metrics").innerHTML = MET.map(([label,val,unit,suf])=>`
     </div>
     <div class="mono text-[12px] text-slate tracking-[.04em] mt-3.5 uppercase">${label}</div>
   </div>`).join("");
+
+/* ---------- network ledger ---------- */
+document.getElementById("netmetrics").innerHTML = NETMET.map(([label,val,unit,pre,dec])=>`
+  <div class="reveal bg-paper hover:bg-band transition-colors p-9">
+    <div class="text-[clamp(30px,4.2vw,48px)] font-extrabold tracking-[-.03em] leading-none flex items-baseline">
+      <span class="text-signal">${pre||""}</span><span class="counter" data-to="${val}" data-dec="${dec||0}">0</span>${unit}
+    </div>
+    <div class="mono text-[12px] text-slate tracking-[.04em] mt-3.5 uppercase">${label}</div>
+  </div>`).join("");
+
+/* ---------- community chips ---------- */
+document.getElementById("community").innerHTML = COMMUNITY.map(p=>`
+  <span class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-line bg-band text-[14px] font-semibold"><i class="w-1.5 h-1.5 rounded-full bg-signal"></i>${p}</span>`).join("");
+
+/* ---------- what-we-do bento (content distribution is card 6, links to deep-dive) ---------- */
+document.getElementById("creatorbento").innerHTML = CREATOR.map(([t,b,cls,link],i)=>`
+  <div class="reveal ${cls}" style="transition-delay:${i*50}ms">
+    <div class="group relative h-full min-h-[180px] p-6 rounded-2xl bg-white border border-line shadow-card hover:shadow-lift hover:border-signal/30 transition-all duration-300 flex flex-col overflow-hidden">
+      <span class="mono text-[12px] text-signal tracking-[.1em] mb-auto">${String(i+1).padStart(2,"0")}</span>
+      <h3 class="text-[${i===0?'24':'20'}px] font-bold mt-8 mb-2 tracking-[-.01em]">${t}</h3>
+      <p class="text-[14.5px] leading-relaxed text-slate">${b}</p>
+      ${link
+        ? `<a href="${link}" class="mono text-[11px] tracking-[.08em] uppercase text-signal inline-flex items-center gap-1.5 mt-4 hover:gap-2.5 transition-all">See how it works <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>`
+        : `<svg class="absolute top-6 right-6 opacity-0 -translate-x-1 translate-y-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all text-signal" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>`}
+    </div>
+  </div>`).join("");
+
+/* ---------- brands list (same tick pattern) ---------- */
+document.getElementById("brand-list").innerHTML = BRANDS.map(x=>`<li class="flex items-center gap-3"><span class="inline-flex items-center justify-center w-5 h-5 rounded-md bg-blue-100 text-signal flex-shrink-0"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>${x}</li>`).join("");
 
 /* ---------- compare ---------- */
 document.getElementById("old-list").innerHTML = OLD.map(o=>`<li class="flex items-center gap-3"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9aa3b2" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg>${o}</li>`).join("");
@@ -562,10 +672,10 @@ document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
 
 function runCounter(el){
   if(el.dataset.done) return; el.dataset.done="1";
-  const to=+el.dataset.to; const start=performance.now(); const dur=1700;
+  const to=+el.dataset.to; const dec=+(el.dataset.dec||0); const start=performance.now(); const dur=1700;
   function tick(t){
     const p=Math.min((t-start)/dur,1); const v=to*(1-Math.pow(1-p,3));
-    el.textContent = Math.round(v).toLocaleString();
+    el.textContent = dec>0 ? v.toFixed(dec) : Math.round(v).toLocaleString();
     if(p<1) requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
